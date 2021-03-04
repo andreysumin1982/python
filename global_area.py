@@ -37,12 +37,49 @@ for i in range(1, 12):
 '''Реализуйте программу, которая будет эмулировать работу с пространствами имен. 
 Необходимо реализовать поддержку создания пространств имен и добавление в них переменных.
 В данной задаче у каждого пространства имен есть уникальный текстовый идентификатор – его имя.
+-----------------------------------------------------------------------------------------------------------
 Вашей программе на вход подаются следующие запросы:
     create <namespace> <parent> –  создать новое пространство имен с именем <namespace> 
             внутри пространства <parent>
     add <namespace> <var> – добавить в пространство <namespace> переменную <var>
     get <namespace> <var> – получить имя пространства, из которого будет взята переменная <var> 
-            при запросе из пространства <namespace>, или None, если такого пространства не существует'''
+            при запросе из пространства <namespace>, или None, если такого пространства не существует
+ Во пример вложенных пространств имено global, foo, bar:
+
+namesp = {
+    'global': {
+        'parent': None,
+        'vars': set('a'),
+        'foo': {
+            'parent': 'global',
+            'vars': set('b'),
+            'bar': {
+                'parent': 'foo', 
+                'vars': set('a')}
+        }
+    }
+}
+
+2. Количество команд считывал через n = int(input()). Затем в цикле while n != 0 считывал команды, сразу деля их на 3 переменные cmd, nmsp, var = input().split() и в зависимости от if cmd == я выполнял ту или иную функцию и передавал в нее остальные 2 переменные nmsp и var.
+3. У меня было 3 основные функции 
+- def get(namespace, var),
+- def add(namespace,var),
+    a['vars'].add(var)
+- def create(namespace, parent)
+    a[namespace] = {'parent':parent, 'vars':set()}
+4. Для создания окружения я использовал рекурсивную функцию, которая ищет ключ словаря который будет родительским пространством для нового.
+
+def finditem(obj, key):
+    if key in obj:
+        return obj[key]
+
+5. Для поиска переменных я создал рекурсивную функцию 
+
+def findvar(obj, namespace, var):
+    if namespace in obj:
+        if var in obj[namespace]['vars']:
+            return namespace'''
+
 #--
 dg = {'a':'global', 'foo':{'b':'local', 'c':'local', 'bar':{'d':'local'} } }    #
 print(dg['a'])
@@ -50,11 +87,17 @@ print(dg['foo'])
 print(dg['foo']['bar'])
 print(dg['foo']['bar']['d'])
 #--
-data = command, parrent, name = input('<:').split()
-if command == 'add' and parrent == 'global':
-    dg[name] = 'global'
-elif command == 'create' and name == 'global':
-    dg[parrent] = {}
+for i in range(int(input())):
+    data = command, parrent, name = input('<:').split()
+    if command == 'add' and parrent == 'global':
+        dg[name] = 'global'
+    elif command == 'create' and name == 'global':
+        dg[parrent] = {}
+    elif command == 'add' and parrent in dg:
+        dg[parrent] = name
+#elif command == 'create' and
+
 #--
+
 print(dg)
 
