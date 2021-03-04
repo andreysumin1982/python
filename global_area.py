@@ -13,13 +13,11 @@ with open('/home/asumin/Загрузки/dataset_3380_5.txt', 'r', encoding='utf
     # создаем 2d массив [['6', 'Tracey', '155'],['3', 'Lewin', '140'],....]
     print(arr)
 #---
-
 dict_medium = {}
 for i in arr:
     dict_medium[i[0]] = dict_medium.setdefault(i[0], 0) + int(i[2])
 print(dict_medium)
 #---
-
 dict_count = {}
 dict_count2 = {}
 for i in arr:
