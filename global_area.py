@@ -99,3 +99,7 @@ data = command, namespace, var = input('<:').split()
 #--
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 09d6c0b1f3a7ce48188d6f8f04ab0e7522e1114f
