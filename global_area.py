@@ -87,17 +87,16 @@ print(dg['foo'])
 print(dg['foo']['bar'])
 print(dg['foo']['bar']['d'])
 #--
-for i in range(int(input())):
-    data = command, parrent, name = input('<:').split()
-    if command == 'add' and parrent == 'global':
-        dg[name] = 'global'
-    elif command == 'create' and name == 'global':
-        dg[parrent] = {}
-    elif command == 'add' and parrent in dg:
-        dg[parrent] = name
-#elif command == 'create' and
-
+namespace_dict = {}
+def add(namespace, var):
+    pass
+def get(namespace, var):
+    pass
+def create(namespace, parrent):
+    pass
+#--
+data = command, namespace, var = input('<:').split()
 #--
 
-print(dg)
+
 
