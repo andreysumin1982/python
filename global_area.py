@@ -97,6 +97,7 @@ def create(namespace, parrent):
 #--
 #data = command, namespace, var = input('<:').split()
 #--
+<<<<<<< HEAD
 #from collections import defaultdict
 #d = defaultdict(list)
 d= {}
@@ -109,3 +110,5 @@ for i in range(10):
         break
 print(d)
 
+=======
+>>>>>>> 4032175022d7d1841322c26356dc3e9918097926
