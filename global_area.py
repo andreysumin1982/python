@@ -78,14 +78,14 @@ def finditem(obj, key):
 def findvar(obj, namespace, var):
     if namespace in obj:
         if var in obj[namespace]['vars']:
-            return namespace'''
+            return namespace
+или 2d массив [global, var, parrent]
+              [ ...   ...    ....  ]
+'''
+
 
 #--
-dg = {'a':'global', 'foo':{'b':'local', 'c':'local', 'bar':{'d':'local'} } }    #
-print(dg['a'])
-print(dg['foo'])
-print(dg['foo']['bar'])
-print(dg['foo']['bar']['d'])
+dg = {'global':{'parrent':None, 'vars': set(), 'foo':{'parrent':None, 'vars':set(), 'bar':{'parrent':None, 'vars':set()}}} }
 #--
 namespace_dict = {}
 def add(namespace, var):
@@ -95,8 +95,17 @@ def get(namespace, var):
 def create(namespace, parrent):
     pass
 #--
-data = command, namespace, var = input('<:').split()
+#data = command, namespace, var = input('<:').split()
 #--
-
-
+#from collections import defaultdict
+#d = defaultdict(list)
+d= {}
+name = 'one'
+f = 'A'
+for i in range(10):
+    try:
+        d[f] = d.setdefault(f, 0) + i
+    except:
+        break
+print(d)
 
