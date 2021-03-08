@@ -93,32 +93,44 @@ dg = {'global':
            'foo':{'parrent':'global', 'vars':set(),
                   'bar':{'parrent':'foo', 'vars':set()}}} }
 #--
-d = {} #  словарь для создания дерева. см. выше ^
+arr_keys = [1,2,3,4,5] # ключи для словаря
+
+d = {} #   для создания дерева. см. выше ^
 #--      Ф-ция для добавл. namespace, parrent и переменных(var в список)
 def add_var(namespace, var):
-    if namespace  not in d:
-        d[namespace] = {}
-        d[namespace]['parrent'] = None
+    if var  not in d[namespace]['vars']:
         d[namespace]['vars'] = []
         d[namespace]['vars'].append(var)
     else: d[namespace]['vars'].append(var)
     print(d)
 #
-def create_def(namespace, parrent):
-    pass
+def create_def(namespace):
+    data = namespace[0]
+    for i in namespace:
+        if namespace:
+            c = d[i]
+            c +=c
+
+            print(c)
+
 #
 def get(namespace, var):
     pass
 #--  основное тело программы ---
 n = 3
-for i in range(n):
+'''for i in range(n):
     command, namespace, name = input('<:').split()
     if command == 'add':
-        add_var(namespace, name)
+        pass
+        #add_var(namespace, name)
     elif command == 'create':
-        create_def(namespace, name)
-
-#print(d)
+        arr_keys.append(namespace)
+        create_def(namespace)
+        
+#print(d)'''
+create_def(arr_keys)
+print(d)
 #--
+aw = {str(a + 1) + ' may':a for a in range(5)}
 
 
