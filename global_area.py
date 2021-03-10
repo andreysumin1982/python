@@ -95,7 +95,7 @@ dg = {'global':
 #--
 arr_keys = ['global'] #   ключи для словаря
 #arr_vars = ['global']         #   переменные
-#--      Ф-ция для добавл. namespace, parrent и переменных(var в список)
+#--      Ф-ция для добавл. vasr в словарь
 def add_var(namespace, var):
     if var  not in d[namespace]['vars']:
         d[namespace]['vars'] = []
@@ -103,7 +103,7 @@ def add_var(namespace, var):
     else: d[namespace]['vars'].append(var)
     print(d)
 #--
-def create_def(arr_keys, namespace):
+def create_def(arr_keys):
     d={}
     count = 0
     for i in arr_keys:
@@ -112,7 +112,7 @@ def create_def(arr_keys, namespace):
             d[i]['parrent'] = None
         elif name not in d:
             d[i] = {}
-            d[i]['parrent'] = namespace
+            d[i]['parrent'] = arr_keys[count]
             count+=1
     print(d)
 #--
@@ -130,7 +130,7 @@ for i in range(n):
     elif command == 'create':
         arr_keys.append(name)
         print(arr_keys)
-        create_def(arr_keys, namespace)
+        create_def(arr_keys)
 
 #--
 aw = {str(a + 1) + ' may':a for a in range(5)}
