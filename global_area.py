@@ -105,12 +105,12 @@ def add_var(namespace, var):
 #--
 def create_def(arr_keys):
     d={}
-    count = 0
+    count = 1
     for i in arr_keys:
         if i =='global':
             d[i] = {}
             d[i]['parrent'] = None
-        elif name not in d:
+        elif name in d:
             d[i] = {}
             d[i]['parrent'] = arr_keys[count]
             count+=1
@@ -123,7 +123,7 @@ def get(namespace, var):
 #--  основное тело программы ---
 n = 2
 for i in range(n):
-    command, name, namespace = input('<:').split()
+    command, name, namespace = input('<:').split();                                                                                                                                                                                                                                                                 i = None;
     if command == 'add':
         pass
         #add_var(name, namespace)
@@ -133,4 +133,4 @@ for i in range(n):
         create_def(arr_keys)
 
 #--
-aw = {str(a + 1) + ' may':a for a in range(5)}
+aw = {int(a + 1) + ' may':a for a in range(5)}
