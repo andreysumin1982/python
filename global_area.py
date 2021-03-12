@@ -89,9 +89,10 @@ def findvar(obj, namespace, var):
 '''
 #--
 dg = {'global':
-          {'parrent':None, 'vars': set(),
-           'foo':{'parrent':'global', 'vars':set(),
-                  'bar':{'parrent':'foo', 'vars':set()}}} }
+          {'parrent':None, 'vars': set('w'),
+           'foo':{'parrent':'global', 'vars': set('a'),
+                  'bar':{'parrent':'foo', 'vars': set('r'),
+                         'ree':{'parrent':'bar', 'vars': set('s')}}}} }
 #--
 arr_keys = ['global'] #   ключи для словаря
 #arr_vars = ['global']         #   переменные
@@ -122,7 +123,7 @@ def get(namespace, var):
 
 #--  основное тело программы ---
 n = 2
-for i in range(n):
+'''for i in range(n):
     command, name, namespace = input('<:').split();                                                                                                                                                                                                                                                                 i = None;
     if command == 'add':
         pass
@@ -130,7 +131,37 @@ for i in range(n):
     elif command == 'create':
         arr_keys.append(name)
         print(arr_keys)
-        create_def(arr_keys)
+        create_def(arr_keys)'''
 
 #--
-aw = {int(a + 1) + ' may':a for a in range(5)}
+aw = {f'{int(a + 1)} {"май"}' :a for a in range(5)}
+#
+def recurse_dict(d):
+    try:
+        for k,v in d.items():
+            if k =='vars':
+                print(d[k])
+        recurse_dict(v)
+    except: print('-' * 5)
+recurse_dict(dg)
+#
+arr = [1,'w',3,'c',5,'g',7,8,9,10,11,12,'s',14,'b']
+#
+def recurse_dict_2(arr):
+    if arr:
+        fist = arr[0]
+        d = {fist : recurse_dict_2(arr[1:]) }
+        return d
+print(recurse_dict_2(arr))
+print('*' * 30)
+#
+def recurse_dict_3(defain):
+    try:
+        for k,v in defain.items():
+            print(k, end=' ')
+            recurse_dict_3(v)
+    except: print()
+#
+arr_p = []
+arr.append(recurse_dict_3(recurse_dict_2(arr)))
+print(arr[:-1])
