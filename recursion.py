@@ -29,3 +29,12 @@ def fac(f): #  Рекурсия факториала
         return f*fac(f-1)
     return 1
 print(fac(3))
+#--
+arr = [1,'a',3,'z',5]
+def reverse(n, k=0):  # Выводим элементы списка рекурсией (без цикла)
+    if k != len(n):
+        print(n[k])
+        k+=1
+        reverse(n, k)
+reverse(arr)
+#--
