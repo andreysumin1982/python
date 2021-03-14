@@ -21,10 +21,10 @@ print(arr[:-1])
 #--
 n= 1
 for i in range(1, 5+1):
-    n *= i
+    n *= i  #   Факториал
     print(n)
 #
-def fac(f):
+def fac(f): #  Рекурсия факториала
     if f != 0:
         return f*fac(f-1)
     return 1
