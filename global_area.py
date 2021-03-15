@@ -104,38 +104,23 @@ def add_var(namespace, var):
     else: d[namespace]['vars'].append(var)
     print(d)
 #--
-def create_def(arr_keys):
+def create_def(arr_keys, namespace):
     d={}
-    count = 1
+    count = 0
     for i in arr_keys:
         if i =='global':
             d[i] = {}
             d[i]['parrent'] = None
-        elif name in d:
+        elif i not in d:
             d[i] = {}
             d[i]['parrent'] = arr_keys[count]
-            count+=1
-    print(d)
+            print(d)
+            count += 1
+
 #--
 def get(namespace, var):
     pass
 #--
-
-#--  основное тело программы ---
-n = 2
-'''for i in range(n):
-    command, name, namespace = input('<:').split();                                                                                                                                                                                                                                                                 i = None;
-    if command == 'add':
-        pass
-        #add_var(name, namespace)
-    elif command == 'create':
-        arr_keys.append(name)
-        print(arr_keys)
-        create_def(arr_keys)'''
-
-#--
-aw = {f'{int(a + 1)} {"май"}' :a for a in range(5)}
-#
 def recurse_dict(d):
     try:
         for k,v in d.items():
@@ -143,5 +128,19 @@ def recurse_dict(d):
                 print(d[k])
         recurse_dict(v)
     except: print('-' * 5)
-recurse_dict(dg)
 
+#--  основное тело программы ---
+n = 2
+for i in range(n):
+    command, name, namespace = input('<:').split();                                                                                                                                                                                                                                                                 i = None;
+    if command == 'add':
+        pass
+        #add_var(name, namespace)
+    elif command == 'create':
+        arr_keys.append(name)
+        print(arr_keys)
+        create_def(arr_keys, namespace)
+
+#--
+aw = {f'{int(a + 1)} {"май"}' :a for a in range(5)}
+#
