@@ -95,28 +95,18 @@ dg = {'global':
                          'ree':{'parrent':'bar', 'vars': set('s')}}}} }
 #--
 arr_keys = ['global'] #   ключи для словаря
-#arr_vars = ['global']         #   переменные
-#--      Ф-ция для добавл. vasr в словарь
-def add_var(namespace, var):
-    if var  not in d[namespace]['vars']:
-        d[namespace]['vars'] = []
-        d[namespace]['vars'].append(var)
-    else: d[namespace]['vars'].append(var)
-    print(d)
-#--
+dict_namespace = {'global': {'parrent': None}} # Помещаем все namespace, vars в словарь
+#-- Ф-ция для добавл. var:  {'global': {'parrent': None, var:''}} в словарь
+def add_var(name, namespace):
+    for key in dict_namespace:
+        if key == name:
+            dict_namespace[key]['var'] = namespace
+#--Ф-ция для добавл. key, namespace :  {'key': {'parrent': 'namespace'}} в словарь
 def create_def(arr_keys, namespace):
-    d={}
-    count = 0
-    for i in arr_keys:
-        if i =='global':
-            d[i] = {}
-            d[i]['parrent'] = None
-        elif i not in d:
-            d[i] = {}
-            d[i]['parrent'] = arr_keys[count]
-            print(d)
-            count += 1
-
+    for key in arr_keys:
+        if key not in dict_namespace:
+            dict_namespace[key] = {}
+            dict_namespace[key]['parrent'] = namespace
 #--
 def get(namespace, var):
     pass
@@ -128,19 +118,20 @@ def recurse_dict(d):
                 print(d[k])
         recurse_dict(v)
     except: print('-' * 5)
-
+#
 #--  основное тело программы ---
-n = 2
+n = 4
 for i in range(n):
     command, name, namespace = input('<:').split();                                                                                                                                                                                                                                                                 i = None;
     if command == 'add':
-        pass
-        #add_var(name, namespace)
+        add_var(name, namespace)
     elif command == 'create':
         arr_keys.append(name)
         print(arr_keys)
         create_def(arr_keys, namespace)
-
+print(dict_namespace)
 #--
 aw = {f'{int(a + 1)} {"май"}' :a for a in range(5)}
 #
+for k,v in dict_namespace.items():
+    print(v)
