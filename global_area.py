@@ -133,5 +133,3 @@ print(dict_namespace)
 #--
 aw = {f'{int(a + 1)} {"май"}' :a for a in range(5)}
 #
-for k,v in dict_namespace.items():
-    print(v)
