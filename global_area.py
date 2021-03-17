@@ -107,7 +107,7 @@ def create_def(arr_keys, namespace):
         if key not in dict_namespace:
             dict_namespace[key] = {}
             dict_namespace[key]['parrent'] = namespace
-#--
+#-- Ф-я для поиска переменных, ф-ций, namespa-ов.
 def get(namespace, var):
     pass
 #--
