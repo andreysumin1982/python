@@ -119,22 +119,22 @@ def create_def(arr_keys, namespace):
 #-- Ф-я для поиска переменных, ф-ций, namespa-ов.
 #dict_namespace = {'global': {'parrent': 'global', 'var': ['a','x']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','d']}}
 def get(name, namespace):
-    try:
-        for v in dict_namespace.values():
-            #print(k, v)
-            if namespace in dict_namespace[name]['var']:
-                return dict_namespace[name]['parrent']
-            else: get(v)
-    except: return None
+    for key, value in dict_namespace.items():
+        #print(k, v)
+        if namespace in dict_namespace[name]['var']:
+            return dict_namespace[name]['parrent']
+        elif namespace in value['var']:
+            return key
+        else: continue
 #
 #--
-def recurse_dict(d):
+'''def recurse_dict(d):
     try:
         for k,v in d.items():
             if k =='vars':
                 print(d[k])
         recurse_dict(v)
-    except: print('-' * 5)
+    except: print('-' * 5)'''
 #
 #------------- Основное тело программы -----------------
 n = 9
@@ -149,9 +149,7 @@ for i in range(n):
     elif command == 'get':
         print(get(name, namespace))    # выз. ф. get
 print(dict_namespace)
-'''name = 'boo'
-namespace = 'd'
-print(get(name, namespace))'''
+
 #--------------------------------------------------------
 #
 aw = {f'{int(a + 1)} {"май"}' :a for a in range(5)}
