@@ -95,21 +95,38 @@ dg = {'global':
                          'ree':{'parrent':'bar', 'vars': set('s')}}}} }
 #--
 arr_keys = ['global'] #   ключи для словаря
-dict_namespace = {'global': {'parrent': None}} # Помещаем все namespace, vars в словарь
-#-- Ф-ция для добавл. var:  {'global': {'parrent': None, var:''}} в словарь
+dict_namespace = {'global': {'parrent': 'global', 'var':[]}} # Помещаем все namespace, vars в словарь
+#
+#-- Ф-ция для добавл. var:  {'namespace': { var:''}} в словарь
 def add_var(name, namespace):
     for key in dict_namespace:
         if key == name:
-            dict_namespace[key]['var'] = namespace
+            dict_namespace[key]['var'].append(namespace)
+#
 #--Ф-ция для добавл. key, namespace :  {'key': {'parrent': 'namespace'}} в словарь
 def create_def(arr_keys, namespace):
     for key in arr_keys:
         if key not in dict_namespace:
-            dict_namespace[key] = {}
-            dict_namespace[key]['parrent'] = namespace
+            if len(arr_keys) <=2:
+                dict_namespace[key] = {}
+                dict_namespace[key]['parrent'] = namespace
+                dict_namespace[key]['var'] = []
+            else:
+                dict_namespace[key] = {}
+                dict_namespace[key]['parrent'] = key
+                dict_namespace[key]['var'] = []
+#
 #-- Ф-я для поиска переменных, ф-ций, namespa-ов.
-def get(namespace, var):
-    pass
+#dict_namespace = {'global': {'parrent': 'global', 'var': ['a','x']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','d']}}
+def get(name, namespace):
+    try:
+        for v in dict_namespace.values():
+            #print(k, v)
+            if namespace in dict_namespace[name]['var']:
+                return dict_namespace[name]['parrent']
+            else: get(v)
+    except: return None
+#
 #--
 def recurse_dict(d):
     try:
@@ -119,17 +136,23 @@ def recurse_dict(d):
         recurse_dict(v)
     except: print('-' * 5)
 #
-#--  основное тело программы ---
-n = 4
+#------------- Основное тело программы -----------------
+n = 9
 for i in range(n):
     command, name, namespace = input('<:').split();                                                                                                                                                                                                                                                                 i = None;
     if command == 'add':
-        add_var(name, namespace)
+        add_var(name, namespace)    # Выз. ф-ю. add_var
     elif command == 'create':
-        arr_keys.append(name)
+        arr_keys.append(name)       # доб. в список
         print(arr_keys)
-        create_def(arr_keys, namespace)
+        create_def(arr_keys, namespace)     # выз. ф. create_def
+    elif command == 'get':
+        print(get(name, namespace))    # выз. ф. get
 print(dict_namespace)
-#--
+'''name = 'boo'
+namespace = 'd'
+print(get(name, namespace))'''
+#--------------------------------------------------------
+#
 aw = {f'{int(a + 1)} {"май"}' :a for a in range(5)}
 #
