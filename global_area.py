@@ -137,9 +137,9 @@ def get(name, namespace):
     except: print('-' * 5)'''
 #
 #------------- Основное тело программы -----------------
-n = 9
+n = int(input(''))
 for i in range(n):
-    command, name, namespace = input('<:').split();                                                                                                                                                                                                                                                                 i = None;
+    command, name, namespace = input('<:').split();
     if command == 'add':
         add_var(name, namespace)    # Выз. ф-ю. add_var
     elif command == 'create':
