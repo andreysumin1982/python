@@ -95,26 +95,21 @@ dg = {'global':
                          'ree':{'parrent':'bar', 'vars': set('s')}}}} }
 #--
 arr_keys = ['global'] #   ключи для словаря
-dict_namespace = {'global': {'parrent': 'global', 'var':[]}} # Помещаем все namespace, vars в словарь
+dict_namespace = {'global': {'parrent': 'global', 'var': set()}} # Помещаем все namespace, vars в словарь
 #
 #-- Ф-ция для добавл. var:  {'namespace': { var:''}} в словарь
 def add_var(name, namespace):
     for key in dict_namespace:
         if key == name:
-            dict_namespace[key]['var'].append(namespace)
+            dict_namespace[key]['var'].add(namespace)
 #
 #--Ф-ция для добавл. key, namespace :  {'key': {'parrent': 'namespace'}} в словарь
 def create_def(arr_keys, namespace):
     for key in arr_keys:
         if key not in dict_namespace:
-            if len(arr_keys) <=2:
-                dict_namespace[key] = {}
-                dict_namespace[key]['parrent'] = namespace
-                dict_namespace[key]['var'] = []
-            else:
-                dict_namespace[key] = {}
-                dict_namespace[key]['parrent'] = key
-                dict_namespace[key]['var'] = []
+            dict_namespace[key] = {}
+            dict_namespace[key]['parrent'] = namespace
+            dict_namespace[key]['var'] = set()
 #
 #-- Ф-я для поиска переменных, ф-ций, namespa-ов.
 #dict_namespace = {'global': {'parrent': 'global', 'var': ['a','x']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','d']}}
