@@ -117,7 +117,7 @@ def get(name, namespace):
     for key, value in dict_namespace.items():
         #print(k, v)
         if namespace in dict_namespace[name]['var']:
-            return dict_namespace[name]['parrent']
+            return name
         elif namespace in value['var']:
             return key
         else: continue

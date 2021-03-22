@@ -38,3 +38,16 @@ def reverse(n, k=0):  # k=0, не обязaтельный аргумент
         reverse(n, k)
 reverse(arr)
 #--
+print('*'*20)
+dict_namespace = {'global': {'parrent': 'None', 'var': ['a','x']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','d']}}
+#
+def recurse2(d):    # Ф-ция (рекурсией) ищет в словаре ключи и значения.
+    for key, value in d.items():
+        #print(key)
+        try:
+            if 'd' in d[key]['var']:
+                print(key, value['var'])
+            recurse2(value)
+        except: pass
+
+recurse2(dict_namespace)
