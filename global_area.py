@@ -113,14 +113,19 @@ def create_def(arr_keys, namespace):
 #
 #-- Ф-я для поиска переменных, ф-ций, namespa-ов.
 #dict_namespace = {'global': {'parrent': 'global', 'var': ['a','x']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','d']}}
-def get(name, namespace):
-    for key, value in dict_namespace.items():
-        #print(k, v)
-        if namespace in dict_namespace[name]['var']:
-            return dict_namespace[name]['parrent']
-        elif namespace in value['var']:
-            return key
-        else: continue
+def get(name, namespace, dict_namespace):
+    list_key = arr_keys[::-1] # revers list
+    for index,element in enumerate(list_key):
+        if name == element:
+            count = 0
+            while count < len(list_key[index:]):
+                if namespace not in dict_namespace[list_key[count]]['var']:
+                    count += 1
+                    if count == len(list_key[index:]):
+                        print('None'); break
+                elif namespace in dict_namespace[list_key[count]]['var']:
+                    print(list_key[count]); break
+
 #-------------------------------
 #--
 '''def recurse_dict(d):
@@ -142,7 +147,7 @@ for i in range(n):
         print(arr_keys)
         create_def(arr_keys, namespace)     # выз. ф. create_def
     elif command == 'get':
-        print(get(name, namespace))    # выз. ф. get
+        get(name, namespace, dict_namespace)    # выз. ф. get
 print(dict_namespace)
 
 #--------------------------------------------------------

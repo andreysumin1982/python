@@ -40,14 +40,21 @@ reverse(arr)
 #--
 print('*'*20)
 dict_namespace = {'global': {'parrent': 'None', 'var': ['a','x']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','d']}}
+arr_keys = ['global','foo','boo']
 #
-def recurse2(d):    # Ф-ция (рекурсией) ищет в словаре ключи и значения.
-    for key, value in d.items():
-        #print(key)
-        try:
-            if 'd' in d[key]['var']:
-                print(key, value['var'])
-            recurse2(value)
-        except: pass
-
-recurse2(dict_namespace)
+def recurse2(name, namespace, d):    # Ф-ция (рекурсией) ищет в словаре ключи и значения.
+    list_key = arr_keys[::-1]
+    for index, element in enumerate(list_key):
+        if name == element:
+            count = 0
+            while count < len(list_key[index:]):
+                if namespace not in d[list_key[count]]['var']:
+                    count += 1
+                    if count == len(list_key[index:]):
+                        print('None'); break
+                elif namespace in d[list_key[count]]['var']:
+                    print(list_key[count]); break
+#--
+namespace = '1'
+name = 'boo'
+recurse2(name, namespace, dict_namespace)
