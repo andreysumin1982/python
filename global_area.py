@@ -115,16 +115,15 @@ def create_def(arr_keys, namespace):
 #dict_namespace = {'global': {'parrent': 'global', 'var': ['a','x']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','d']}}
 def get(name, namespace, dict_namespace):
     list_key = arr_keys[::-1] # revers list
-    for index,element in enumerate(list_key):
-        if name == element:
-            count = 0
-            while count < len(list_key[index:]):
-                if namespace not in dict_namespace[list_key[count]]['var']:
-                    count += 1
-                    if count == len(list_key[index:]):
-                        print('None'); break
-                elif namespace in dict_namespace[list_key[count]]['var']:
-                    print(list_key[count]); break
+    if name in list_key :
+        if namespace in dict_namespace[name]['var']:
+            print(name); return
+        else:
+            index = list_key.index(name)
+            for key in list_key[index+1:]:
+                if namespace in dict_namespace[key]['var']:
+                    print(key); return
+                print('None'); return
 
 #-------------------------------
 #--

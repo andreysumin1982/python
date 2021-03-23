@@ -39,22 +39,23 @@ def reverse(n, k=0):  # k=0, не обязaтельный аргумент
 reverse(arr)
 #--
 print('*'*20)
-dict_namespace = {'global': {'parrent': 'None', 'var': ['a','x']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','d']}}
+dict_namespace = {'global': {'parrent': 'None', 'var': ['a','q']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','b']}}
 arr_keys = ['global','foo','boo']
 #
 def recurse2(name, namespace, d):    # Ф-ция (рекурсией) ищет в словаре ключи и значения.
     list_key = arr_keys[::-1]
-    for index, element in enumerate(list_key):
-        if name == element:
-            count = 0
-            while count < len(list_key[index:]):
-                if namespace not in d[list_key[count]]['var']:
-                    count += 1
-                    if count == len(list_key[index:]):
-                        print('None'); break
-                elif namespace in d[list_key[count]]['var']:
-                    print(list_key[count]); break
+    #print(list_key)
+    if name in list_key :
+        if namespace in d[name]['var']:
+            print(name); return
+        else:
+            index = list_key.index(name)
+            for key in list_key[index+1:]:
+                if namespace in d[key]['var']:
+                    print(key); return
+                print('None'); return
+
 #--
-namespace = '1'
-name = 'boo'
+namespace = 'q'
+name = 'foo'
 recurse2(name, namespace, dict_namespace)
