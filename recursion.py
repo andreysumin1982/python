@@ -38,6 +38,33 @@ def reverse(n, k=0):  # k=0, не обязaтельный аргумент
         reverse(n, k)
 reverse(arr)
 #--
+''' -------------- Пример заполнения словаря -----------
+namesp = {
+    'global': {
+        'parent': None,
+        'vars': set('a'),
+        'foo': {
+            'parent': 'global',
+            'vars': set('b'),
+            'bar': {
+                'parent': 'foo', 
+                'vars': set('a')}
+        }
+    }
+}           ---------------------------------------
+'''
+namsp = {}
+arr_keys = ['global','foo','bar','barz','bary','zoo','zoo2','zoo3','doo']
+def recur(arr, count=0):
+    if arr:
+        #first = {arr[0]: {'parrent':first,'var': set() }}
+        count += 1
+        first = arr[0]
+        d = {first: {'parrent': count,'var': set(),'next': recur(arr[1:],count)}}
+        return d
+#
+print(recur(arr_keys))
+#--
 print('*'*20)
 dict_namespace = {'global': {'parrent': 'None', 'var': ['a','q']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','b']}}
 arr_keys = ['global','foo','bar','barz','bary','zoo','zoo2','zoo3','doo']
@@ -65,6 +92,6 @@ def test(name, namespace, d):    # Ф-ция для тестирования.
             else: print('None'); return
     else: print('None'); return
 #--
-namespace = '1b'
+namespace = 'b'
 name = 'zoo'
 test(name, namespace, test6)
