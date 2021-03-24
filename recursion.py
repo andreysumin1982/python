@@ -40,22 +40,31 @@ reverse(arr)
 #--
 print('*'*20)
 dict_namespace = {'global': {'parrent': 'None', 'var': ['a','q']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','b']}}
-arr_keys = ['global','foo','boo']
+arr_keys = ['global','foo','bar','barz','bary','zoo','zoo2','zoo3','doo']
 #
-def recurse2(name, namespace, d):    # Ф-ция (рекурсией) ищет в словаре ключи и значения.
+test6 = {'global': {'parrent': 'global', 'var': set()},
+         'foo': {'parrent': 'global', 'var': set()},
+         'bar': {'parrent': 'foo', 'var': {'b'}},
+         'barz': {'parrent': 'bar', 'var': set()},
+         'bary': {'parrent': 'barz', 'var': {'b'}},
+         'zoo': {'parrent': 'bar', 'var': set()},
+         'zoo2': {'parrent': 'zoo', 'var': set()},
+         'zoo3': {'parrent': 'zoo2', 'var': set()},
+         'doo': {'parrent': 'zoo', 'var': set()}}
+#
+def test(name, namespace, d):    # Ф-ция для тестирования.
     list_key = arr_keys[::-1]
     #print(list_key)
     if name in list_key :
         if namespace in d[name]['var']:
             print(name); return
         else:
-            index = list_key.index(name)
-            for key in list_key[index+1:]:
-                if namespace in d[key]['var']:
-                    print(key); return
-                print('None'); return
-
+            parrent = d[name]['parrent']
+            if namespace in d[parrent]['var']:
+                print(parrent); return
+            else: print('None'); return
+    else: print('None'); return
 #--
-namespace = 'q'
-name = 'foo'
-recurse2(name, namespace, dict_namespace)
+namespace = '1b'
+name = 'zoo'
+test(name, namespace, test6)

@@ -119,11 +119,11 @@ def get(name, namespace, dict_namespace):
         if namespace in dict_namespace[name]['var']:
             print(name); return
         else:
-            index = list_key.index(name)
-            for key in list_key[index+1:]:
-                if namespace in dict_namespace[key]['var']:
-                    print(key); return
-                print('None'); return
+            parrent = dict_namespace[name]['parrent']
+            if namespace in dict_namespace[parrent]['var']:
+                print(parrent); return
+            else: print('None'); return
+    else: print('None'); return
 
 #-------------------------------
 #--
