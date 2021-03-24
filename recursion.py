@@ -53,17 +53,27 @@ namesp = {
     }
 }           ---------------------------------------
 '''
-namsp = {}
+print('-'*20)
 arr_keys = ['global','foo','bar','barz','bary','zoo','zoo2','zoo3','doo']
-def recur(arr, count=0):
+dict_namespace = {}
+def add_recur(arr, count = 0):
     if arr:
-        #first = {arr[0]: {'parrent':first,'var': set() }}
-        count += 1
         first = arr[0]
-        d = {first: {'parrent': count,'var': set(),'next': recur(arr[1:],count)}}
+        count +=1
+        d = {first : {'parrent': count, 'next->' : add_recur(arr[1:], count)}}
         return d
 #
-print(recur(arr_keys))
+dict_namespace = add_recur(arr_keys)
+print(dict_namespace)
+#
+def read_recur(d):
+    for k,v in d.items():
+        if v['parrent'] == 5:
+            print(k, v['parrent']); return
+        else:
+            read_recur(v['next->'])
+#
+read_recur(dict_namespace)
 #--
 print('*'*20)
 dict_namespace = {'global': {'parrent': 'None', 'var': ['a','q']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','b']}}
