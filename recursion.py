@@ -60,8 +60,10 @@ def add_recur(arr, count = 0):
     if arr:
         first = arr[0]
         count +=1
-        d = {first : {'parrent': count, 'next->' : add_recur(arr[1:], count)}}
-        return d
+        try:
+            d = {first : {'parrent': count, 'next->' : add_recur(arr[1:], count)}}
+            return d
+        except : None
 #
 dict_namespace = add_recur(arr_keys)
 print(dict_namespace)
@@ -76,8 +78,10 @@ def read_recur(d):
 read_recur(dict_namespace)
 #--
 print('*'*20)
-dict_namespace = {'global': {'parrent': 'None', 'var': ['a','q']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','b']}}
-arr_keys = ['global','foo','bar','barz','bary','zoo','zoo2','zoo3','doo']
+#dict_namespace = {'global': {'parrent': 'None', 'var': ['a','q']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','b']}}
+dict_namespace = {'global': {'parrent': 'global', 'var': {'qqq'}}, 'qqq': {'parrent': 'global', 'var': {'www'}}, 'www': {'parrent': 'qqq', 'var': {'eee'}}, 'eee': {'parrent': 'www', 'var': {'rrr'}}}
+#arr_keys = ['global','foo','bar','barz','bary','zoo','zoo2','zoo3','doo']
+arr_keys = ['global','qqq','www','eee']
 #
 test6 = {'global': {'parrent': 'global', 'var': set()},
          'foo': {'parrent': 'global', 'var': set()},
@@ -88,7 +92,7 @@ test6 = {'global': {'parrent': 'global', 'var': set()},
          'zoo2': {'parrent': 'zoo', 'var': set()},
          'zoo3': {'parrent': 'zoo2', 'var': set()},
          'doo': {'parrent': 'zoo', 'var': set()}}
-#
+#    Дописать try -  except ..
 def test(name, namespace, d):    # Ф-ция для тестирования.
     list_key = arr_keys[::-1]
     #print(list_key)
@@ -96,12 +100,14 @@ def test(name, namespace, d):    # Ф-ция для тестирования.
         if namespace in d[name]['var']:
             print(name); return
         else:
-            parrent = d[name]['parrent']
-            if namespace in d[parrent]['var']:
-                print(parrent); return
+            index = list_key.index(name)
+            for i in list_key[index:]:
+                parrent = d[i]['parrent']
+                if namespace in d[parrent]['var']:
+                    print(parrent); return
+                else: continue
             else: print('None'); return
-    else: print('None'); return
 #--
-namespace = 'b'
-name = 'zoo'
-test(name, namespace, test6)
+namespace = 'rrr'
+name = 'www'
+test(name, namespace, dict_namespace)
