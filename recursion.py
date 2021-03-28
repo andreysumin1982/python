@@ -56,20 +56,28 @@ namesp = {
 print('-'*20)
 arr_keys = ['global','foo','bar','barz','bary','zoo','zoo2','zoo3','doo']
 dict_namespace = {'global':{'parrent':'None'}}
-#dict_namespace = {}
 def add_recur(arr, count = 0):
-    pass
+    for i in arr:
+        if len(arr)==1: return
+        print(i)
+        print(len(arr))
+        #d[arr[i]]= {}
+        #d[arr[i]]['parrent'] = 'a'
+        #d[arr[i]][arr[i+1]] = 'a'
+        #for k,v in d.items():
+        count +=1
+        add_recur(arr[1:], count)
+    return
+        #break
 add_recur(arr_keys)
+print(dict_namespace)
 #  Подсказка для создания рекурсии для добавления в словарь.
-dict_namespace['global'].update({'foo': {'parrent':'global'}})
+'''dict_namespace['global'].update({'foo': {'parrent':'global'}})
 print(dict_namespace)
 dict_namespace['global']['foo'].update({'bar':{}})
 print(dict_namespace)
 dict_namespace['global']['foo']['bar'].update({'too':{}})
-print(dict_namespace)
-#
-for k, v in dict_namespace.items():
-    print(k)
+print(dict_namespace)'''
 #
 def read_recur(d):
     for k,v in d.items():
