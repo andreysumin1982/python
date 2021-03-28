@@ -55,18 +55,21 @@ namesp = {
 '''
 print('-'*20)
 arr_keys = ['global','foo','bar','barz','bary','zoo','zoo2','zoo3','doo']
-dict_namespace = {}
+dict_namespace = {'global':{'parrent':'None'}}
+#dict_namespace = {}
 def add_recur(arr, count = 0):
-    if arr:
-        first = arr[0]
-        count +=1
-        try:
-            d = {first : {'parrent': count, 'next->' : add_recur(arr[1:], count)}}
-            return d
-        except : None
-#
-dict_namespace = add_recur(arr_keys)
+    pass
+add_recur(arr_keys)
+#  Подсказка для создания рекурсии для добавления в словарь.
+dict_namespace['global'].update({'foo': {'parrent':'global'}})
 print(dict_namespace)
+dict_namespace['global']['foo'].update({'bar':{}})
+print(dict_namespace)
+dict_namespace['global']['foo']['bar'].update({'too':{}})
+print(dict_namespace)
+#
+for k, v in dict_namespace.items():
+    print(k)
 #
 def read_recur(d):
     for k,v in d.items():
@@ -75,7 +78,9 @@ def read_recur(d):
         else:
             read_recur(v['next->'])
 #
-read_recur(dict_namespace)
+#read_recur(dict_namespace)
+#
+
 #--
 print('*'*20)
 #dict_namespace = {'global': {'parrent': 'None', 'var': ['a','q']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','b']}}
