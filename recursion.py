@@ -38,6 +38,7 @@ def reverse(n, k=0):  # k=0, не обязaтельный аргумент
         reverse(n, k)
 reverse(arr)
 #--
+<<<<<<< HEAD
 print('*'*20)
 dict_namespace = {'global': {'parrent': 'None', 'var': ['a','x']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','d']}}
 #
@@ -51,3 +52,91 @@ def recurse2(d):    # Ф-ция (рекурсией) ищет в словаре 
         except: pass
 
 recurse2(dict_namespace)
+=======
+''' -------------- Пример заполнения словаря -----------
+namesp = {
+    'global': {
+        'parent': None,
+        'vars': set('a'),
+        'foo': {
+            'parent': 'global',
+            'vars': set('b'),
+            'bar': {
+                'parent': 'foo', 
+                'vars': set('a')}
+        }
+    }
+}           ---------------------------------------
+'''
+print('-'*20)
+arr_keys = ['global','foo','bar','barz','bary','zoo','zoo2','zoo3','doo']
+dict_namespace = {'global':{'parrent':'None'}}
+def add_recur(arr, count = 0):
+    for i in arr:
+        if len(arr)==1: return
+        print(i)
+        print(len(arr))
+        #d[arr[i]]= {}
+        #d[arr[i]]['parrent'] = 'a'
+        #d[arr[i]][arr[i+1]] = 'a'
+        #for k,v in d.items():
+        count +=1
+        add_recur(arr[1:], count)
+    return
+        #break
+add_recur(arr_keys)
+print(dict_namespace)
+#  Подсказка для создания рекурсии для добавления в словарь.
+'''dict_namespace['global'].update({'foo': {'parrent':'global'}})
+print(dict_namespace)
+dict_namespace['global']['foo'].update({'bar':{}})
+print(dict_namespace)
+dict_namespace['global']['foo']['bar'].update({'too':{}})
+print(dict_namespace)'''
+#
+def read_recur(d):
+    for k,v in d.items():
+        if v['parrent'] == 5:
+            print(k, v['parrent']); return
+        else:
+            read_recur(v['next->'])
+#
+#read_recur(dict_namespace)
+#
+
+#--
+print('*'*20)
+#dict_namespace = {'global': {'parrent': 'None', 'var': ['a','q']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','b']}}
+dict_namespace = {'global': {'parrent': 'global', 'var': {'qqq'}}, 'qqq': {'parrent': 'global', 'var': {'www'}}, 'www': {'parrent': 'qqq', 'var': {'eee'}}, 'eee': {'parrent': 'www', 'var': {'rrr'}}}
+#arr_keys = ['global','foo','bar','barz','bary','zoo','zoo2','zoo3','doo']
+arr_keys = ['global','qqq','www','eee']
+#
+test6 = {'global': {'parrent': 'global', 'var': set()},
+         'foo': {'parrent': 'global', 'var': set()},
+         'bar': {'parrent': 'foo', 'var': {'b'}},
+         'barz': {'parrent': 'bar', 'var': set()},
+         'bary': {'parrent': 'barz', 'var': {'b'}},
+         'zoo': {'parrent': 'bar', 'var': set()},
+         'zoo2': {'parrent': 'zoo', 'var': set()},
+         'zoo3': {'parrent': 'zoo2', 'var': set()},
+         'doo': {'parrent': 'zoo', 'var': set()}}
+#    Дописать try -  except ..
+def test(name, namespace, d):    # Ф-ция для тестирования.
+    list_key = arr_keys[::-1]
+    #print(list_key)
+    if name in list_key :
+        if namespace in d[name]['var']:
+            print(name); return
+        else:
+            index = list_key.index(name)
+            for i in list_key[index:]:
+                parrent = d[i]['parrent']
+                if namespace in d[parrent]['var']:
+                    print(parrent); return
+                else: continue
+            else: print('None'); return
+#--
+namespace = 'rrr'
+name = 'www'
+test(name, namespace, dict_namespace)
+>>>>>>> d3182cf1be2f495a417bed14abacec43bfd62944
