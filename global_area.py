@@ -128,7 +128,7 @@ def get(name, namespace, dict_namespace):
                     else: continue
                 except: pass
             else: print('None'); return
-
+    else: print('None'); return
 #-------------------------------
 #--
 '''def recurse_dict(d):
