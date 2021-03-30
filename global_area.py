@@ -87,13 +87,13 @@ def findvar(obj, namespace, var):
 или 2d массив [global, var, parrent]
               [ ...   ...    ....  ]
 '''
-#--
+#--  пример
 dg = {'global':
           {'parrent':None, 'vars': set('w'),
            'foo':{'parrent':'global', 'vars': set('a'),
                   'bar':{'parrent':'foo', 'vars': set('r'),
                          'ree':{'parrent':'bar', 'vars': set('s')}}}} }
-#--
+#------------------------------------------------------------------------------------
 arr_keys = ['global'] #   ключи для словаря
 dict_namespace = {'global': {'parrent': 'global', 'var': set()}} # Помещаем все namespace, vars в словарь
 #
@@ -112,6 +112,7 @@ def create_def(arr_keys, namespace):
             dict_namespace[key]['var'] = set()
 #
 #-- Ф-я для поиска переменных, ф-ций, namespa-ов.
+
 #dict_namespace = {'global': {'parrent': 'global', 'var': ['a','x']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','d']}}
 def get(name, namespace, dict_namespace):
     list_key = arr_keys[::-1] # revers list
@@ -130,28 +131,26 @@ def get(name, namespace, dict_namespace):
             else: print('None'); return
     else: print('None'); return
 #-------------------------------
-#--
-'''def recurse_dict(d):
-    try:
-        for k,v in d.items():
-            if k =='vars':
-                print(d[k])
-        recurse_dict(v)
-    except: print('-' * 5)'''
-#
-#------------- Основное тело программы -----------------
-n = int(input(''))
-for i in range(n):
-    command, name, namespace = input('<:').split();
-    if command == 'add':
-        add_var(name, namespace)    # Выз. ф-ю. add_var
-    elif command == 'create':
-        arr_keys.append(name)       # доб. в список
-        print(arr_keys)
-        create_def(arr_keys, namespace)     # выз. ф. create_def
-    elif command == 'get':
-        get(name, namespace, dict_namespace)    # выз. ф. get
-print(dict_namespace)
+
+#------------- Основное тело программы -читаем из файла тесты----------------
+path = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/test'
+arr = []
+with open(path,'r') as file:
+    for i in file.readlines():
+        arr.append(i.strip('\n').split())
+#-----------------------
+    count = 1
+    while count < len(arr):
+        if arr[count][0] == 'add':
+            add_var(arr[count][1], arr[count][2])    # Выз. ф-ю. add_var
+        elif arr[count][0] == 'create':
+            arr_keys.append(arr[count][1])       # доб. в список
+            #print(arr_keys)
+            create_def(arr_keys, arr[count][2])     # выз. ф. create_def
+        elif arr[count][0] == 'get':
+            get(arr[count][1], arr[count][2], dict_namespace)    # выз. ф. get
+        count +=1
+    #print(dict_namespace)
 
 #--------------------------------------------------------
 #
