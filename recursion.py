@@ -104,6 +104,13 @@ test6 = {'global': {'parrent': 'global', 'var': set()},
          'zoo2': {'parrent': 'zoo', 'var': set()},
          'zoo3': {'parrent': 'zoo2', 'var': set()},
          'doo': {'parrent': 'zoo', 'var': set()}}
+'''test 15 
+5
+create first global
+create second first
+create third second 
+add first my_var
+get third my_var'''
 #    Дописать try -  except ..
 def test(name, namespace, d):    # Ф-ция для тестирования.
     list_key = arr_keys[::-1]

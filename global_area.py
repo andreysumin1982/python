@@ -121,26 +121,22 @@ def get(name, namespace, dict_namespace):
         else:
             index = list_key.index(name)
             for i in list_key[index:]:
-                try:
-                    parrent = dict_namespace[i]['parrent']
-                    if namespace in dict_namespace[parrent]['var']:
-                        print(parrent); return
-                    else: continue
-                except: pass
-            else: print('None'); return
-
-#-------------------------------
-#--
-'''def recurse_dict(d):
-    try:
-        for k,v in d.items():
-            if k =='vars':
-                print(d[k])
-        recurse_dict(v)
-    except: print('-' * 5)'''
+                parrent = dict_namespace[i]['parrent']
+                if namespace in dict_namespace[parrent]['var']:
+                    print(parrent); return
+                else: print('None'); return
+#
+#------  Тесты из файлаЖ
+PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/tests'
+list_file = []
+with open(PATH, 'r', encoding='utf-8') as file_read: # read file
+    for i in file_read.read().strip().split():
+        print(i.strip().split())
+        list_file.append(i.strip().split())
+print(list_file[3])
 #
 #------------- Основное тело программы -----------------
-n = int(input(''))
+'''n = int(input(''))
 for i in range(n):
     command, name, namespace = input('<:').split();
     if command == 'add':
@@ -151,7 +147,7 @@ for i in range(n):
         create_def(arr_keys, namespace)     # выз. ф. create_def
     elif command == 'get':
         get(name, namespace, dict_namespace)    # выз. ф. get
-print(dict_namespace)
+print(dict_namespace)'''
 
 #--------------------------------------------------------
 #
