@@ -115,25 +115,33 @@ def get(name, namespace, dict_namespace):
     #print(list_key[index:])
     count = index
     while count < len(list_key):
+        print(list_key)
         print(len(list_key))
         print(list_key[count:])
+        print(dict_namespace[list_key[count]])
+
         if namespace in dict_namespace[list_key[count]]['var']:
             ##print(namespace in dict_namespace[name]['var'])
             print(list_key[count]); return
-        else:
             #
+        else:
+            if dict_namespace[list_key[count]]['parrent'] == 'None':
+                print('None *'); return
             parrent = dict_namespace[list_key[count]]['parrent']
             print(parrent, list_key.index(parrent),'*')
             #print(namespace in dict_namespace[parrent]['var'])
             #print(dict_namespace[parrent]['var'], '**')
+
             if namespace in dict_namespace[parrent]['var']:
                 print(parrent); return
             count = list_key.index(parrent); print(count); continue
-    print('None ***'); return
+        #print('None *'); return
+    print('None **'); return
 #-------------------------------
 
 #------------- Основное тело программы -читаем из файла тесты----------------
-path = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/tests'
+path = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/test'
+#path = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/tests'
 arr = []
 with open(path,'r') as file:
     for i in file.readlines():
