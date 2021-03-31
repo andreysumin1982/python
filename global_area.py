@@ -114,8 +114,8 @@ def get(name, namespace, dict_namespace):
     index = list_key.index(name)
     #print(list_key[index:])
     count = index
-    while count < len(list_key[count:]):
-        print(count, len(list_key))
+    while count < len(list_key):
+        print(len(list_key))
         print(list_key[count:])
         if namespace in dict_namespace[list_key[count]]['var']:
             ##print(namespace in dict_namespace[name]['var'])
@@ -125,14 +125,11 @@ def get(name, namespace, dict_namespace):
             parrent = dict_namespace[list_key[count]]['parrent']
             print(parrent, list_key.index(parrent),'*')
             #print(namespace in dict_namespace[parrent]['var'])
-            print(dict_namespace[parrent]['var'], '**')
-            if parrent == 'None':
-                print('None'); return
-            elif namespace in dict_namespace[parrent]['var']:
+            #print(dict_namespace[parrent]['var'], '**')
+            if namespace in dict_namespace[parrent]['var']:
                 print(parrent); return
-            count +=1;
-            continue
-    print('None'); return
+            count = list_key.index(parrent); print(count); continue
+    print('None ***'); return
 #-------------------------------
 
 #------------- Основное тело программы -читаем из файла тесты----------------
