@@ -46,7 +46,6 @@ for i in range(1, 12):
     get <namespace> <var> – получить имя пространства, из которого будет взята переменная <var> 
             при запросе из пространства <namespace>, или None, если такого пространства не существует
  Во пример вложенных пространств имено global, foo, bar:
-
 namesp = {
     'global': {
         'parent': None,
@@ -60,7 +59,6 @@ namesp = {
         }
     }
 }
-
 2. Количество команд считывал через n = int(input()). Затем в цикле while n != 0 считывал команды, 
 сразу деля их на 3 переменные cmd, nmsp, var = input().split() и в зависимости 
 от if cmd == я выполнял ту или иную функцию и передавал в нее остальные 2 переменные nmsp и var.
@@ -72,13 +70,10 @@ namesp = {
     a[namespace] = {'parent':parent, 'vars':set()}
 4. Для создания окружения я использовал рекурсивную функцию, 
 которая ищет ключ словаря который будет родительским пространством для нового.
-
 def finditem(obj, key):
     if key in obj:
         return obj[key]
-
 5. Для поиска переменных я создал рекурсивную функцию 
-
 def findvar(obj, namespace, var):
     if namespace in obj:
         if var in obj[namespace]['vars']:
@@ -122,35 +117,6 @@ def get(name, namespace, dict_namespace):
         else:
             index = list_key.index(name)
             for i in list_key[index:]:
-<<<<<<< HEAD
-                parrent = dict_namespace[i]['parrent']
-                if namespace in dict_namespace[parrent]['var']:
-                    print(parrent); return
-                else: print('None'); return
-#
-#------  Тесты из файлаЖ
-PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/tests'
-list_file = []
-with open(PATH, 'r', encoding='utf-8') as file_read: # read file
-    for i in file_read.read().strip().split():
-        print(i.strip().split())
-        list_file.append(i.strip().split())
-print(list_file[3])
-#
-#------------- Основное тело программы -----------------
-'''n = int(input(''))
-for i in range(n):
-    command, name, namespace = input('<:').split();
-    if command == 'add':
-        add_var(name, namespace)    # Выз. ф-ю. add_var
-    elif command == 'create':
-        arr_keys.append(name)       # доб. в список
-        print(arr_keys)
-        create_def(arr_keys, namespace)     # выз. ф. create_def
-    elif command == 'get':
-        get(name, namespace, dict_namespace)    # выз. ф. get
-print(dict_namespace)'''
-=======
                 try:
                     parrent = dict_namespace[i]['parrent']
                     if namespace in dict_namespace[parrent]['var']:
@@ -180,7 +146,6 @@ with open(path,'r') as file:
             get(arr[count][1], arr[count][2], dict_namespace)    # выз. ф. get
         count +=1
     #print(dict_namespace)
->>>>>>> af62a0019ac650d20e702935e0194e6638d40400
 
 #--------------------------------------------------------
 #
