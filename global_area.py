@@ -146,7 +146,7 @@ with open(path,'r') as file:
             get(arr[count][1], arr[count][2], dict_namespace)    # выз. ф. get
         count +=1
     #print(dict_namespace)
-
+sdfsdfs
 #--------------------------------------------------------
 #
 aw = {f'{int(a + 1)} {"май"}' :a for a in range(5)}
