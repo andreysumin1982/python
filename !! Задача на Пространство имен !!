@@ -1,0 +1,480 @@
+Реализуйте программу, которая будет эмулировать работу с пространствами имен. Необходимо реализовать поддержку создания пространств имен и добавление в них переменных.
+
+В данной задаче у каждого пространства имен есть уникальный текстовый идентификатор – его имя.
+
+Вашей программе на вход подаются следующие запросы:
+
+    create <namespace> <parent> –  создать новое пространство имен с именем <namespace> внутри пространства <parent>
+    add <namespace> <var> – добавить в пространство <namespace> переменную <var>
+    get <namespace> <var> – получить имя пространства, из которого будет взята переменная <var> при запросе из пространства <namespace>, или None, если такого пространства не существует
+
+Рассмотрим набор запросов
+
+    add global a
+    create foo global
+    add foo b
+    create bar foo
+    add bar a
+
+Структура пространств имен описанная данными запросами будет эквивалентна структуре пространств имен, созданной при выполнении данного кода
+
+a = 0
+def foo():
+  b = 1
+  def bar():
+    a = 2
+
+В основном теле программы мы объявляем переменную a, тем самым добавляя ее в пространство global. Далее мы объявляем функцию foo, что влечет за собой создание локального для нее пространства имен внутри пространства global. В нашем случае, это описывается командой create foo global. Далее мы объявляем внутри функции foo функцию bar, тем самым создавая пространство bar внутри пространства foo, и добавляем в bar переменную a.
+
+Добавим запросы get к нашим запросам
+
+    get foo a
+    get foo c
+    get bar a
+    get bar b
+
+Представим как это могло бы выглядеть в коде
+
+a = 0
+def foo():
+  b = 1
+  get(a)
+  get(c)
+  def bar():
+    a = 2
+    get(a)
+    get(b)
+
+Результатом запроса get будет имя пространства, из которого будет взята нужная переменная.
+Например, результатом запроса get foo a будет global, потому что в пространстве foo не объявлена переменная a, но в пространстве global, внутри которого находится пространство foo, она объявлена. Аналогично, результатом запроса get bar b будет являться foo, а результатом работы get bar a будет являться bar.
+
+Результатом get foo c будет являться None, потому что ни в пространстве foo, ни в его внешнем пространстве global не была объявлена переменная с.
+
+Более формально, результатом работы get <namespace> <var> является
+
+    <namespace>, если в пространстве <namespace> была объявлена переменная <var>
+    get <parent> <var> – результат запроса к пространству, внутри которого было создано пространство <namespace>, если переменная не была объявлена
+    None, если не существует <parent>, т. е. <namespace>﻿ – это global
+
+Формат входных данных
+
+В первой строке дано число n (1 ≤ n ≤ 100) – число запросов.
+В каждой из следующих n строк дано по одному запросу.
+Запросы выполняются в порядке, в котором они даны во входных данных.
+Имена пространства имен и имена переменных представляют из себя строки длины не более 10, состоящие из строчных латинских букв.
+Формат выходных данных
+
+Для каждого запроса get выведите в отдельной строке его результат.
+---------------------------------------------------------------------------------------------------------------------------------------
+
+#--
+arr_keys = ['global'] #   ключи для словаря
+dict_namespace = {'global': {'parrent': 'None', 'var': set()}} # Помещаем все namespace, vars в словарь
+#
+#-- Ф-ция для добавл. var:  {'namespace': { var:''}} в словарь
+def add_var(name, namespace):
+    for key in dict_namespace:
+        if key == name:
+            dict_namespace[key]['var'].add(namespace)
+#
+#--Ф-ция для добавл. key, namespace :  {'key': {'parrent': 'namespace'}} в словарь
+def create_def(arr_keys, namespace):
+    for key in arr_keys:
+        if key not in dict_namespace:
+            dict_namespace[key] = {}
+            dict_namespace[key]['parrent'] = namespace
+            dict_namespace[key]['var'] = set()
+            
+#-- Ф-я для поиска переменных, ф-ций, namespa-ов.
+def get(name, namespace, dict_namespace):
+    list_key = arr_keys[::-1] # revers list
+    index = list_key.index(name)
+    #print(list_key[index:])
+    count = index
+    while count < len(list_key):
+        #print(list_key)
+        #print(len(list_key))
+        #print(list_key[count:])
+        #print(dict_namespace[list_key[count]])
+
+        if namespace in dict_namespace[list_key[count]]['var']:
+            ##print(namespace in dict_namespace[name]['var'])
+            print(list_key[count]); return
+            #
+        else:
+            if dict_namespace[list_key[count]]['parrent'] == 'None':
+                print('None'); return
+            parrent = dict_namespace[list_key[count]]['parrent']
+            #print(parrent, list_key.index(parrent),'*')
+            #print(namespace in dict_namespace[parrent]['var'])
+            #print(dict_namespace[parrent]['var'], '**')
+
+            if namespace in dict_namespace[parrent]['var']:
+                print(parrent); return
+            count = list_key.index(parrent); continue
+        #print('None *'); return
+    print('None'); return
+#-------------------------------
+
+#------------- Основное тело программы -----------------
+n = int(input(''))
+for i in range(n):
+    command, name, namespace = input('').split();
+    if command == 'add':
+        add_var(name, namespace)    # Выз. ф-ю. add_var
+    elif command == 'create':
+        arr_keys.append(name)       # доб. в список
+        create_def(arr_keys, namespace)     # выз. ф. create_def
+    elif command == 'get':
+        get(name, namespace, dict_namespace)    # выз. ф. get
+#--------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+
+# put your python code here
+n = int(input())
+space = {'global': [None]}
+for i in range(n):
+    cmd, ns, par = input().split()
+    if cmd == 'create':
+        space[ns] = [par]
+    elif cmd == 'add':
+        space[ns].append(par)
+    elif cmd == 'get':
+        while True:
+            if par in space[ns]:
+                print(ns)
+                break
+            elif ns == 'global':
+                print('None')
+                break
+            else:
+                ns = space[ns][0]
+------------------------------------------------------------------------------------
+
+N = int(input())                # Ввод числа директив
+# print(N)
+Key_0 = "global"                # Ключ корневго узла
+Namespaces = {Key_0: None}      # словарь с иерархией {Namespace: Parent}
+Variables = {Key_0: []}         # словарь {Namespace: [Parameters]}
+Res_Get = []                    # Список результатов
+#
+def Crt(nsp, par):              # Функция реализации Create
+    Pair_1 = {nsp: par}         # Пара для обновления Namespace
+    Namespaces.update(Pair_1)   # Обновление Namespace
+    Pair_2 = {nsp: []}          # Пара для обновления Variables
+    Variables.update(Pair_2)    # Обновление Variables
+    return
+#
+def Add(nsp, par):              # Функция реализации Add
+    Var = Variables.get(nsp)    # Получение данных по ключу nsp
+    Var.append(par)             # Обновление списка данных
+    Pair = {nsp: Var}           # Пара для обновления Variables
+    Variables.update(Pair)      # Обновление словаря Variables
+    return
+#
+def Get(nsp, par):              # Функция реализации Get
+    Var = Variables.get(nsp)    # Получение данных по ключу nsp
+    Reply = (par in Var)        # Проверка par в списке Var
+    if Reply is True:           # Если данное есть в списке
+        Get_Out = nsp           # Ключ для обновляемых данных
+        Res_Get.append(Get_Out) # Обновление списка результатов
+        return
+    if ((Reply == False) and (nsp == "global")):    # Данных нет в списке и ключ не "global"  
+        Get_Out = 'None'            # Нет родителя (корневой узел
+        Res_Get.append(Get_Out)     # Обновление списка результатов
+        return
+    if (Reply is False) and (nsp != "global"):      # Данных нет в списке и ключ "global"
+        Parent = Namespaces.get(nsp)    # Родитель уровня выше
+        Get(Parent, par)                # Рекурсия (вызов Get для родителя)
+        return
+#
+for i in range(N):                      # Цикл по номеру директивы
+    cmd, namesp, arg = input().split()  # Парсинг строки на элементы
+#    print("cmd:", cmd, "namesp:", namesp, "arg:", arg)
+    if cmd == "create":             # Если команда create
+        Crt(namesp, arg)            # Вызов процедуры Crt
+    if cmd == "add":                # Если команда add
+        Add(namesp, arg)            # Вызов процедуры add
+    if cmd == "get":                # Если команда get
+        Get(namesp, arg)            # Вызов процедуры Get
+# print("Namespaces:", Namespaces)    # Печать словаря Namespaces
+# print("Variables:", Variables)      # Печать словаря Variables
+# print(Res_Get)
+for mem in Res_Get:                 # Печать элементов списка реультатов 
+    print(mem)
+-------------------------------------------------------------------------------------------------------------------------
+
+
+def get(ns, var):
+    if var in space[ns][1]: return ns
+    elif ns == 'global': return 'None'
+    return get(space[ns][0], var)
+
+space = {'global': ['None', []]}
+for _ in range(int(input())):
+    com, ns, param = input().split()
+    if com == 'create': space[ns] = [param, []]
+    elif com == 'add': space[ns][1].append(param)
+    elif com == 'get': print(get(ns, param))
+
+--------------------------------------------------------------------------------
+
+
+class Scopes:
+    def __init__(self):
+        self.root = dict()
+        self.flag = False
+        self.root['global'] = dict()
+        self.root['global']['parent'] = None
+        self.root['global']['vars'] = set()
+
+    def create_sp(self, val, parent):
+        self.root[val] = dict()
+        self.root[val]['parent'] = parent
+        self.root[val]['vars'] = set()
+
+    def add_var(self, sp, val):
+        self.root[sp]['vars'].add(val)
+
+    def get_var(self, sp, val):
+        self.flag = False
+        if val in self.root[sp]['vars']:
+            self.flag = True
+            print(sp)
+        else:
+            if sp != 'global':
+                self.get_var(self.root[sp]['parent'], val)
+            else:
+                print("None")
+
+
+scope = Scopes()
+
+
+def getstuff(cmd, ns, var):
+    if cmd == "add":
+        scope.add_var(ns, var)
+    elif cmd == "create":
+        scope.create_sp(ns, var)
+    elif cmd == "get":
+        scope.get_var(ns, var)
+    else:
+        pass
+
+
+if __name__ == "__main__":
+
+    # create n-th time queries
+    n = int(input())
+    # check if n is good
+    lst = []
+    if 1 <= n <= 100:
+        i = 0
+        while i < n:
+            cmd, ns, var = input().split()
+            getstuff(cmd, ns, var)
+            i += 1
+    else:
+        pass
+        
+------------------------------------------------------------------------------------------------
+
+class GlobalNamespace:
+
+    def __init__(self, name, parent):
+        self.name = name
+        self.parent = parent
+        self.vars = []
+        self.namespace = None
+
+    def add(self, var):
+        self.vars.append(var)
+
+    def get(self, var):
+        if var not in self.vars and self.name == 'global':
+            return None
+        if var not in self.vars:
+            temp = self.parent.get(var)
+            return temp
+        else:
+            return self.name
+
+    def create(self, namespace):
+        namespace_object = Namespace(name=namespace, parent=self)
+        return namespace_object
+
+
+class Namespace(GlobalNamespace):
+
+    def __init__(self, name, parent):
+        super().__init__(name, parent)
+
+
+def main():
+    command_lists = []
+    namespaces = [GlobalNamespace(name='global', parent=None)]
+    for _ in range(int(input())):
+        command = str(input()).strip().split()
+        command_lists.append(command)
+
+    for command in command_lists:
+        if command[0] == 'create':
+            for namespace in namespaces:
+                if namespace.name == command[2]:
+                    namespaces.append(namespace.create(namespace=command[1]))
+                    break
+        elif command[0] == 'add':
+            for namespace in namespaces:
+                if namespace.name == command[1]:
+                    namespace.add(command[2])
+                    break
+        elif command[0] == 'get':
+            for namespace in namespaces:
+                if namespace.name == command[1]:
+                    print(namespace.get(command[2]))
+                    break
+
+    return
+
+
+if __name__ == '__main__':
+    main()
+-----------------------------------------------------------------------------------------
+
+
+# put your python code here
+n = int(input())
+space = {'global': [None]}
+for i in range(n):
+    cmd, ns, par = input().split()
+    if cmd == 'create':
+        space[ns] = [par]
+    elif cmd == 'add':
+        space[ns].append(par)
+    elif cmd == 'get':
+        while True:
+            if par in space[ns]:
+                print(ns)
+                break
+            elif ns == 'global':
+                print('None')
+                break
+            else:
+                ns = space[ns][0]   
+                
+------------------------------------------------------------------------------------
+
+
+n = int(input())
+
+def getNameSpace(nameSpace, var):
+    if nameSpace is None:
+        return None
+    elif var in namespaces[nameSpace]['vars']:
+        return nameSpace
+    else:
+        return getNameSpace(namespaces[nameSpace]['parent'], var)
+
+namespaces={'global': {'parent': None, 'vars': []}}
+
+for i in range(n):
+    s = input().split(' ')
+    if s[0] == 'create':
+        namespaces[s[1]] = {'parent': s[2], 'vars': []}
+    if s[0] == 'add':
+        namespaces[s[1]]['vars'].append(s[2])
+    if s[0] == 'get':
+        print(getNameSpace(s[1],s[2]))
+        
+------------------------------------------------------------------------------------
+
+ Словарь пространтсва имен,
+# ключи - наши пронстранства имен
+# Значения - словарь с двумя значениями:
+#   потомок (если пространтсво имен global, то None)
+#   переменные пронстрантства
+spaces = {'global': {'parrent': None, 'values': []}}
+
+def create(namespace, parent='global'):
+    '''
+    Добпавляет новое пространство имен, по умолчанию родитель - global
+    :param namespace:   пронстранство имен
+    :param parent: потомок (по умолчанию global)
+    :return: Null
+    '''
+    spaces[namespace] = {'parrent': parent, 'values': []}
+
+
+def add(namespace, var):
+    '''
+    Добавляет переменную в пронстранство имен
+    :param namespace:  пронстранство имен
+    :param var: переменная
+    :return:
+    '''
+    spaces[namespace]['values'].append(var)
+
+def get(namespace, var):
+    '''
+    Возвращает име пронстранство имен, если переменная принадлежит заданному пронстрантству имен
+    в противном случае идет вверх до global
+    :param namespace:  пронстранство имен
+    :param var: переменная
+    :return: пронстранство имен или родитель (до global)
+    '''
+    if var in spaces[namespace]['values']:
+        return namespace
+    if namespace == 'global':
+        return None
+    return get(spaces[namespace]['parrent'], var)
+
+for i in range(int(input().strip())):
+    cmd, namesp, arg = input().split()
+    if cmd == 'get':
+        print(get(namesp, arg))
+    elif cmd == 'add' :
+        add(namesp, arg)
+    elif cmd == 'create':
+        create(namesp, arg)        
+
+--------------------------------------------------------------------------------------------------                
+
+class nmspc(list):
+    names = {"global": ["None"],"None":[]}
+
+    def create(self, space, parent):
+        self.names[parent].append(space)
+        self.names[space] = [parent]
+
+    def add(self, space, var):
+        self.names[space].append(var)
+
+    def get(self, space, var):
+        if space == "None":
+            return
+        if var in self.names[space]:
+            print(space)
+            return
+        elif self.names[space][0] != "None":
+            self.get(self.names[space][0], var)
+            return
+        else:
+            print("None")
+        return
+
+a = nmspc()
+n = int(input())
+for i in range(n):
+    s = input().split()
+    if s[0] == "add":
+        a.add(s[1], s[2])
+    elif s[0] == "create":
+        a.create(s[1], s[2])
+    else:
+        a.get(s[1], s[2])
+
+#####################################################################################
+
+        
+
+
