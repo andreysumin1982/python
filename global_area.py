@@ -46,7 +46,6 @@ for i in range(1, 12):
     get <namespace> <var> – получить имя пространства, из которого будет взята переменная <var> 
             при запросе из пространства <namespace>, или None, если такого пространства не существует
  Во пример вложенных пространств имено global, foo, bar:
-
 namesp = {
     'global': {
         'parent': None,
@@ -60,7 +59,6 @@ namesp = {
         }
     }
 }
-
 2. Количество команд считывал через n = int(input()). Затем в цикле while n != 0 считывал команды, 
 сразу деля их на 3 переменные cmd, nmsp, var = input().split() и в зависимости 
 от if cmd == я выполнял ту или иную функцию и передавал в нее остальные 2 переменные nmsp и var.
@@ -72,13 +70,10 @@ namesp = {
     a[namespace] = {'parent':parent, 'vars':set()}
 4. Для создания окружения я использовал рекурсивную функцию, 
 которая ищет ключ словаря который будет родительским пространством для нового.
-
 def finditem(obj, key):
     if key in obj:
         return obj[key]
-
 5. Для поиска переменных я создал рекурсивную функцию 
-
 def findvar(obj, namespace, var):
     if namespace in obj:
         if var in obj[namespace]['vars']:
@@ -87,15 +82,15 @@ def findvar(obj, namespace, var):
 или 2d массив [global, var, parrent]
               [ ...   ...    ....  ]
 '''
-#--
+#--  пример
 dg = {'global':
           {'parrent':None, 'vars': set('w'),
            'foo':{'parrent':'global', 'vars': set('a'),
                   'bar':{'parrent':'foo', 'vars': set('r'),
                          'ree':{'parrent':'bar', 'vars': set('s')}}}} }
-#--
+#------------------------------------------------------------------------------------
 arr_keys = ['global'] #   ключи для словаря
-dict_namespace = {'global': {'parrent': 'global', 'var': set()}} # Помещаем все namespace, vars в словарь
+dict_namespace = {'global': {'parrent': 'None', 'var': set()}} # Помещаем все namespace, vars в словарь
 #
 #-- Ф-ция для добавл. var:  {'namespace': { var:''}} в словарь
 def add_var(name, namespace):
@@ -112,9 +107,11 @@ def create_def(arr_keys, namespace):
             dict_namespace[key]['var'] = set()
 #
 #-- Ф-я для поиска переменных, ф-ций, namespa-ов.
+
 #dict_namespace = {'global': {'parrent': 'global', 'var': ['a','x']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','d']}}
 def get(name, namespace, dict_namespace):
     list_key = arr_keys[::-1] # revers list
+<<<<<<< HEAD
     if name in list_key :
         if namespace in dict_namespace[name]['var']:
 <<<<<<< HEAD
@@ -124,41 +121,62 @@ def get(name, namespace, dict_namespace):
         else: continue
 =======
             print(name); return
-        else:
-            index = list_key.index(name)
-            for i in list_key[index:]:
-                try:
-                    parrent = dict_namespace[i]['parrent']
-                    if namespace in dict_namespace[parrent]['var']:
-                        print(parrent); return
-                    else: continue
-                except: pass
-            else: print('None'); return
+=======
+    index = list_key.index(name)
+    #print(list_key[index:])
+    count = index
+    while count < len(list_key):
+        #print(list_key)
+        #print(len(list_key))
+        #print(list_key[count:])
+        #print(dict_namespace[list_key[count]])
 
+        if namespace in dict_namespace[list_key[count]]['var']:
+            ##print(namespace in dict_namespace[name]['var'])
+            print(list_key[count]); return
+            #
+>>>>>>> recurse_def
+        else:
+            if dict_namespace[list_key[count]]['parrent'] == 'None':
+                print('None'); return
+            parrent = dict_namespace[list_key[count]]['parrent']
+            #print(parrent, list_key.index(parrent),'*')
+            #print(namespace in dict_namespace[parrent]['var'])
+            #print(dict_namespace[parrent]['var'], '**')
+
+<<<<<<< HEAD
 >>>>>>> d3182cf1be2f495a417bed14abacec43bfd62944
+=======
+            if namespace in dict_namespace[parrent]['var']:
+                print(parrent); return
+            count = list_key.index(parrent); continue
+        #print('None *'); return
+    print('None'); return
+>>>>>>> recurse_def
 #-------------------------------
-#--
-'''def recurse_dict(d):
-    try:
-        for k,v in d.items():
-            if k =='vars':
-                print(d[k])
-        recurse_dict(v)
-    except: print('-' * 5)'''
+
+#------------- Основное тело программы -читаем из файла тесты----------------
+#path = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/test'
+path = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/tests'
+arr = []
+with open(path,'r') as file:
+    for i in file.readlines():
+        arr.append(i.strip('\n').split())
+#-----------------------
+    count = 1
+    while count < len(arr):
+        if arr[count][0] == 'add':
+            add_var(arr[count][1], arr[count][2])    # Выз. ф-ю. add_var
+        elif arr[count][0] == 'create':
+            arr_keys.append(arr[count][1])       # доб. в список
+            #print(arr_keys)
+            create_def(arr_keys, arr[count][2])     # выз. ф. create_def
+        elif arr[count][0] == 'get':
+            get(arr[count][1], arr[count][2], dict_namespace)    # выз. ф. get
+        count +=1
 #
-#------------- Основное тело программы -----------------
-n = int(input(''))
-for i in range(n):
-    command, name, namespace = input('<:').split();
-    if command == 'add':
-        add_var(name, namespace)    # Выз. ф-ю. add_var
-    elif command == 'create':
-        arr_keys.append(name)       # доб. в список
-        print(arr_keys)
-        create_def(arr_keys, namespace)     # выз. ф. create_def
-    elif command == 'get':
-        get(name, namespace, dict_namespace)    # выз. ф. get
-print(dict_namespace)
+    print('`'*20)
+    for k,v in dict_namespace.items(): print(k, v)
 
 #--------------------------------------------------------
 #
