@@ -111,17 +111,7 @@ def create_def(arr_keys, namespace):
 #dict_namespace = {'global': {'parrent': 'global', 'var': ['a','x']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','d']}}
 def get(name, namespace, dict_namespace):
     list_key = arr_keys[::-1] # revers list
-<<<<<<< HEAD
-    if name in list_key :
-        if namespace in dict_namespace[name]['var']:
-<<<<<<< HEAD
-            return name
-        elif namespace in value['var']:
-            return key
-        else: continue
-=======
-            print(name); return
-=======
+
     index = list_key.index(name)
     #print(list_key[index:])
     count = index
@@ -135,7 +125,7 @@ def get(name, namespace, dict_namespace):
             ##print(namespace in dict_namespace[name]['var'])
             print(list_key[count]); return
             #
->>>>>>> recurse_def
+
         else:
             if dict_namespace[list_key[count]]['parrent'] == 'None':
                 print('None'); return
@@ -144,15 +134,13 @@ def get(name, namespace, dict_namespace):
             #print(namespace in dict_namespace[parrent]['var'])
             #print(dict_namespace[parrent]['var'], '**')
 
-<<<<<<< HEAD
->>>>>>> d3182cf1be2f495a417bed14abacec43bfd62944
-=======
+
             if namespace in dict_namespace[parrent]['var']:
                 print(parrent); return
             count = list_key.index(parrent); continue
         #print('None *'); return
     print('None'); return
->>>>>>> recurse_def
+
 #-------------------------------
 
 #------------- Основное тело программы -читаем из файла тесты----------------
