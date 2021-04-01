@@ -38,7 +38,7 @@ def reverse(n, k=0):  # k=0, не обязaтельный аргумент
         reverse(n, k)
 reverse(arr)
 #--
-<<<<<<< HEAD
+
 print('*'*20)
 dict_namespace = {'global': {'parrent': 'None', 'var': ['a','x']}, 'foo': {'parrent': 'global', 'var': ['b']}, 'boo': {'parrent': 'foo', 'var': ['c','d']}}
 #
