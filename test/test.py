@@ -24,7 +24,48 @@ def body(): # Тело программы
 #body()
 print(dict_namespace)
 #-----------------------------------------------------------------------------
+'''ООП'''
+#
+class Car:          # Создаем класс Car
+    count = 0
+    def __init__(self, a):
+        self.a = a
+        print('Create obj')
+        Car.count += 1  # Счетчик
+        print(Car.count)
 
-
-
+    #def __init__(self, name, make, model): # __init__  Конструктор класса
+    #    self.name = name
+    #    self.make = make
+    #    self.model = model
+    #name = ''       # Атрибут класса имя
+    #make = ''       # Атрибут класса
+    #model = 2000    # Атрибут класса
+    '''Создаем методы класса'''
+    def start(self):    # Метод start
+        print('Заводим машину.')
+    def stop(self):     # Метод stop
+        print('Стоп машина.')
+    def run(self):      # Метод run
+        print('Поехали.')
+        #Car.count += 1  # Счетчик
+        #print(Car.count)
+#
+#car_a = Car('Машина', 'Жига', 'ВАЗ2115') # Создаем объект (экземпляр класса) класса Car под названием car_a
+#car_b = Car('Машина', 'BMW', '525')      # Создаем объект (экземпляр класса) класса Car под названием car_b
+car_a = Car(1)
+car_a.stop()
+car_b = Car(2)
+car_c = Car(3)
+car_c.count = 100
+print(car_c.count)
+#
+car_a.start()       # вызываем метод start() через объект car_a
+#
+car_a.run()
+#Car.count = 2
+#print(Car.count)
+#print(car_c.count)
+car_a.run()
+#print(car_a.model)  # Получаем доступ к атрибуту класса Car
 
