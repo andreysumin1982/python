@@ -69,3 +69,23 @@ car_a.run()
 car_a.run()
 #print(car_a.model)  # Получаем доступ к атрибуту класса Car
 
+#-------------------------------------------------------------------------------------------------------------
+class A:
+    def __init__(self, val=0):
+        self.val = val
+#
+    def add(self, x):
+        self.val += x
+#
+    def print_val(self):
+        print(self.val)
+#
+a = A()
+b = A(2)
+c = A(4)
+a.add(2)
+b.add(2)
+#
+a.print_val()
+b.print_val()
+c.print_val()
