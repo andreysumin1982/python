@@ -19,4 +19,3 @@ b.add(2)
 a.print_val()
 b.print_val()
 c.print_val()
-dasdasdasdasdasd
