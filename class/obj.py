@@ -42,3 +42,27 @@ class Hero():
         pass
     def intelligence(self):
         pass
+#----------------------------------------
+class Point3D():
+    '''Класс для хранения координат'''
+    arr_xy = [] # Для хран. координат
+    def __init__(self, coordinat = None):
+        self.coordinat = Point3D.arr_xy.append(coordinat)
+pt = Point3D(123)
+print(Point3D.arr_xy)
+class Point(Point3D):
+    '''Дочерний класс '''
+    def __init__(self, coordinat = 0):
+        self.coordinat = Point3D.arr_xy.append(coordinat)
+pt1 = Point('erwer')
+print(Point3D.arr_xy)
+#---------------------------------------------------------------
+print('-'*30)
+print(getattr(pt, "y", 'Такого значения нет.')) # Возвр. значен. атрибута, а если нет, выводит текст.
+print(hasattr(pt, "i")) # Проверяет на наличии атрибута.
+setattr(pt, "c", 122) # Задает значение атрибута, если его нет, то создает его.
+print(pt.__dict__) # Выводит все атр. в экземпляре класса
+print(pt.__doc__) # выводит строку с описанием класса, если нет ()
+print(Point3D.__name__) # выводит имя класса
+print(isinstance(pt, Point3D)) # проверяет принадлежность объекта к классу.
+
