@@ -56,6 +56,64 @@ class Point(Point3D):
         self.coordinat = Point3D.arr_xy.append(coordinat)
 pt1 = Point('erwer')
 print(Point3D.arr_xy)
+#--
+class MoneyBox():
+    '''Класс копилка'''
+    list_box = [] # список для добалнения значений
+    def __init__(self, capacity): # Конструктор. вх. значение вместительность list_box
+        self.capacity = capacity
+        self.count = 0
+    #
+    def can_add(self, v):
+        if self.count + v <= self.capacity:
+            return True
+        return False
+    #
+    def add(self, v):
+        if self.can_add(v):
+            self.count += v
+#
+x = MoneyBox(10)
+x.add(5)
+x.add(3)
+x.add(0)
+print(x.can_add(2))
+#print(x.can_add(2))
+#-
+print(x.capacity)
+print('*'*20)
+#-------------------------------------------------------------
+class Buffer:
+    def __init__(self):
+        self.count = 0
+        self.list = None
+
+    def add(self, *a):
+        self.list = list(a)
+
+    def get_current_part(self):
+        s = 0
+        for i in self.list:
+            s +=i; self.count += 1
+            if self.count == 5:
+                self.list = None
+                return s
+        else: return self.list[:self.count]
+
+        print(self.list)
+b = Buffer()
+b.add(1,2,3,4)
+print(b.get_current_part())
+b.add(5,6)
+print(b.get_current_part())
+b.add(1,1,1,1,1)
+print(b.get_current_part())
+
+
+
+
+
+
 #---------------------------------------------------------------
 print('-'*30)
 print(getattr(pt, "y", 'Такого значения нет.')) # Возвр. значен. атрибута, а если нет, выводит текст.
@@ -65,4 +123,4 @@ print(pt.__dict__) # Выводит все атр. в экземпляре кл�
 print(pt.__doc__) # выводит строку с описанием класса, если нет ()
 print(Point3D.__name__) # выводит имя класса
 print(isinstance(pt, Point3D)) # проверяет принадлежность объекта к классу.
-
+#---------------------------------------------------------------
