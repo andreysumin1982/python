@@ -84,32 +84,31 @@ print(x.capacity)
 print('*'*20)
 #-------------------------------------------------------------
 class Buffer:
+    '''Класс Buffer, задание stepic.org'''
     def __init__(self):
         self.count = 0
-        self.list = None
+        self.list = []
 
-    def add(self, *a):
-        self.list = a
-        print(self.list, '***')
-    def get_current_part(self):
+    '''Обьявляем методы'''
+    def add(self, *a): # Метод добавления эл. в список
+        for i in a: self.list.append(' '.join(str(i)))
+        print(self.list, '*')
+
+    '''def get_current_part(self):
         s = 0
         for i in self.list:
             s +=i; self.count += 1
             if self.count == 5:
                 self.list = None
                 return s
-        else: return self.list[:self.count]
+        else: return self.list[:self.count]'''
 
-        print(self.list)
+
 b = Buffer()
 b.add(1,2,3,4)
-print(b.get_current_part())
-b.add(5,6)
-print(b.get_current_part())
-b.add(1,1,1,1,1)
-print(b.get_current_part())
-
-
+b.add(11)
+b.add(12)
+b.add(13)
 
 
 
