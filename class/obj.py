@@ -89,8 +89,8 @@ class Buffer:
         self.list = None
 
     def add(self, *a):
-        self.list = list(a)
-
+        self.list = a
+        print(self.list, '***')
     def get_current_part(self):
         s = 0
         for i in self.list:
