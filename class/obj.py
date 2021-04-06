@@ -57,8 +57,9 @@ class Point(Point3D):
 pt1 = Point('erwer')
 print(Point3D.arr_xy)
 #--
+#------------------------------------------------------------------------------------
 class MoneyBox():
-    '''Класс копилка'''
+    '''Класс копилка задание stepic.org'''
     list_box = [] # список для добалнения значений
     def __init__(self, capacity): # Конструктор. вх. значение вместительность list_box
         self.capacity = capacity
@@ -82,33 +83,53 @@ print(x.can_add(2))
 #-
 print(x.capacity)
 print('*'*20)
-#-------------------------------------------------------------
+#-------------------------------------------------------------------------------------
 class Buffer:
     '''Класс Buffer, задание stepic.org'''
     def __init__(self):
-        self.count = 0
         self.list = []
-
-    '''Обьявляем методы'''
-    def add(self, *a): # Метод добавления эл. в список
-        for i in a: self.list.append(' '.join(str(i)))
-        print(self.list, '*')
-
-    '''def get_current_part(self):
-        s = 0
-        for i in self.list:
-            s +=i; self.count += 1
-            if self.count == 5:
-                self.list = None
-                return s
-        else: return self.list[:self.count]'''
-
-
+    '''Метод добавления элементов. в список и вывод.'''
+    '''def add(self, *a):
+        for i in a: self.list.append(i)   # Добавляем в список
+        #print(self.list)
+        while len(self.list) >= 5:  # Пока длинна >= 5 выполняем...
+            summa = 0; count = 0    # Сумма, счетчик элементов.
+            for i in self.list:     # Бежим по списку.
+                summa += (i); count +=1 # Подсчитываем сумму и счетчик
+                if count == 5:
+                    print(summa)
+                    for j in self.list[:count]: # Отсекаем первую пятёрку элементов
+                        self.list.remove(j)
+                    i, j = 0, 0      # Обнуляем сумму, счетчики циклов.
+                    #print(self.list)'''
+    ''' !! Более улучшенный метод добавления и посчета'''
+    def add(self,*a):
+        for i in a:    # Бежим по кортежу
+            self.list.append(i) # Добавляем в список
+            if len(self.list) == 5: # если длинна списока составила 5 элем.
+                print(sum(self.list))  # Выводим сумму всех элементов
+                self.list.clear() # Очищаем список из 5 елементов, и возвращ. в начало цикла
+    '''Вернуть сохраненные в текущий момент элементы последовательности в порядке, 
+    в котором они были добавлены'''
+    def get_current_part(self):
+        #if len(self.list) < 5:
+        return self.list
+#-
 b = Buffer()
-b.add(1,2,3,4)
-b.add(11)
-b.add(12)
-b.add(13)
+#b.add(*range(42**4))
+#print(b.get_current_part())
+#------------------------------------------------------------------------------------
+'''Тестируем map, lambda'''
+lst = [*range(1,150001)]
+def sqr_func(iter):
+    return (iter*2)//2**5
+def run():
+    m = list(map(sqr_func, lst))
+    return m
+print(run())
+'''---------------------------'''
+
+
 
 
 
