@@ -173,7 +173,7 @@ class D:
    def foo(self):
       print("D")
 
-class E(B, C, D):
+class E(B, D, C):
    pass
 
 E().foo()
