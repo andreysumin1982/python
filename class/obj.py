@@ -1,14 +1,20 @@
 '''stepic.org, тесты, задачи на тему ООП'''
-#------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
 class A:
     def __init__(self, val=0):
         self.val = val
-#
+
+    #
     def add(self, x):
         self.val += x
-#
+
+    #
     def print_val(self):
         print(self.val)
+
+
 #
 a = A()
 b = A(2)
@@ -19,9 +25,12 @@ b.add(2)
 a.print_val()
 b.print_val()
 c.print_val()
-#--------------------------------------------------------------------------
+
+
+# --------------------------------------------------------------------------
 class Hero():
     '''Класс создаем героя для игры'''
+
     def __init__(self, name, race, level, force, magic, intelligence):
         self.name = name
         self.race = race
@@ -29,65 +38,93 @@ class Hero():
         self.force = force
         self.magic = magic
         self.intelligence = intelligence
+
     '''Добавляем методы'''
+
     def name(self):
         pass
+
     def race(self):
         pass
+
     def level(self):
         pass
+
     def force(self):
         pass
+
     def magic(self):
         pass
+
     def intelligence(self):
         pass
-#----------------------------------------
+
+
+# ----------------------------------------
 class Point3D():
     '''Класс для хранения координат'''
-    arr_xy = [] # Для хран. координат
-    def __init__(self, coordinat = None):
+    arr_xy = []  # Для хран. координат
+
+    def __init__(self, coordinat=None):
         self.coordinat = Point3D.arr_xy.append(coordinat)
+
+
 pt = Point3D(123)
 print(Point3D.arr_xy)
+
+
 class Point(Point3D):
     '''Дочерний класс '''
-    def __init__(self, coordinat = 0):
+
+    def __init__(self, coordinat=0):
         self.coordinat = Point3D.arr_xy.append(coordinat)
+
+
 pt1 = Point('erwer')
 print(Point3D.arr_xy)
-#--
-#------------------------------------------------------------------------------------
+
+
+# --
+# ------------------------------------------------------------------------------------
 class MoneyBox():
     '''Класс копилка задание stepic.org'''
-    list_box = [] # список для добалнения значений
-    def __init__(self, capacity): # Конструктор. вх. значение вместительность list_box
+    list_box = []  # список для добалнения значений
+
+    def __init__(self, capacity):  # Конструктор. вх. значение вместительность list_box
         self.capacity = capacity
         self.count = 0
+
     #
     def can_add(self, v):
         if self.count + v <= self.capacity:
             return True
         return False
+
     #
     def add(self, v):
         if self.can_add(v):
             self.count += v
+
+
 #
 x = MoneyBox(10)
 x.add(5)
 x.add(3)
 x.add(0)
 print(x.can_add(2))
-#print(x.can_add(2))
-#-
+# print(x.can_add(2))
+# -
 print(x.capacity)
-print('*'*20)
-#-------------------------------------------------------------------------------------
+print('*' * 20)
+
+
+# -------------------------------------------------------------------------------------
 class Buffer:
     '''Класс Buffer, задание stepic.org'''
+
     def __init__(self):
         self.list = []
+
     '''Метод добавления элементов. в список и вывод.'''
     '''def add(self, *a):
         for i in a: self.list.append(i)   # Добавляем в список
@@ -103,32 +140,45 @@ class Buffer:
                     i, j = 0, 0      # Обнуляем сумму, счетчики циклов.
                     #print(self.list)'''
     ''' !! Более улучшенный метод добавления и посчета'''
-    def add(self,*a):
-        for i in a:    # Бежим по кортежу
-            self.list.append(i) # Добавляем в список
-            if len(self.list) == 5: # если длинна списока составила 5 элем.
+
+    def add(self, *a):
+        for i in a:  # Бежим по кортежу
+            self.list.append(i)  # Добавляем в список
+            if len(self.list) == 5:  # если длинна списока составила 5 элем.
                 print(sum(self.list))  # Выводим сумму всех элементов
-                self.list.clear() # Очищаем список из 5 елементов, и возвращ. в начало цикла
+                self.list.clear()  # Очищаем список из 5 елементов, и возвращ. в начало цикла
+
     '''Вернуть сохраненные в текущий момент элементы последовательности в порядке, 
     в котором они были добавлены'''
+
     def get_current_part(self):
-        #if len(self.list) < 5:
+        # if len(self.list) < 5:
         return self.list
-#-
+
+
+# -
 b = Buffer()
-#b.add(*range(42**4))
-#print(b.get_current_part())
-#------------------------------------------------------------------------------------
+# b.add(*range(42**4))
+# print(b.get_current_part())
+# ------------------------------------------------------------------------------------
 '''Тестируем map, lambda'''
-lst = [*range(1,150001)]
+lst = [*range(1, 150001)]
+
+
 def sqr_func(iter):
-    return (iter*2)//2**5
+    return (iter * 2) // 2 ** 5
+
+
 def run():
     m = list(map(sqr_func, lst))
     return m
-print(run())
+
+
+# print(run())
 '''---------------------------'''
-#---------------------- Наследование---------------------------
+
+
+# ---------------------- Наследование---------------------------
 class Base:
     def __init__(self):
         self.val = 0
@@ -142,6 +192,7 @@ class Base:
             print('add_one_Base')
             self.add_one()
 
+
 class Derived(Base):
     def add_one(self):
         print('add_one_Dereved')
@@ -149,45 +200,88 @@ class Derived(Base):
         print(self.val)
 
 
-#a = Derived()
-#a.add_one()
+# a = Derived()
+# a.add_one()
 
 b = Derived()
 b.add_many(3)
 
-#print(a.val)
+# print(a.val)
 print(b.val)
-#--     --------------------------------------------
+
+
+# --     --------------------------------------------
 class A:
-   def foo(self):
-      print("A")
+    def foo(self):
+        print("A")
+
 
 class B(A):
-   pass
+    pass
+
 
 class C(A):
-   def foo(self):
-      print("C")
+    def foo(self):
+        print("C")
+
 
 class D:
-   def foo(self):
-      print("D")
+    def foo(self):
+        print("D")
+
 
 class E(B, D, C):
-   pass
+    pass
+
 
 E().foo()
+print('-' * 30)
+# ------------- Задача stepic.org наследование классов ---------
+PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/test_class'
 
 
+#
+def read_file(P):
+    with open(P, 'r') as file:
+        data = []
+        for i in file.readlines():
+            data.append(''.join(i.strip().replace(':', '').split()))
+        return data
 
 
-#---------------------------------------------------------------
-print('-'*30)
-print(getattr(pt, "y", 'Такого значения нет.')) # Возвр. значен. атрибута, а если нет, выводит текст.
-print(hasattr(pt, "i")) # Проверяет на наличии атрибута.
-setattr(pt, "c", 122) # Задает значение атрибута, если его нет, то создает его.
-print(pt.__dict__) # Выводит все атр. в экземпляре класса
-print(pt.__doc__) # выводит строку с описанием класса, если нет ()
-print(Point3D.__name__) # выводит имя класса
-print(isinstance(pt, Point3D)) # проверяет принадлежность объекта к классу.
-#---------------------------------------------------------------
+'''['4', 'A', 'BA', 'CA', 'DBC', '4', 'AB', 'BD', 'CD', 'DA']'''
+#
+dict_data = {}
+n = int(read_file(PATH)[0])
+p = read_file(PATH)
+
+for i in range(1, n + 1):
+    if len(p[i]) == 1:
+        dict_data[p[i][0]] = ['None']
+    else:
+        dict_data[p[i][0]] = [','.join(p[i][1:])]
+print(dict_data)
+
+
+class Myx1:
+    def __init__(self):
+        self.val = 3
+#
+lst = list()
+i = 0
+while i < 10:
+    #m = "{i}".format
+    m = Myx1()
+    lst.append(m)
+    i += 1
+    print(Myx1.__str__(m), m.val, "!!")
+# ---------------------------------------------------------------
+print('-' * 30)
+print(getattr(pt, "y", 'Такого значения нет.'))  # Возвр. значен. атрибута, а если нет, выводит текст.
+print(hasattr(pt, "i"))  # Проверяет на наличии атрибута.
+setattr(pt, "c", 122)  # Задает значение атрибута, если его нет, то создает его.
+print(pt.__dict__)  # Выводит все атр. в экземпляре класса
+print(pt.__doc__)  # выводит строку с описанием класса, если нет ()
+print(Point3D.__name__)  # выводит имя класса
+print(isinstance(pt, Point3D))  # проверяет принадлежность объекта к классу.
+# ---------------------------------------------------------------
