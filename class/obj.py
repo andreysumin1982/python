@@ -238,8 +238,6 @@ E().foo()
 print('-' * 30)
 # ------------- Задача stepic.org наследование классов ---------
 PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/test_class'
-
-
 #
 def read_file(P):
     with open(P, 'r') as file:
@@ -248,21 +246,57 @@ def read_file(P):
             data.append(''.join(i.strip().replace(':', '').split()))
         return data
 
-
 '''['4', 'A', 'BA', 'CA', 'DBC', '4', 'AB', 'BD', 'CD', 'DA']'''
 #
-dict_data = {}
-n = int(read_file(PATH)[0])
-p = read_file(PATH)
+dict_data = {} # словарь для добавл. предков, классов.
+p = read_file(PATH)         # список возвр. ф-ц.read_file(PATH)
+#
+def add_class():
+    for i in range(1, int(p[0]) + 1):
+        if len(p[i]) == 1:
+            dict_data[p[i][0]] = ['None']
+        else:
+            dict_data[p[i][0]] = [','.join(p[i][1:])]
+    print(dict_data)
+#
+add_class()
+#
+def get_sum():
+    d = [i for i in p[1:] if i.isdigit()]
+    k = ''.join(d)
+    return int(k)+1
+#
+def get_class(p):
+    p = p[1:]
+    for i in p[get_sum():]:
+        print(i[0],i[1])
+#
+get_class(p)
+#
+'''Алгоритм DFS «Depth-first search» или «Поиск в глубину»'''
 
-for i in range(1, n + 1):
-    if len(p[i]) == 1:
-        dict_data[p[i][0]] = ['None']
-    else:
-        dict_data[p[i][0]] = [','.join(p[i][1:])]
-print(dict_data)
+def dfs(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start, graph[start], visited)
+    for next in graph[start] - visited:
+        dfs(graph, next, visited)
+    return visited
 
 
+graph = {'0': set(['1', '2']),
+         '1': set(['0', '3', '4']),
+         '2': set(['0']),
+         '3': set(['1']),
+         '4': set(['2', '3']),
+         '5': None}
+
+dfs(graph, '0')
+s1 = set([1,2])
+s2 = set([0])
+print(s1-s2)
+#----------------------------------------------------------
 class Myx1:
     def __init__(self):
         self.val = 3
@@ -274,7 +308,7 @@ while i < 10:
     m = Myx1()
     lst.append(m)
     i += 1
-    print(Myx1.__str__(m), m.val, "!!")
+    #print(Myx1.__str__(m), m.val, "!!")
 # ---------------------------------------------------------------
 print('-' * 30)
 print(getattr(pt, "y", 'Такого значения нет.'))  # Возвр. значен. атрибута, а если нет, выводит текст.
