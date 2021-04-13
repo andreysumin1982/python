@@ -252,7 +252,7 @@ def read_file(P):
 '''['4', 'A', 'BA', 'CA', 'DBC', '4', 'AB', 'BD', 'CD', 'DA']'''
 #
 dict_data = {} # словарь для добавл. предков, классов.
-p = read_file(PATH)         # список возвр. ф-ц.read_file(PATH)
+#p = read_file(PATH)         # список возвр. ф-ц.read_file(PATH)
 #
 def add_class():
     for i in range(1, int(p[0]) + 1):
@@ -262,7 +262,7 @@ def add_class():
             dict_data[p[i][0]] = [','.join(p[i][1:])]
     print(dict_data)
 #
-add_class()
+#add_class()
 #
 def get_sum():
     d = [i for i in p[1:] if i.isdigit()]
@@ -274,7 +274,7 @@ def get_class(p):
     for i in p[get_sum():]:
         print(i[0],i[1])
 #
-get_class(p)
+#get_class(p)
 #
 '''Алгоритм DFS «Depth-first search» или «Поиск в глубину»'''
 
@@ -297,18 +297,18 @@ graph = {'0': set(['1', '2']),
 
 print(dfs(graph, '0'))
 #
-
-s = [[j for j in range(random.randint(2,4))] for i in range(2)]
+print('-'*30)
+s = [[j for j in range(random.randint(2,4))] for i in range(3)]
 print(s)
 
-visit = []
+visit = [False]*len(s[0]+s[1]+s[2])
 print(visit)
 def dfs1(c):
-    visit.append(c)
+    visit[c] = True
     print(visit)
     for i in s[c]:
         print(i)
-        if visit[i] not in visit:
+        if not visit[i]:
             dfs1(i)
 dfs1(0)
 #
