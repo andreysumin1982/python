@@ -2,6 +2,9 @@
 
 
 # ------------------------------------------------------------------------------
+import random
+
+
 class A:
     def __init__(self, val=0):
         self.val = val
@@ -162,7 +165,7 @@ b = Buffer()
 # print(b.get_current_part())
 # ------------------------------------------------------------------------------------
 '''Тестируем map, lambda'''
-lst = [*range(1, 150001)]
+lst = [*range(1, 1500)]
 
 
 def sqr_func(iter):
@@ -279,23 +282,38 @@ def dfs(graph, start, visited=None):
     if visited is None:
         visited = set()
     visited.add(start)
-    print(start, graph[start], visited)
+    #print(start, visited)
+    #print(graph[start] - visited)
     for next in graph[start] - visited:
+        #print(next + ' След. итерация')
         dfs(graph, next, visited)
     return visited
-
 
 graph = {'0': set(['1', '2']),
          '1': set(['0', '3', '4']),
          '2': set(['0']),
          '3': set(['1']),
-         '4': set(['2', '3']),
-         '5': None}
+         '4': set(['2', '3'])}
 
-dfs(graph, '0')
-s1 = set([1,2])
-s2 = set([0])
-print(s1-s2)
+print(dfs(graph, '0'))
+#
+
+s = [[j for j in range(random.randint(2,4))] for i in range(2)]
+print(s)
+
+visit = []
+print(visit)
+def dfs1(c):
+    visit.append(c)
+    print(visit)
+    for i in s[c]:
+        print(i)
+        if visit[i] not in visit:
+            dfs1(i)
+dfs1(0)
+#
+
+
 #----------------------------------------------------------
 class Myx1:
     def __init__(self):
