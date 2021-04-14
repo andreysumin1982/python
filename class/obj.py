@@ -298,18 +298,17 @@ graph = {'0': set(['1', '2']),
 print(dfs(graph, '0'))
 #
 print('-'*30)
-s = [[j for j in range(random.randint(2,4))] for i in range(3)]
+s = [[random.randint(0,3) for _ in range(random.randrange(1,3))] for i in range(4)]
 print(s)
 
-visit = [False]*len(s[0]+s[1]+s[2])
-print(visit)
+visit = [False]*len(s)
 def dfs1(c):
     visit[c] = True
-    print(visit)
     for i in s[c]:
-        print(i)
+        #print(i,  '*')
         if not visit[i]:
             dfs1(i)
+            print(i, '**')
 dfs1(0)
 #
 
