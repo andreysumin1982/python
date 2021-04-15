@@ -301,14 +301,16 @@ print('-'*30)
 s = [[random.randint(0,3) for _ in range(random.randrange(1,3))] for i in range(4)]
 print(s)
 
-visit = [False]*len(s)
+visit = [False] * len(s)
 def dfs1(c):
     visit[c] = True
+    print(visit)
     for i in s[c]:
         #print(i,  '*')
-        if not visit[i]:
+        if visit[i] == False:
             dfs1(i)
-            print(i, '**')
+        #print(i, '**')
+    print(visit.count(True))
 dfs1(0)
 #
 
