@@ -302,12 +302,30 @@ s = [[random.randint(0,3) for _ in range(random.randrange(1,3))] for i in range(
 print(s)
 #
 '''Создаем 2d массив с 0 по диагонали'''
-for i in range(5):
-    list_2d = []; arr = []
-    for j in range(5):
-        arr.append(j)
-    list_2d.append(arr)
-print(list_2d)
+n = 7
+str = 'abcdef'
+matrix = [['.'] *n for i in range(n)]
+#
+def add_matrix(str): # Заполнение верхней шипки
+    def add_left(count, i): # Заполнение левого края
+        matrix[count][0] = i
+    def add_diagonal(count):    # заполнение диагонали 0
+        matrix[count][count] = '0'
+    def add_price(count):       # заполнение числами (цена маршрута)
+        for i in range(1,n):
+            matrix[count][i] = random.randrange(1, 11).__str__()
+    count = 1
+    for i in str:  # Заполнение верхней шипки
+        matrix[0][count] = i
+        add_left(count, i)
+        add_price(count)
+        add_diagonal(count)
+        count +=1
+#
+add_matrix(str)
+list(map(lambda x: print(x), matrix))
+#
+print('*'*30)
 #
 visit = set()
 def dfs1(c):
