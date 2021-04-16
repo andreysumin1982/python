@@ -300,18 +300,28 @@ print(dfs(graph, '0'))
 print('-'*30)
 s = [[random.randint(0,3) for _ in range(random.randrange(1,3))] for i in range(4)]
 print(s)
-
-visit = [False] * len(s)
+#
+'''Создаем 2d массив с 0 по диагонали'''
+for i in range(5):
+    list_2d = []; arr = []
+    for j in range(5):
+        arr.append(j)
+    list_2d.append(arr)
+print(list_2d)
+#
+visit = set()
 def dfs1(c):
-    visit[c] = True
-    print(visit)
+    if c in visit:
+        return
+    visit.add(c)
+    #print(visit)
     for i in s[c]:
         #print(i,  '*')
-        if visit[i] == False:
+        if i not in visit:
             dfs1(i)
         #print(i, '**')
-    print(visit.count(True))
 dfs1(0)
+print(visit)
 #
 
 
