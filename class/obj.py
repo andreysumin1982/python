@@ -327,19 +327,19 @@ list(map(lambda x: print(x), matrix))
 #
 print('*'*30)
 #
-visit = set()
+visit = [False]*len(s)
+d = []
 def dfs1(c):
-    if c in visit:
-        return
-    visit.add(c)
+    visit[c] = True
+    d.append(c)
     #print(visit)
     for i in s[c]:
         #print(i,  '*')
-        if i not in visit:
+        if visit[i] == False :
             dfs1(i)
         #print(i, '**')
-dfs1(0)
-print(visit)
+dfs1(s[0][0])
+print(visit, d)
 #
 
 
