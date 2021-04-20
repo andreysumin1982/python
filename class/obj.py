@@ -240,7 +240,8 @@ class E(B, D, C):
 E().foo()
 print('-' * 30)
 # ------------------------ Задача stepic.org наследование классов -------------------------------------
-PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/test_class'
+#PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/test_class'
+PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/test_class'
 #
 def read_file(P):
     with open(P, 'r') as file:
@@ -328,19 +329,17 @@ def add_matrix(str): # Заполнение верхней шипки
         count +=1
 #
 add_matrix(str)
-list(map(lambda x: print(x), matrix))
+#list(map(lambda x: print(x), matrix))
 #
 print('*'*30)
 #
-<<<<<<< HEAD
 t = [['*']*i for i in range(6, 0,-1 )]
-list(map(print,t))
+#list(map(print,t))
 #
 visit = set()
-=======
 visit = [False]*len(s)
 d = []
->>>>>>> 57b1491b340231843dddb2c79e6721daf97a89fc
+
 def dfs1(c):
     visit[c] = True
     d.append(c)
