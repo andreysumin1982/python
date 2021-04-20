@@ -327,6 +327,9 @@ list(map(lambda x: print(x), matrix))
 #
 print('*'*30)
 #
+t = [['*']*i for i in range(6, 0,-1 )]
+list(map(print,t))
+#
 visit = set()
 def dfs1(c):
     if c in visit:
