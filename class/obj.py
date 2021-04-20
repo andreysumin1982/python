@@ -239,44 +239,49 @@ class E(B, D, C):
 
 E().foo()
 print('-' * 30)
-# ------------- Задача stepic.org наследование классов ---------
+# ------------------------ Задача stepic.org наследование классов -------------------------------------
 PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/test_class'
 #
 def read_file(P):
     with open(P, 'r') as file:
-        data = []
-        for i in file.readlines():
-            data.append(''.join(i.strip().replace(':', '').split()))
+        data = [''.join(i.strip().split()) for i in file.readlines()]
         return data
-
-'''['4', 'A', 'BA', 'CA', 'DBC', '4', 'AB', 'BD', 'CD', 'DA']'''
+'''['4', 'A', 'BA', 'CA', 'DBC', '4', 'AB', 'BD', 'CD', 'DA'] 
+        пример вывода ф-ции read_file'''
 #
 dict_data = {} # словарь для добавл. предков, классов.
-#p = read_file(PATH)         # список возвр. ф-ц.read_file(PATH)
+p = read_file(PATH)         # список возвр. ф-ц.read_file(PATH)
+print(p)
 #
 def add_class():
     for i in range(1, int(p[0]) + 1):
         if len(p[i]) == 1:
-            dict_data[p[i][0]] = ['None']
+            dict_data[p[i][0]] = [' '.join(p[i][0])]
         else:
-            dict_data[p[i][0]] = [','.join(p[i][1:])]
+            k = p[i].replace(':','')
+            dict_data[k[0]] = [''.join(k[1:])]
     print(dict_data)
 #
-#add_class()
+add_class()
 #
 def get_sum():
-    d = [i for i in p[1:] if i.isdigit()]
-    k = ''.join(d)
-    return int(k)+1
+    d = [i for i in p[1:] if i.isdigit()] # находим число запросов
+    k = p[1:].index(''.join(d))+1 # находим индекс этого числа
+    d = p[k+1:] # получаем список запросов
+    return d
+#print(get_sum())
 #
-def get_class(p):
-    p = p[1:]
-    for i in p[get_sum():]:
-        print(i[0],i[1])
+def dfs(arr):
+    print(arr)
+    if len(arr) == 0:
+        return
+    if arr[0][0] in dict_data[arr[0][1]]:
+            print('Yes')
+    dfs(arr[1:])
+dfs(get_sum())
 #
-#get_class(p)
-#
-'''Алгоритм DFS «Depth-first search» или «Поиск в глубину»'''
+#--------------------------------------------------------------------------------------
+'''Алгоритм DFS «Depth-first search» или «Поиск в глубину»
 
 def dfs(graph, start, visited=None):
     if visited is None:
@@ -296,7 +301,7 @@ graph = {'0': set(['1', '2']),
          '4': set(['2', '3'])}
 
 print(dfs(graph, '0'))
-#
+#'''
 print('-'*30)
 s = [[random.randint(0,3) for _ in range(random.randrange(1,3))] for i in range(4)]
 print(s)
@@ -327,22 +332,26 @@ list(map(lambda x: print(x), matrix))
 #
 print('*'*30)
 #
+<<<<<<< HEAD
 t = [['*']*i for i in range(6, 0,-1 )]
 list(map(print,t))
 #
 visit = set()
+=======
+visit = [False]*len(s)
+d = []
+>>>>>>> 57b1491b340231843dddb2c79e6721daf97a89fc
 def dfs1(c):
-    if c in visit:
-        return
-    visit.add(c)
+    visit[c] = True
+    d.append(c)
     #print(visit)
     for i in s[c]:
         #print(i,  '*')
-        if i not in visit:
+        if visit[i] == False :
             dfs1(i)
         #print(i, '**')
-dfs1(0)
-print(visit)
+dfs1(s[0][0])
+print(visit, d)
 #
 
 
