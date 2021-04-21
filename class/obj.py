@@ -240,8 +240,8 @@ class E(B, D, C):
 E().foo()
 print('-' * 30)
 # ------------------------ Задача stepic.org наследование классов -------------------------------------
-PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/test_class'
-#PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/test_class'
+#PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/test_class'
+PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/test_class'
 #
 def read_file(P):
     with open(P, 'r') as file:
@@ -260,7 +260,7 @@ def add_class():
             dict_data[p[i][0]] = [''.join(p[i][0])]
         else:
             k = p[i].replace(':','')
-            dict_data[k[0]] = [', '.join(k[1:])]
+            dict_data[k[0]] = list(''.join(k[1:]))
     print(dict_data)
 #
 add_class()
@@ -273,13 +273,14 @@ def get_sum():
 #print(get_sum())
 #
 def dfs(arr):
-    print(arr)
-    if len(arr) <= 1:
+    print(len(arr))
+    if len(arr) == 0:
         return
-    print(arr[0][0], dict_data[arr[0][1]])
     if arr[0][0] in dict_data[arr[0][1]]:
-            print('Yes')
-    dfs(arr[1:])
+        print('Yes')
+        dfs(arr[1:])
+    print('None');
+
 dfs(get_sum())
 #
 #--------------------------------------------------------------------------------------
