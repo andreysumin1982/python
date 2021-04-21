@@ -240,8 +240,8 @@ class E(B, D, C):
 E().foo()
 print('-' * 30)
 # ------------------------ Задача stepic.org наследование классов -------------------------------------
-#PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/test_class'
-PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/test_class'
+PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/test_class'
+#PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/test_class'
 #
 def read_file(P):
     with open(P, 'r') as file:
@@ -257,10 +257,10 @@ print(p)
 def add_class():
     for i in range(1, int(p[0]) + 1):
         if len(p[i]) == 1:
-            dict_data[p[i][0]] = [' '.join(p[i][0])]
+            dict_data[p[i][0]] = [''.join(p[i][0])]
         else:
             k = p[i].replace(':','')
-            dict_data[k[0]] = [''.join(k[1:])]
+            dict_data[k[0]] = [', '.join(k[1:])]
     print(dict_data)
 #
 add_class()
@@ -274,8 +274,9 @@ def get_sum():
 #
 def dfs(arr):
     print(arr)
-    if len(arr) == 0:
+    if len(arr) <= 1:
         return
+    print(arr[0][0], dict_data[arr[0][1]])
     if arr[0][0] in dict_data[arr[0][1]]:
             print('Yes')
     dfs(arr[1:])
@@ -336,7 +337,7 @@ print('*'*30)
 t = [['*']*i for i in range(6, 0,-1 )]
 #list(map(print,t))
 #
-visit = set()
+#visit = set()
 visit = [False]*len(s)
 d = []
 
@@ -352,8 +353,28 @@ def dfs1(c):
 dfs1(s[0][0])
 print(visit, d)
 #
-
-
+#----------Алгоритм поиска в ширину----------------------------------------
+'''n = int(input(': '))
+graph = {i:set() for i in range(n)}
+print(graph)
+for i in range(n):
+    v1,v2 = map(int, input(': ').split())
+    graph[v1].add(v2)
+    graph[v2].add(v1)
+print(graph)
+from collections import deque
+distance = [None] * n # список расстояний, изнач. не известен
+start_vertex = 0        # начинаем с 0 вершины
+distance[start_vertex] = 0  # Расстояние до себя = 0
+queue = deque([start_vertex]) # Создаем очередь. Добавляем 0 вершину
+#
+while queue:  # Пока очередь не пуста
+    cur_v = queue.popleft()   # Достаем первый элемент из очереди (изнач. 0 вершина)
+    for neigh_v in graph[cur_v]:  # Идем по соседям set(. . .)
+        if distance[neigh_v] is None:  # Если сосед еще не посещен
+            distance[neigh_v] = distance[cur_v] + 1  # Считаем расстояние (0 + 1)
+            queue.append(neigh_v)  # Добавляем в очередь, чтоб проверить и его соседей
+print(distance)'''
 #----------------------------------------------------------
 class Myx1:
     def __init__(self):
