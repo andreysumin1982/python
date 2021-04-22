@@ -240,8 +240,8 @@ class E(B, D, C):
 E().foo()
 print('-' * 30)
 # ------------------------ Задача stepic.org наследование классов -------------------------------------
-PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/test_class'
-#PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/test_class'
+#PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/test_class'
+PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/test_class'
 #
 def read_file(P):
     with open(P, 'r') as file:
@@ -276,7 +276,7 @@ visit = set()
 def dfs_1(arr):
     if len(arr) == 0:
          return
-    k0,k1 = arr[1][0], arr[1][1]
+    k0,k1 = arr[0][0], arr[0][1]
     print(k0,k1)
     #dfs_1(arr[1:])
     #   не то
@@ -288,31 +288,56 @@ def dfs_1(arr):
     #
 #
 #dfs_1(get_sum())
-visit = set()
+'''visit = set()
 def dfs_3(v):
     if v in visit:
         print('Yes'); return
     visit.add(v)
-    #print(visit)
+    print(visit)
+    if v not in dict_data.keys():
+        pass
     for i in dict_data[v]:
+        k = dict_data[v].pop(0)
+        print(k)
         if i not in visit:
             dfs_3(i)
-dfs_3('A')
-if 'D' in visit:
+#dfs_3('C')
+if 'B' in visit:
     print('Yes')
 else:print('No')
 print(visit, '>')
-
+'''
 
 
 #---------------- Реализация задачи для тестов на stepic --------------
-'''dict_obj = {}
+dict_obj = {}
 for _ in range(int(input('n: '))):
     k, *args = input(': ').split()
     l = [*args]
     dict_obj[k] = list(map(lambda x: l.pop(1), l))
 print(dict_obj)
-for _ in range(int(input('n: '))):'''
+for _ in range(int(input('n: '))):
+    p,k = input('P:').split()
+print(p,k)
+#
+visit = set()
+def dfs_3(v):
+    if v in visit:
+        print('Yes'); return
+    visit.add(v)
+    print(visit)
+    if v not in dict_data.keys():
+        pass
+    for i in dict_data[v]:
+        k = dict_data[v].pop(0)
+        print(k)
+        if i not in visit:
+            dfs_3(i)
+#
+if 'B' in visit:
+    print('Yes')
+else:print('No')
+print(visit, '>')
 
 
 #--------------------------------------------------------------------------------------
