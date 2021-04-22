@@ -240,8 +240,8 @@ class E(B, D, C):
 E().foo()
 print('-' * 30)
 # ------------------------ Задача stepic.org наследование классов -------------------------------------
-#PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/test_class'
-PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/test_class'
+PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/test_class'
+#PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/test_class'
 #
 def read_file(P):
     with open(P, 'r') as file:
@@ -270,19 +270,51 @@ def get_sum():
     k = p[1:].index(''.join(d))+1 # находим индекс этого числа
     d = p[k+1:] # получаем список запросов
     return d
-#print(get_sum())
+print(get_sum())
 #
-def dfs(arr):
-    print(len(arr))
+visit = set()
+def dfs_1(arr):
     if len(arr) == 0:
-        return
-    if arr[0][0] in dict_data[arr[0][1]]:
-        print('Yes')
-        dfs(arr[1:])
-    print('None');
-
-dfs(get_sum())
+         return
+    k0,k1 = arr[1][0], arr[1][1]
+    print(k0,k1)
+    #dfs_1(arr[1:])
+    #   не то
+    if k0 == k1:
+        print('Yes'); return
+    if k1 not in dict_data or k0 not in dict_data or k0 not in dict_data[k1]:
+        print('No'); return
+    print('Yes'); return
+    #
 #
+#dfs_1(get_sum())
+visit = set()
+def dfs_3(v):
+    if v in visit:
+        print('Yes'); return
+    visit.add(v)
+    #print(visit)
+    for i in dict_data[v]:
+        if i not in visit:
+            dfs_3(i)
+dfs_3('A')
+if 'D' in visit:
+    print('Yes')
+else:print('No')
+print(visit, '>')
+
+
+
+#---------------- Реализация задачи для тестов на stepic --------------
+'''dict_obj = {}
+for _ in range(int(input('n: '))):
+    k, *args = input(': ').split()
+    l = [*args]
+    dict_obj[k] = list(map(lambda x: l.pop(1), l))
+print(dict_obj)
+for _ in range(int(input('n: '))):'''
+
+
 #--------------------------------------------------------------------------------------
 '''Алгоритм DFS «Depth-first search» или «Поиск в глубину»
 
