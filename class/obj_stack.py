@@ -4,13 +4,22 @@
 class ExtendedStack(list):
     def sum(self):
         # операция сложения
-        pass
+        s = self.pop() + self.pop()
+        self.append(s)
     def sub(self):
         # операция вычитания
-        pass
+        s = self.pop() - self.pop()
+        self.append(s)
     def mul(self):
         # операция умножения
-        pass
+        s = self.pop() * self.pop()
+        self.append(s)
     def div(self):
         # операция целочисленного деления
-        pass
+        s = self.pop() // self.pop()
+        self.append(s)
+p = ExtendedStack([1, 2, 3, 4, -3, 3, 5, 10])
+p.sum()
+print(p)
+p.mul()
+print(p)
