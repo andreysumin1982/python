@@ -19,7 +19,24 @@ class ExtendedStack(list):
         s = self.pop() // self.pop()
         self.append(s)
 p = ExtendedStack([1, 2, 3, 4, -3, 3, 5, 10])
-p.sum()
-print(p)
-p.mul()
-print(p)
+#p.sum()
+#print(p)
+#p.mul()
+#print(p)
+#-------------------------------------------------------------------------
+'''Задача stepic.org: Реализуйте класс LoggableList, 
+отнаследовав его от классов list и Loggable таким образом, 
+чтобы при добавлении элемента в список 
+посредством метода append в лог отправлялось сообщение, 
+состоящее из только что добавленного элемента.'''
+
+import time
+
+class Loggable:
+    def log(self, msg):
+        print(str(time.ctime()) + ": " + str(msg))
+class LoggableList(list, Loggable):
+    pass
+d = LoggableList([1, 2, 3, 4, -3, 3, 5, 10])
+d.append(3)
+print(d)
