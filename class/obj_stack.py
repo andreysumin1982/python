@@ -36,7 +36,9 @@ class Loggable:
     def log(self, msg):
         print(str(time.ctime()) + ": " + str(msg))
 class LoggableList(list, Loggable):
-    pass
+    def append(self, name):
+        self.append(name)
+
 d = LoggableList([1, 2, 3, 4, -3, 3, 5, 10])
 d.append(3)
 print(d)
