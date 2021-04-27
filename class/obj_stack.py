@@ -39,6 +39,6 @@ class LoggableList(list, Loggable):
     def append(self, name):
         super().append(name)
         self.log(name)
-        print(self)
+        #print(self)
 d = LoggableList([1, 2, 3, 4, -3, 3, 5, 10])
 d.append(200)
