@@ -41,4 +41,4 @@ class LoggableList(list, Loggable):
         self.log(name)
         #print(self)
 d = LoggableList([1, 2, 3, 4, -3, 3, 5, 10])
-d.append(200)
+d.append(300)
