@@ -15,8 +15,8 @@ except ArithmeticError:
 except AssertionError:
     print("AssertionError")
 #-------------------------------------------
-PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/Исключения/test'
-#PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/Исключения/test'
+#PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/Исключения/test'
+PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/Исключения/test'
 #
 def read_file(p):
     with open(p) as file:
@@ -39,19 +39,20 @@ k = int(r[0][0])+2 # для среза
 arr = [''.join(i) for i in r[k:]] # получаем список из запросов.
 print(arr)
 #
-def rec(parr): # Создаем рекурсию
-    #if dict_class[parr] == 'None':
-    #    return
-    if parr in arr:
+dk = [i for i in dict_class.keys()] # Получаем список ключей
+#print(dk)
+#
+def rec(parr, arr_dk): # Создаем рекурсию
+    if len(arr_dk) == 0:
+        return []
+    if dict_class[parr] != 'None' or parr in dict_class[parr]:
         return parr
-    for i in dict_class[parr]:
-        if rec(i):
-            return parr
-
+    else: rec(parr, arr_dk[1:])
+    return []
 
 def request(p): # бежим по списку запросов [arr]
     for i in p:
-        print(rec(i))
+        print(rec(i, dk))
 request(arr)
 #--------------- Реализация для stepic.org-----------------
 '''def recur(arr_parr):
