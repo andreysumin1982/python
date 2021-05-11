@@ -15,7 +15,8 @@ except ArithmeticError:
 except AssertionError:
     print("AssertionError")
 #-------------------------------------------
-PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/Исключения/test'
+#PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/Исключения/test'
+PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/Исключения/test'
 #
 def read_file(p):
     with open(p) as file:
@@ -40,8 +41,8 @@ print(arr)
 #
 def request(p):
     for i in p:
-        if dict_class[i]:
-            print(p.count(dict_class[i]),'*')
-        print(p.count(i),'**')
+        if i in dict_class:
+
+        #print(i,'**')
 
 request(arr)
