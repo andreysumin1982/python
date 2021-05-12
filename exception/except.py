@@ -15,8 +15,8 @@ except ArithmeticError:
 except AssertionError:
     print("AssertionError")
 #-------------------------------------------
-PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/Исключения/test'
-#PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/Исключения/test'
+#PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/Исключения/test'
+PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/Исключения/test'
 #
 def read_file(p):
     with open(p) as file:
@@ -28,31 +28,30 @@ dict_class = {} # добавл. в словарь предка и наследн
 def add_dict(p):
     for i in range(1, int(p[0][0])+1):
         if len(p[i]) == 1:
-            dict_class[p[i][0]] = 'None'  # Убираем пробелы, доводим до состояния {'..':'..'}
+            dict_class[p[i][0]] = 'None'  # Убираем пробелы, доводим до состояния {'..':['None']}
         else:
-            dict_class[p[i][0].strip()] = ''.join(p[i][1:]).strip().split() # Убираем пробелы, доводим до состояния {'..':'..'}
+            dict_class[p[i][0].strip()] = ''.join(p[i][1:]).strip().split() # Убираем пробелы, доводим до состояния {'..':['..']}
     print(dict_class)
 #
 add_dict(r)
 #
 k = int(r[0][0])+2 # для среза
 arr = [''.join(i) for i in r[k:]] # получаем список из запросов.
-print(arr)
 #
 dk = [i for i in dict_class.keys()] # Получаем список ключей
-#print(dk)
 #
 def rec(parr, arr_dk): # Создаем рекурсию
     if len(arr_dk) == 0:
-        return
+        exit(0)
     if parr in dict_class[arr_dk[0]]:
         return arr_dk[0]
     return rec(parr, arr_dk[1:])
 #
 def request(p): # бежим по списку запросов [arr]
     for i in p:
-        if i is rec(i, dk):
-            print(i)
+        #print(i)
+        print(rec(i, (dk)))
+
 request(arr)
 
 #--------------- Реализация для stepic.org-----------------
