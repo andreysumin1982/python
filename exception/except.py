@@ -15,8 +15,8 @@ except ArithmeticError:
 except AssertionError:
     print("AssertionError")
 #-------------------------------------------
-#PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/Исключения/test'
-PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/Исключения/test'
+PATH = '/home/asumin/Документы/Программирование Python/stepik.org/Основы и применение/Исключения/test'
+#PATH = '/home/asumin/Документы/Программирование Python/Stepic.org/Основы и применение/Исключения/test'
 #
 def read_file(p):
     with open(p) as file:
@@ -28,7 +28,7 @@ dict_class = {} # добавл. в словарь предка и наследн
 def add_dict(p):
     for i in range(1, int(p[0][0])+1):
         if len(p[i]) == 1:
-            dict_class[p[i][0]] = 'None'  # Убираем пробелы, доводим до состояния {'..':['None']}
+            dict_class[p[i][0]] = []  # Убираем пробелы, доводим до состояния {'..':[]}
         else:
             dict_class[p[i][0].strip()] = ''.join(p[i][1:]).strip().split() # Убираем пробелы, доводим до состояния {'..':['..']}
     print(dict_class)
@@ -37,23 +37,26 @@ add_dict(r)
 #
 k = int(r[0][0])+2 # для среза
 arr = [''.join(i) for i in r[k:]] # получаем список из запросов.
+print(arr)
 #
-dk = [i for i in dict_class.keys()] # Получаем список ключей
+def rec(parr): # Создаем рекурсию
+    for p in dict_class[parr]:
+        #print(f'{p} - p(i)')
+        dk.add(p)
+        rec(p)
 #
-def rec(parr, arr_dk): # Создаем рекурсию
-    if len(arr_dk) == 0:
-        exit(0)
-    if parr in dict_class[arr_dk[0]]:
-        return arr_dk[0]
-    return rec(parr, arr_dk[1:])
-#
-def request(p): # бежим по списку запросов [arr]
-    for i in p:
-        #print(i)
-        print(rec(i, (dk)))
-
-request(arr)
-
+def run():
+    for i in arr: # идем по списку
+        #print(f'{i} - i')
+        global dk
+        dk = set() # Обнуляем пустое множество
+        rec(i) # Вызывем рекурсию и передаем ей итер. аргумент
+        for j in dk:
+            #print(f'{dk} - dk')
+            if j in arr:
+                print(f'{i} - Нашли' ); break
+    #
+run()
 #--------------- Реализация для stepic.org-----------------
 '''def recur(arr_parr):
     if len(arr_parr) == 0:
@@ -80,4 +83,4 @@ for i in [input('<').strip().split() for j in range(int(input('n2: ')))]:
 print(arr_req)
 #
 print(recur(arr_req))
-#'''
+'''
