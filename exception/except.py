@@ -58,15 +58,8 @@ def run():
     #
 run()
 #--------------- Реализация для stepic.org-----------------
-'''def recur(arr_parr):
-    if len(arr_parr) == 0:
-        return
-    k = arr_parr[0]
-    if k in di[k]:
-        return k
-    else:
-        recur(arr_parr[1:])
-
+'''
+Функции rec, run добавляем.
 #
 di = {}
 s = set()
