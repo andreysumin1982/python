@@ -134,7 +134,6 @@ def get(name, namespace, dict_namespace):
             #print(namespace in dict_namespace[parrent]['var'])
             #print(dict_namespace[parrent]['var'], '**')
 
-
             if namespace in dict_namespace[parrent]['var']:
                 print(parrent); return
             count = list_key.index(parrent); continue
