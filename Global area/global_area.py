@@ -125,7 +125,6 @@ def get(name, namespace, dict_namespace):
             ##print(namespace in dict_namespace[name]['var'])
             print(list_key[count]); return
             #
-
         else:
             if dict_namespace[list_key[count]]['parrent'] == 'None':
                 print('None'); return
