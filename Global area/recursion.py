@@ -145,8 +145,3 @@ def test(name, namespace, d):    # Ф-ция для тестирования.
 namespace = 'rrr'
 name = 'www'
 test(name, namespace, dict_namespace)
-<<<<<<< HEAD
->>>>>>> d3182cf1be2f495a417bed14abacec43bfd62944
-=======
-#-------------------------------------------------
->>>>>>> recurse_def
