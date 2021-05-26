@@ -30,7 +30,6 @@ def run():
    print(p_date.strftime("%Y %m %d").replace(' 0', ' '))
 run()
 #------ Реализация для Stepic (Simple in / out )----------
-
 '''p_date = input(': ').split()
 p_days = int(input(': '))
 #
