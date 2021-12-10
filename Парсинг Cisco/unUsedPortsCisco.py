@@ -12,7 +12,7 @@ pathUnusedPorts = '/home/asumin/github/projects/stepic/Парсинг Cisco/unus
 # Параметры подключения
 sshParams = {'host': '',
              'user': 'admin',
-             'password': '2xm9sD',
+             'password': '*******',
              'port': '22'}
 
 # Команды
