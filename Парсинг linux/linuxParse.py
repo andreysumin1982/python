@@ -6,7 +6,7 @@ import time
 # Параметры подключения
 sshParams = {'host': '127.0.0.1',
              'user': 'asumin',
-             'password': 'demon',
+             'password': '*******',
              'port': '22'}
 
 # Команды
