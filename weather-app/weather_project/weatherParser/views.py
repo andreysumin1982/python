@@ -24,7 +24,7 @@ def weatherParser(request):
         outputResponse = {'status': response.status_code, 'headers': response.headers, 'output': response.json()}
         #--
         iconImage = f'http://openweathermap.org/img/wn/{outputResponse["output"]["weather"][0]["icon"]}@2x.png'
-        dateNow = datetime.now()
+        dateNow = datetime.today()
         context = {
             'date' : dateNow,
             'name' : outputResponse['output']['name'], # город
