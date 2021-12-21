@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherParser</title>
+     {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% csrf_token %}
+            <!--
+                <h3>{{name}}, погода сейчас:</h3>
+                <p>{{description}}</p>
+                <img src={{icon}} class="icon" alt="">
+                <p>Температура: {{temp}}</p>
+                <p>По ощущению: {{feels_like}}</p>
+                <p>Скорость ветра: {{wind}} м/с</p>
+                <p>Влажность: {{humidity}} %</p>
+            -->
+
+    <div class="header">
+        <div class="weather date">{{date}}</div>
+        <div class="weather name">{{name}}</div>
+        <div class="weather description">{{description}}</div>
+        <div class="weather icon"><img src={{icon}} class="icon" alt=""></div>
+        <div class="weather temp">Температура: {{temp}}</div>
+        <div class="weather temp2">По ощущению: {{feels_like}}</div>
+        <div class="weather wind">Скорость ветра: {{wind}} м/с</div>
+        <div class="weather humidity">Влажность: {{humidity}} %</div>
+    </div>
+
+</body>
+</html>
