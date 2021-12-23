@@ -1,6 +1,10 @@
+from django.views.generic import RedirectView
 from django.urls import path
-from .import views # Импортируем views из папки приложения weatherParser
+# Импортируем views из папки приложения weatherParser
+from django.conf.urls.static import static
+from .import views
 #
 urlpatterns = [
-    path('', views.weatherParser),# метод index в файле weatherParser/views
+    path('', views.index),# метод index в файле weatherParser/views
+    #path('weatherParser/', views.index),# метод index в файле weatherParser/views
 ]

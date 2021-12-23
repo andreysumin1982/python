@@ -80,7 +80,20 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+##
+'''DATABASES = {
+   'default': {
+       'ENGINE': "django_pyodbc",
+       'HOST': "127.0.0.1,1433",
+       'USER': "AS",
+       'PASSWORD': "#Demon159523021982",
+       'NAME': "weather",
+       'OPTIONS': {
+           'host_is_server': True
+       },
+   }
+}
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -122,7 +135,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     'weatherParser/static',
 ]
-
+#LOGIN_REDIRECT_URL = '/weather_project/weatherParser'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 

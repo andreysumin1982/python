@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include # include обязательно
+from django.views.generic import RedirectView
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('weatherParser.urls'))
+    #path('weatherParser/', include('weatherParser.urls')),
+    path('', include('weatherParser.urls')),
 
 ]
