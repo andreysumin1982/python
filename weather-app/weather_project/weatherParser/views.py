@@ -26,3 +26,15 @@ def index(request):
         context = parsing_weather.getData()  # Метод getData() из модуля parsing_weather
         return JsonResponse(context) # Вызвращает json
 #---
+def addDate(request):
+    '''Ф-ция вызывает хранимые процедуры из модуля sql_request'''
+    if (request.method == 'GET'):
+        context = parsing_weather.getData()  # Метод getData() из модуля parsing_weather, получаем словарь
+        #
+        db = connect_to_db.connectDB()
+        # Заполняем таблицу city
+        city = db.execute(sql_request.insertDataCity(context['name']))
+        show = db.execute(sql_request.showTable('city'))
+        print(show.fetchall())
+        db.close()
+    return JsonResponse(context)
