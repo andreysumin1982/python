@@ -22,10 +22,11 @@ def getData():
     context = {
         'date': 'Сегодня ' + datetime.today().strftime("%d %b. %Y %H:%M"),
         'name': outputResponse['output']['name'],  # город
-        'icon': iconImage,  # иконка
+        'icon': iconImage,  # иконка URL
+        'icon_name': outputResponse["output"]["weather"][0]["icon"], #
         'description': outputResponse['output']['weather'][0]['description'].capitalize(), # состояние погоды (снег, дождь...)
-        'temp': f'{outputResponse["output"]["main"]["temp"]} \u2103',  # температура
-        'feels_like': f'{outputResponse["output"]["main"]["feels_like"]} \u2103',  # ощущение как
+        'temp': f'{outputResponse["output"]["main"]["temp"]}', #\u2103  # температура
+        'feels_like': f'{outputResponse["output"]["main"]["feels_like"]}', #\u2103,  # ощущение как
         'wind': outputResponse['output']['wind']['speed'],  # ветер
         'humidity': outputResponse['output']['main']['humidity'],  # влажность
     }
