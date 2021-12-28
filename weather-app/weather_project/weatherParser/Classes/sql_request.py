@@ -7,7 +7,7 @@ def showTable(tableName):
     data = db.execute(f'select * from {tableName}')
     result = data.fetchall()
     db.close()
-    return result
+    return result # Резельтат запроса - [(),] список
 #
 def showID(tablename):
     '''Ф-ция возвращает id'''
@@ -15,10 +15,12 @@ def showID(tablename):
     data = db.execute(f'SELECT max(id) from {tablename}')
     result = data.fetchone()
     db.close()
-    return result[0]
+    return int(result[0]) # число
+
 #-------------------------------------------------
 '''Хранимые процедуры'''
-#
+#-------------------------------------------------
+
 def insertDataCity(cityName):
     '''Заносим полученные данные в таблицу city'''
     db = connectDB()

@@ -26,7 +26,7 @@ def addDate(request):
         context = parsing_weather.getData()  # Метод getData() из модуля parsing_weather, получаем словарь
         #
         # Заполняем таблицу city
-        #sql_request.insertDataCity(context['name'])
+        sql_request.insertDataCity(context['name'])
 
         # Заполняем таблицу image
         sql_request.insertDataImage(context['icon_name'], 'png')
@@ -35,7 +35,7 @@ def addDate(request):
         sql_request.insertDataOsadki(context['description'], sql_request.showID('city'), sql_request.showID('image'))
 
         # Заполняем таблицу summary
-        sql_request.insertDataSummary(sql_request.showID('city'), float(context['temp']), float(context['feels_like']), int(context['wind']), context['humidity'])
+        sql_request.insertDataSummary(sql_request.showID('city'), float(context['temp']), float(context['feels_like']), int(context['wind']), int(context['humidity']))
 
     return JsonResponse(context)
 #---
