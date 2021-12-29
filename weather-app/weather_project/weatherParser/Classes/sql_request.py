@@ -1,22 +1,16 @@
 #-------------------------------------------------
 from .connect_to_db import connectDB
+from .connect_to_db import getFetchall
 #-------------------------------------------------
 def showTable(tableName):
     '''Смотрим содержимое таблицы'''
-    db = connectDB()
-    data = db.execute(f'select * from {tableName}')
-    result = data.fetchall()
-    db.close()
+    result = getFetchall(f'select * from {tableName}')
     return result # Резельтат запроса - [(),] список
 #
 def showID(tablename):
     '''Ф-ция возвращает id'''
-    db = connectDB()
-    data = db.execute(f'SELECT max(id) from {tablename}')
-    result = data.fetchone()
-    db.close()
-    return int(result[0]) # число
-
+    result = getFetchall(f'SELECT max(id) from {tablename}')
+    return int(result[0][0]) # число
 #-------------------------------------------------
 '''Хранимые процедуры'''
 #-------------------------------------------------

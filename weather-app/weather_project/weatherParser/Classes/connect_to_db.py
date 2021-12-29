@@ -14,3 +14,11 @@ def connectDB():
     cursor = connect.cursor()
     return cursor # Возвращает обьект
 #---
+def getFetchall(sql_request):
+    '''Ф-ция возвращает результат sql-запроса'''
+    db = connectDB()
+    data = db.execute(sql_request)
+    result = data.fetchall()
+    db.close()
+    return result
+#---
