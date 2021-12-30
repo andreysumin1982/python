@@ -1,6 +1,8 @@
 #-------------------------------------------------
 from .connect_to_db import connectDB
 from .connect_to_db import getFetchall
+from .connect_to_db import insertData
+from .connect_to_db import deleteData
 #-------------------------------------------------
 def showTable(tableName):
     '''Смотрим содержимое таблицы'''
@@ -9,10 +11,7 @@ def showTable(tableName):
 #
 def showID(tablename):
     '''Ф-ция возвращает id'''
-    #print('*', tablename)
-    #print(f'SELECT max(id) from {tablename}')
     result = getFetchall(f'SELECT max(id) from {tablename}')
-    print(result)
     return int(result[0][0]) # число
 #
 #-------------------------------------------------
@@ -21,17 +20,29 @@ def showID(tablename):
 
 def insertDataCity(cityName):
     '''Заносим полученные данные в таблицу city'''
-    getFetchall(f"exec addCity '{cityName}'")
+    insertData(f"exec addCity '{cityName}'")
 #
 def insertDataImage(name, expansion, data):
     '''Заносим полученные данные в таблицу image'''
-    getFetchall(f"exec addImage '{name}', '{expansion}', '{data}'")
+    insertData(f"exec addImage '{name}', '{expansion}', '{data}'")
 #
 def insertDataOsadki(description, id_city, id_image):
     '''Заносим полученные данные в таблицу osadki'''
-    getFetchall(f"exec addOsadki '{description}', {id_city}, {id_image}")
+    insertData(f"exec addOsadki '{description}', {id_city}, {id_image}")
 #
 def insertDataSummary(id_city, temperature, feels_like, wind, humidity):
     '''Заносим полученные данные в таблицу summary'''
-    getFetchall(f"exec addSummary '{id_city}', '{temperature}', '{feels_like}', '{wind}', '{humidity}'")
+    insertData(f"exec addSummary '{id_city}', '{temperature}', '{feels_like}', '{wind}', '{humidity}'")
+#
+def deleteDataCity():
+    deleteData(f"exec delTable 'city'")
+#
+def deleteDataImage():
+    deleteData(f"exec delTable 'image'")
+#
+def deleteDataOsadki():
+    deleteData(f"exec delTable 'osadki'")
+#
+def deleteDataSummary():
+    deleteData(f"exec delTable 'summary'")
 #

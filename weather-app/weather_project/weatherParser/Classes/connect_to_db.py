@@ -15,26 +15,23 @@ def connectDB():
     return cursor # Возвращает обьект
 #---
 def getFetchall(sql_request): ######### Доделать ф-цию !!!!!
-    ''' Ф-ция:
-        если в запросе есть add, добавляет запись в таблицу,
-        иначе возвращает результат sql-запроса'''
-    print('**-', ('delTable' or 'addTable') in sql_request)
-    if 'delTabl' in sql_request:
-        db = connectDB()
-        db.execute(sql_request)
-        db.commit()
-        db.close()
-        return
-    if 'addTabl' in sql_request:
-        db = connectDB()
-        db.execute(sql_request)
-        db.commit()
-        db.close()
-        return
-    if  'delTabl' or 'addTabl' not in sql_request:
-        db = connectDB()
-        db.execute(sql_request)
-        result = db.fetchall()
-        db.close()
-        return result
+    ''' Ф-ция возвращает результат sql-запроса'''
+    db = connectDB()
+    db.execute(sql_request)
+    result = db.fetchall()
+    db.close()
+    return result
 #---
+def insertData(sql_request):
+    db = connectDB()
+    db.execute(sql_request)
+    db.commit()
+    db.close()
+    return
+#---
+def deleteData(sql_request):
+    db = connectDB()
+    db.execute(sql_request)
+    db.commit()
+    db.close()
+    return

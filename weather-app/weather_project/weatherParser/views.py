@@ -1,4 +1,5 @@
 #--
+from django.http import HttpResponse
 from django.shortcuts import render
 from .Classes import parsing_weather # Импортируем parsing_weather из Classes
 from .Classes import sql_request
@@ -13,10 +14,8 @@ def index(request):
         context = parsing_weather.getData()  # Метод getData() из модуля parsing_weather
         #
         for name in tableName: # Бежим по таблицам
-            pass
-            #print(sql_request.showTable(name)) # смотрим (вызываем sql_request.showTable() и передаем name)
-            #
-        print(sql_request.showID('city'))
+            print(sql_request.showTable(name)) # смотрим (вызываем sql_request.showTable() и передаем name)
+        #
         return render(request, 'weatherParser/weatherParser.html', context) # Вызвращает html
     #elif (request.method == 'POST'):
     #    context = parsing_weather.getData()  # Метод getData() из модуля parsing_weather
@@ -42,12 +41,10 @@ def addData(request):
     return JsonResponse(context)
 #---
 def delTable(request):
-    '''ф-ция вызывает хранимую процедуру удаление записей из табдицы'''
-    print(request)
+    '''ф-ция  удаление записей из табдицы'''
     if (request.method == 'GET'):
-        context = parsing_weather.getData()  # Метод getData() из модуля parsing_weather, получаем словарь
-        sql_request.getFetchall(f"exec delTable 'summary'")
-        sql_request.getFetchall(f"exec delTable 'osadki'")
-        sql_request.getFetchall(f"exec delTable 'image'")
-        sql_request.getFetchall(f"exec delTable 'city'")
-    return JsonResponse(context)
+        sql_request.deleteDataSummary()
+        sql_request.deleteDataOsadki()
+        sql_request.deleteDataImage()
+        sql_request.deleteDataCity()
+    return HttpResponse('Данные из всех таблиц удалены.')
