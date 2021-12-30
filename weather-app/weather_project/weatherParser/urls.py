@@ -6,5 +6,6 @@ from .import views
 #
 urlpatterns = [
     path('', views.index),# метод index в файле weatherParser/views
-    path('add/', views.addDate),# метод addDate в файле weatherParser/views
+    path('add/', views.addData),# метод addDate в файле weatherParser/views
+    path('del/', views.delTable),# метод delTable в файле weatherParser/views
 ]
