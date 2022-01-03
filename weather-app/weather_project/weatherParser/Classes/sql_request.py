@@ -14,6 +14,10 @@ def showID(tablename):
     result = getFetchall(f'SELECT max(id) from {tablename}')
     return int(result[0][0]) # число
 #
+def getDate():
+    '''Ф-ция возвр объект datetime'''
+    result = getFetchall(f'exec getDate')
+    return str(result[0][0])
 #-------------------------------------------------
 '''Вызываем хранимые процедуры.'''
 #-------------------------------------------------
@@ -30,9 +34,9 @@ def insertDataOsadki(description, id_city, id_image):
     '''Заносим полученные данные в таблицу osadki'''
     insertData(f"exec addOsadki '{description}', {id_city}, {id_image}")
 #
-def insertDataSummary(id_city, temperature, feels_like, wind, humidity):
+def insertDataSummary(id_city, temperature, feels_like, wind, humidity, date_time):
     '''Заносим полученные данные в таблицу summary'''
-    insertData(f"exec addSummary '{id_city}', '{temperature}', '{feels_like}', '{wind}', '{humidity}'")
+    insertData(f"exec addSummary '{id_city}', '{temperature}', '{feels_like}', '{wind}', '{humidity}', '{date_time}'")
 #
 def deleteDataCity():
     deleteData(f"exec delTable 'city'")
