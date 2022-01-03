@@ -21,14 +21,15 @@
             -->
 
     <div class="header">
+        <div class="weather none"></div>
         <div class="weather date">{{date}}</div>
         <div class="weather name">{{name}}</div>
         <div class="weather description">{{description}}</div>
         <div class="weather icon"><img src={{icon}} class="icon" alt=""></div>
-        <div class="weather temp">Температура: {{temp}}</div>
-        <div class="weather temp2">По ощущению: {{feels_like}}</div>
-        <div class="weather wind">Скорость ветра: {{wind}} м/с</div>
-        <div class="weather humidity">Влажность: {{humidity}} %</div>
+        <div class="weather temp">{{temp}}</div>
+        <div class="weather temp2">Ощущается как {{feels_like}}</div>
+        <div class="weather wind">Ветер {{wind}} м/с</div>
+        <div class="weather humidity">Влажность {{humidity}} %</div>
     </div>
 
 </body>
