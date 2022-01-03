@@ -12,28 +12,39 @@ body, button, h1, h2, h3, h4, p, a {
 /*---*/
 .header{
     display: grid;
-    grid-gap: 5px;
+    grid-gap: 10px;
     /* сетка */
     grid-template-areas:
-        "name date date"
-        "description icon temp"
-        "wind humidity temp2";
+        "name name name"
+        "date date date"
+        "none none none"
+        "none none none"
+        "temp icon description"
+        "temp2 wind humidity";
     /**/
     border: 1px solid silver;
-    width: 40%;
-    padding: 5px;
+    border-radius: 10px;
+    width: 48%;
+    padding: 10px;
     margin: 3% auto;
+    background-image: url('../img/index.jpeg')
+
 }
 .weather{
     border: 1px solid silver;
     padding: 5px;
+    font-size: 18px;
+    color: white;
+    font-weight: 300;
 }
 /* сетка */
 .date{grid-area: date;}
 .name{grid-area: name;}
 .description{grid-area: description;}
 .icon{grid-area: icon; margin: auto;}
-.temp{grid-area: temp;}
+.temp{grid-area: temp;
+    font-size: 50px;
+    text-align: center;}
 .temp2{grid-area: temp2;}
 .wind{grid-area: wind;}
 .humidity{grid-area: humidity;}
