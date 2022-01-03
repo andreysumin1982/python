@@ -16,6 +16,7 @@ def index(request):
         for name in tableName: # Бежим по таблицам
             print(sql_request.showTable(name)) # смотрим (вызываем sql_request.showTable() и передаем name)
         #
+        #print(sql_request.getDate())
         return render(request, 'weatherParser/weatherParser.html', context) # Вызвращает html
     #elif (request.method == 'POST'):
     #    context = parsing_weather.getData()  # Метод getData() из модуля parsing_weather
@@ -36,7 +37,7 @@ def addData(request):
         sql_request.insertDataOsadki(context['description'], sql_request.showID('city'), sql_request.showID('image'))
 
         # Заполняем таблицу summary
-        sql_request.insertDataSummary(sql_request.showID('city'), float(context['temp']), float(context['feels_like']), int(context['wind']), int(context['humidity']))
+        sql_request.insertDataSummary(sql_request.showID('city'), float(context['temp']), float(context['feels_like']), context['wind'], context['humidity'], sql_request.getDate())
 
     return JsonResponse(context)
 #---
