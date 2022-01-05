@@ -18,36 +18,37 @@ body, button, h1, h2, h3, h4, p, a {
         "name name name"
         "date date date"
         "none none none"
-        "none none none"
-        "temp icon description"
-        "temp2 wind humidity";
+        "temp icon block"
+        "wind humidity humidity";
     /**/
-    border: 1px solid silver;
+    /*border: 1px solid silver;*/
     border-radius: 10px;
-    width: 48%;
+    width: 45%;
     padding: 10px;
     margin: 3% auto;
-    background-image: url('../img/index.jpeg')
+    /*background-image: url('../img/index.jpeg')*/
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(6,6,34,1) 0%, rgba(153,153,212,1) 100%, rgba(0,212,255,1) 100%);
 
 }
 .weather{
-    border: 1px solid silver;
+    /*border: 1px solid silver;*/
     padding: 5px;
     font-size: 18px;
     color: white;
     font-weight: 300;
 }
 /* сетка */
-.date{grid-area: date;}
-.name{grid-area: name;}
-.description{grid-area: description;}
+.date{grid-area: date; padding-left: 10px}
+.name{grid-area: name; padding-left: 10px}
+.block{grid-area: block; padding-top: 20px}
 .icon{grid-area: icon; margin: auto;}
 .temp{grid-area: temp;
-    font-size: 50px;
-    text-align: center;}
-.temp2{grid-area: temp2;}
+    font-size: 70px;
+    text-align: center;
+    padding-top: 20px}
 .wind{grid-area: wind;}
-.humidity{grid-area: humidity;}
+.humidity{grid-area: humidity; padding-left: 30px}
 /**/
 
 
