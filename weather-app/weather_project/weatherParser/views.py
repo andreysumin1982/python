@@ -16,11 +16,16 @@ def index(request):
         for name in tableName: # Бежим по таблицам
             print(sql_request.showTable(name)) # смотрим (вызываем sql_request.showTable() и передаем name)
         #
-        #print(sql_request.getDate())
+        #return JsonResponse(context)  # Вызвращает json
         return render(request, 'weatherParser/weatherParser.html', context) # Вызвращает html
     #elif (request.method == 'POST'):
     #    context = parsing_weather.getData()  # Метод getData() из модуля parsing_weather
     #    return JsonResponse(context) # Вызвращает json
+#---
+def getJson(request):
+    if (request.method == 'GET'):
+        context = parsing_weather.getData()  # Метод getData() из модуля parsing_weather
+        return JsonResponse(context)  # Вызвращает json
 #---
 def addData(request):
     '''Ф-ция вызывает хранимые процедуры из модуля sql_request'''
