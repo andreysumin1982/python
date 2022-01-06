@@ -1,24 +1,16 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherParser</title>
-     {% load static %}
+    <link rel="ico" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
     {% csrf_token %}
-            <!--
-                <h3>{{name}}, погода сейчас:</h3>
-                <p>{{description}}</p>
-                <img src={{icon}} class="icon" alt="">
-                <p>Температура: {{temp}}</p>
-                <p>По ощущению: {{feels_like}}</p>
-                <p>Скорость ветра: {{wind}} м/с</p>
-                <p>Влажность: {{humidity}} %</p>
-            -->
 
     <div class="header">
         <div class="weather none"></div>
@@ -36,5 +28,6 @@
 
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
+
 </body>
 </html>
