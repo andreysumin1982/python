@@ -18,14 +18,16 @@ def index(request):
         #
         #return JsonResponse(context)  # Вызвращает json
         return render(request, 'weatherParser/weatherParser.html', context) # Вызвращает html
-    #elif (request.method == 'POST'):
-    #    context = parsing_weather.getData()  # Метод getData() из модуля parsing_weather
-    #    return JsonResponse(context) # Вызвращает json
 #---
 def getJson(request):
     if (request.method == 'GET'):
         context = parsing_weather.getData()  # Метод getData() из модуля parsing_weather
         return JsonResponse(context)  # Вызвращает json
+#---
+def showSummary(request):
+    if (request.method == 'GET'):
+        summary = sql_request.getSummary()
+    return JsonResponse(summary)  # Вызвращает json
 #---
 def addData(request):
     '''Ф-ция вызывает хранимые процедуры из модуля sql_request'''
@@ -47,10 +49,11 @@ def addData(request):
     return JsonResponse(context)
 #---
 def delTable(request):
-    '''ф-ция  удаление записей из табдицы'''
+    '''ф-ция  удаление записей из таблиц'''
     if (request.method == 'GET'):
         sql_request.deleteDataSummary()
         sql_request.deleteDataOsadki()
         sql_request.deleteDataImage()
         sql_request.deleteDataCity()
     return HttpResponse('Данные из всех таблиц удалены.')
+#---
