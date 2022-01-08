@@ -14,6 +14,14 @@ def showID(tablename):
     result = getFetchall(f'SELECT max(id) from {tablename}')
     return int(result[0][0]) # число
 #
+def getSummary():
+    result = getFetchall(f'exec showWeather')
+    i = 0
+    summary = {}
+    for res in result:
+        summary.update({f'{i}': f'{res}'}); i+=1
+    return summary
+#
 def getDate():
     '''Ф-ция возвр объект datetime'''
     result = getFetchall(f'exec getDate')
