@@ -38,7 +38,7 @@ setInterval(() =>{
         //
     })
 
-}, 7200000);
+}, 720000);
 //
 setInterval(() =>{
     /*
@@ -49,4 +49,4 @@ setInterval(() =>{
         let time = weather.date
             console.log(`ok - Погодные данные внесены ${time.split(' ').slice(1)}`)
     })
-}, 7200000);
+}, 720000);
