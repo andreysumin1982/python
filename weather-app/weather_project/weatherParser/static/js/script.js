@@ -25,7 +25,6 @@ setInterval(() =>{
     */
     ajaxRequest(url_update).then((weather) => {
         let time = weather.date
-            console.log(`ok - Погодные данные обновлены ${time.split(' ').slice(1)}`) /* Отделяем только время */
         // Размещаем обновленные данные на странице
         findElement('.date')[0].innerHTML = `${weather.date}`
         findElement('.name')[0].innerHTML = `${weather.name}`
@@ -36,6 +35,8 @@ setInterval(() =>{
         findElement('.wind')[0].innerHTML = `Ветер ${weather.wind} м/с`
         findElement('.humidity')[0].innerHTML = `Влажность ${weather.humidity} %`
         //
+        console.log(`ok - Погодные данные обновлены ${time.split(' ').slice(1)}`) /* Отделяем только время */
+
     })
 
 }, 720000);

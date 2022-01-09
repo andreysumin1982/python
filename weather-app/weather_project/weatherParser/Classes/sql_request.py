@@ -19,7 +19,8 @@ def getSummary():
     i = 0
     summary = {}
     for res in result:
-        summary.update({f'{i}': f'{res}'}); i+=1
+        stroka = str(res)[2:-2] # обрезаем лишние символы, пробелы.
+        summary.update({f"{i}": f"{stroka}"}); i+=1
     return summary
 #
 def getDate():

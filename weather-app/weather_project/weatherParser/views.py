@@ -13,8 +13,8 @@ def index(request):
         tableName = ['city', 'osadki', 'image', 'summary'] # Список таблиц в базе
         context = parsing_weather.getData()  # Метод getData() из модуля parsing_weather
         #
-        for name in tableName: # Бежим по таблицам
-            print(sql_request.showTable(name)) # смотрим (вызываем sql_request.showTable() и передаем name)
+        #for name in tableName: # Бежим по таблицам
+        #    print(sql_request.showTable(name)) # смотрим (вызываем sql_request.showTable() и передаем name)
         #
         #return JsonResponse(context)  # Вызвращает json
         return render(request, 'weatherParser/weatherParser.html', context) # Вызвращает html
