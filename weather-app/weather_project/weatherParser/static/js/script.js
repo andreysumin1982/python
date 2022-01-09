@@ -21,7 +21,7 @@ function ajaxRequest(url){
 setInterval(() =>{
     /*
         Обновляем погодные данные на странице
-        выполняется кажд. 2 часа
+        выполняется кажд. 30 мин
     */
     ajaxRequest(url_update).then((weather) => {
         let time = weather.date
@@ -39,15 +39,15 @@ setInterval(() =>{
 
     })
 
-}, 720000);
+}, 1800000);
 //
 setInterval(() =>{
     /*
         Вносим обновления в БД
-        выполняется кажд. 2 часа
+        выполняется кажд. 30 мин
     */
     ajaxRequest(url_add_db).then((weather) => {
         let time = weather.date
             console.log(`ok - Погодные данные внесены ${time.split(' ').slice(1)}`)
     })
-}, 720000);
+}, 1800000);
