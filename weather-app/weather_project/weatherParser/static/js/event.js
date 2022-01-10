@@ -26,13 +26,14 @@ function addData(city, description, temperature, feels_like, wind, humidity, dat
     let element = findOneElement('.table')
         element.innerHTML += `
                             <div class = "content">
-                                <div>${date}</div>
+                                <div>${date.slice(0, -6)}</div>
+                                <div class="tr">${date.slice(-5) }</div>
                                 <div class="tr">${description }</div>
                                 <div class="tr">${temperature}&deg;C </div>
                                 <div class="tr">Ощущается как ${feels_like}&deg;C</div>
                                 <div class="tr">Ветер ${wind} м/с</div>
                                 <div class="tr">Влажность ${humidity}%</div>
-                            </div>`
+                            </div> <hr>`
 }
 
 /* Событие мыши */
