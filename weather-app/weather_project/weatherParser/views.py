@@ -29,6 +29,12 @@ def showSummary(request):
         summary = sql_request.getSummary()
     return JsonResponse(summary)  # Вызвращает json
 #---
+def showSummaryDate(request, str1, str2):
+    if (request.method == 'GET'):
+        summary = sql_request.getSummaryDate(str1, str2)
+        #return HttpResponse(f"<h1>Работает</h1>{str1}{str2}</p>")
+    return JsonResponse(summary)  # Вызвращает json
+#---
 def addData(request):
     '''Ф-ция вызывает хранимые процедуры из модуля sql_request'''
     if (request.method == 'GET'):

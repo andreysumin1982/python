@@ -23,6 +23,16 @@ def getSummary():
         summary.update({f"{i}": f"{stroka}"}); i+=1
     return summary
 #
+def getSummaryDate(date1, date2):
+    result = getFetchall(f'exec showSummaryDate "{date1}", "{date2}"')
+    i = 0
+    summary = {}
+    for res in result:
+        stroka = str(res)[2:-2]  # обрезаем лишние символы, пробелы.
+        summary.update({f"{i}": f"{stroka}"});
+        i += 1
+    return summary
+#
 def getDate():
     '''Ф-ция возвр объект datetime'''
     result = getFetchall(f'exec getDate')

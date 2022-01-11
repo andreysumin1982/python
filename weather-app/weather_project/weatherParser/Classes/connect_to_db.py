@@ -4,7 +4,7 @@ def connectDB():
 
     '''Ф-ция подключается к базе SQL "weather" и возвращает cursor '''
     connect = pyodbc.connect("Driver={ODBC Driver 17 for SQL Server};"
-                             "Server=127.0.0.1;"
+                             "Server=192.168.220.72;"
                              "Database=weather;"
                              "uid=SA;"
                              "pwd=#Demon159523021982;"

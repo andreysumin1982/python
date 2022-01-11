@@ -1,6 +1,8 @@
 /*Создание ajax-запросов GET/POST, промисы */
-url_update = 'http://127.0.0.1:8000/json/' /* Обновление погодных данных */
-url_add_db = 'http://127.0.0.1:8000/add/' /* Внесение погодных данных в БД MSSQL */
+//url_update = 'http://127.0.0.1:8000/json/' /* Обновление погодных данных */
+//url_add_db = 'http://127.0.0.1:8000/add/' /* Внесение погодных данных в БД MSSQL */
+url_update = 'http://192.168.220.72:8000/json/' /* Обновление погодных данных */
+url_add_db = 'http://192.168.220.72:8000/add/' /* Внесение погодных данных в БД MSSQL */
 //
 function findElement(className){
     /*  Ф-ция находит эдемент(ы) на странице по классу и
@@ -38,16 +40,22 @@ setInterval(() =>{
         console.log(`ok - Погодные данные обновлены ${time.split(' ').slice(1)}`) /* Отделяем только время */
 
     })
+    //
+    ajaxRequest(url_add_db).then((weather) => {
+        let time = weather.date
+        //
+        console.log(`ok - Погодные данные внесены ${time.split(' ').slice(1)}`)
+    })
 
-}, 900000);
+}, 1800000);
 //
-setInterval(() =>{
+//setInterval(() =>{
     /*
         Вносим обновления в БД
         выполняется кажд. 30 мин
     */
-    ajaxRequest(url_add_db).then((weather) => {
-        let time = weather.date
-            console.log(`ok - Погодные данные внесены ${time.split(' ').slice(1)}`)
-    })
-}, 900000);
+//    ajaxRequest(url_add_db).then((weather) => {
+//        let time = weather.date
+//            console.log(`ok - Погодные данные внесены ${time.split(' ').slice(1)}`)
+//    })
+//}, 900000);
