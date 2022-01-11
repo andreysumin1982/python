@@ -1,8 +1,8 @@
 /*Создание ajax-запросов GET/POST, промисы */
-//url_update = 'http://127.0.0.1:8000/json/' /* Обновление погодных данных */
-//url_add_db = 'http://127.0.0.1:8000/add/' /* Внесение погодных данных в БД MSSQL */
-url_update = 'http://192.168.220.72:8000/json/' /* Обновление погодных данных */
-url_add_db = 'http://192.168.220.72:8000/add/' /* Внесение погодных данных в БД MSSQL */
+url_update = 'http://127.0.0.1:8000/json/' /* Обновление погодных данных */
+url_add_db = 'http://127.0.0.1:8000/add/' /* Внесение погодных данных в БД MSSQL */
+//url_update = 'http://192.168.220.72:8000/json/' /* Обновление погодных данных */
+//url_add_db = 'http://192.168.220.72:8000/add/' /* Внесение погодных данных в БД MSSQL */
 //
 function findElement(className){
     /*  Ф-ция находит эдемент(ы) на странице по классу и
@@ -20,7 +20,7 @@ function ajaxRequest(url){
     return promise
 }
 //
-setInterval(() =>{
+let interval1 = setInterval(() =>{
     /*
         Обновляем погодные данные на странице
         выполняется кажд. 30 мин
@@ -38,24 +38,17 @@ setInterval(() =>{
         findElement('.humidity')[0].innerHTML = `Влажность ${weather.humidity} %`
         //
         console.log(`ok - Погодные данные обновлены ${time.split(' ').slice(1)}`) /* Отделяем только время */
-
     })
-    //
-    ajaxRequest(url_add_db).then((weather) => {
-        let time = weather.date
-        //
-        console.log(`ok - Погодные данные внесены ${time.split(' ').slice(1)}`)
-    })
+}, 1800000)
 
-}, 1800000);
 //
-//setInterval(() =>{
+let interval2 = setInterval(() =>{
     /*
         Вносим обновления в БД
         выполняется кажд. 30 мин
     */
-//    ajaxRequest(url_add_db).then((weather) => {
-//        let time = weather.date
-//            console.log(`ok - Погодные данные внесены ${time.split(' ').slice(1)}`)
-//    })
-//}, 900000);
+    ajaxRequest(url_add_db).then((weather) => {
+        let time = weather.date
+            console.log(`ok - Погодные данные внесены ${time.split(' ').slice(1)}`)
+    })
+}, 1850000)

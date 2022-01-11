@@ -1,7 +1,9 @@
 //
-//url_summary = 'http://127.0.0.1:8000/summary/'
-url_summary = 'http://192.168.220.72:8000/summary/'
-url_summary_date = 'http://192.168.220.72:8000/summary_date/'
+url_summary = 'http://127.0.0.1:8000/summary/'
+url_summary_date = 'http://127.0.0.1:8000/summary_date/'
+//
+//url_summary = 'http://192.168.220.72:8000/summary/'
+//url_summary_date = 'http://192.168.220.72:8000/summary_date/'
 //
 function addElement(child, parent = 'body', classChild = 'childBody', type = NaN, text = ''){
     /*Ф-ция создает элемент на странице:
@@ -66,7 +68,7 @@ let header = document.querySelector('.header')
                 let m = String(date.getMonth()+1)
                 let y = String(date.getFullYear())
                 // Вносим в значение элемента date-input1
-                //console.log(findOneElement('.date-input1').value = (y+'-'+m+'-'+d));
+                //console.log(`${url_summary_date}${y+'-'+m+'-'+d}/${y+'-'+m+'-'+d}`);
 
             //
             getAjax(`${url_summary_date}${y+'-'+m+'-'+d}/${y+'-'+m+'-'+d}`);
@@ -92,6 +94,7 @@ let header = document.querySelector('.header')
                     year2 = String(date2.getFullYear());
                 //console.log([day, month, year]);
                 findOneElement('.table').innerHTML = '' // очищаем всю таблицу
+                //console.log(`${url_summary_date}${year1+'-'+month1+'-'+day1}/${year2+'-'+month2+'-'+day2}`)
                 getAjax(`${url_summary_date}${year1+'-'+month1+'-'+day1}/${year2+'-'+month2+'-'+day2}`)
             });
         //

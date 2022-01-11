@@ -1,5 +1,5 @@
 #-------------------------------------------------
-from .connect_to_db import connectDB
+#from .connect_to_db import connectDB
 from .connect_to_db import getFetchall
 from .connect_to_db import insertData
 from .connect_to_db import deleteData
