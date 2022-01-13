@@ -1,7 +1,7 @@
 //
-//url_summary_date = 'http://127.0.0.1:8000/summary_date/'
+url_summary_date = 'http://127.0.0.1:8000/summary_date/'
 //
-url_summary_date = 'http://192.168.220.72:8000/summary_date/'
+//url_summary_date = 'http://192.168.220.72:8000/summary_date/'
 //
 function addElement(child, parent = 'body', classChild = 'childBody', type = NaN, text = ''){
     /*Ф-ция создает элемент на странице:
@@ -26,6 +26,7 @@ function findOneElement(className){
 //
 function addData(
     /* Ф-ция создает html-дерево из входных аргументов*/
+                id_city,
                 description,
                 temperature,
                 feels_like,
@@ -35,6 +36,7 @@ function addData(
     let element = findOneElement('.table')
         element.innerHTML += `
                             <div class = "content">
+                                <p>${id_city}</p>
                                 <p>${date.slice(0, -6)}</p>
                                 <p class="tr">${date.slice(-5) }</p>
                                 <p class="tr">${description }</p>
@@ -72,7 +74,8 @@ function getAjax(url){
         for (let i in summary){
             let element = summary[i].split(',') // преобразуем строки в массив
             //
-            addData(element[2].replace(/'/g, ''), +element[3], +element[4], element[5], element[6], element[7].slice(0,-14).replace(/'/g, ''))
+            console.log(element)
+            addData(element[0], element[3].replace(/'/g, ''), +element[4], +element[5], element[6], element[7], element[8].slice(0,-14).replace(/'/g, ''))
         }
     });
 }
