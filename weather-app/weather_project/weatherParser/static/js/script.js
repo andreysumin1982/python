@@ -1,8 +1,8 @@
 /*Создание ajax-запросов GET/POST, промисы */
-url_update = 'http://127.0.0.1:8000/json/' /* Обновление погодных данных */
-url_add_db = 'http://127.0.0.1:8000/add/' /* Внесение погодных данных в БД MSSQL */
+//url_update = 'http://127.0.0.1:8000/json/' /* Обновление погодных данных */
+//url_add_db = 'http://127.0.0.1:8000/add/' /* Внесение погодных данных в БД MSSQL */
 //url_update = 'http://192.168.220.72:8000/json/' /* Обновление погодных данных */
-//url_add_db = 'http://192.168.220.72:8000/add/' /* Внесение погодных данных в БД MSSQL */
+url_add_db = 'http://192.168.220.72:8000/add/' /* Внесение погодных данных в БД MSSQL */
 //
 function findElement(className){
     /*  Ф-ция находит эдемент(ы) на странице по классу и
@@ -20,12 +20,13 @@ function ajaxRequest(url){
     return promise
 }
 //
+let count = 1
 let interval1 = setInterval(() =>{
     /*
         Обновляем погодные данные на странице
         выполняется кажд. 30 мин
     */
-    ajaxRequest(url_update).then((weather) => {
+    ajaxRequest(url_add_db).then((weather) => {
         let time = weather.date
         // Размещаем обновленные данные на странице
         findElement('.date')[0].innerHTML = `${weather.date}`
@@ -37,18 +38,19 @@ let interval1 = setInterval(() =>{
         findElement('.wind')[0].innerHTML = `Ветер ${weather.wind} м/с`
         findElement('.humidity')[0].innerHTML = `Влажность ${weather.humidity} %`
         //
-        console.log(`ok - Погодные данные обновлены ${time.split(' ').slice(1)}`) /* Отделяем только время */
+
+        console.log(`ok - Погодные данные обновлены ${time.split(' ').slice(1)}`, count++) /* Отделяем только время */
     })
 }, 1800000)
 
 //
-let interval2 = setInterval(() =>{
+//let interval2 = setInterval(() =>{
     /*
         Вносим обновления в БД
         выполняется кажд. 30 мин
     */
-    ajaxRequest(url_add_db).then((weather) => {
-        let time = weather.date
-            console.log(`ok - Погодные данные внесены ${time.split(' ').slice(1)}`)
-    })
-}, 1850000)
+//    ajaxRequest(url_add_db).then((weather) => {
+//        let time = weather.date
+//            console.log(`ok - Погодные данные внесены ${time.split(' ').slice(1)}`)
+//    })
+//}, 1810000)

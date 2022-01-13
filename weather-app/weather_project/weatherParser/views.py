@@ -8,26 +8,16 @@ from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
-    '''ф-ция вызывае парсинг погоды и выводит в консоль содержимое таблиц БД'''
+    '''ф-ция  парсит погодные данные и выводит в формате HTML'''
     if (request.method == 'GET'):
-        tableName = ['city', 'osadki', 'image', 'summary'] # Список таблиц в базе
+        #tableName = ['city', 'osadki', 'image', 'summary'] # Список таблиц в базе
         context = parsing_weather.getData()  # Метод getData() из модуля parsing_weather
-        #
-        #for name in tableName: # Бежим по таблицам
-        #    print(sql_request.showTable(name)) # смотрим (вызываем sql_request.showTable() и передаем name)
-        #
-        #return JsonResponse(context)  # Вызвращает json
         return render(request, 'weatherParser/weatherParser.html', context) # Вызвращает html
 #---
 def getJson(request):
     if (request.method == 'GET'):
         context = parsing_weather.getData()  # Метод getData() из модуля parsing_weather
         return JsonResponse(context)  # Вызвращает json
-#---
-def showSummary(request):
-    if (request.method == 'GET'):
-        summary = sql_request.getSummary()
-    return JsonResponse(summary)  # Вызвращает json
 #---
 def showSummaryDate(request, str1, str2):
     if (request.method == 'GET'):

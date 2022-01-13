@@ -1,9 +1,9 @@
 //
-url_summary = 'http://127.0.0.1:8000/summary/'
-url_summary_date = 'http://127.0.0.1:8000/summary_date/'
+//url_summary = 'http://127.0.0.1:8000/summary/'
+//url_summary_date = 'http://127.0.0.1:8000/summary_date/'
 //
 //url_summary = 'http://192.168.220.72:8000/summary/'
-//url_summary_date = 'http://192.168.220.72:8000/summary_date/'
+url_summary_date = 'http://192.168.220.72:8000/summary_date/'
 //
 function addElement(child, parent = 'body', classChild = 'childBody', type = NaN, text = ''){
     /*Ф-ция создает элемент на странице:
