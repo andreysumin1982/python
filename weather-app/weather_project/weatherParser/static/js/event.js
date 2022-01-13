@@ -1,8 +1,6 @@
 //
-//url_summary = 'http://127.0.0.1:8000/summary/'
 //url_summary_date = 'http://127.0.0.1:8000/summary_date/'
 //
-//url_summary = 'http://192.168.220.72:8000/summary/'
 url_summary_date = 'http://192.168.220.72:8000/summary_date/'
 //
 function addElement(child, parent = 'body', classChild = 'childBody', type = NaN, text = ''){
@@ -26,19 +24,14 @@ function findOneElement(className){
     return document.querySelector(className) //массив объектов
 };
 //
-function getAjax(url){
-    ajaxRequest(url).then((summary) => {
-    //
-        for (let i in summary){
-            let element = summary[i].split(',') // преобразуем строки в массив
-            //
-            addData(element[0].replace(/\s/g, ''), element[2].replace(/'/g, ''), +element[3], +element[4], element[5], element[6], element[7].slice(0,-14).replace(/'/g, ''))
-        }
-    });
-}
-
-//
-function addData(city, description, temperature, feels_like, wind, humidity, date){
+function addData(
+    /* Ф-ция создает html-дерево из входных аргументов*/
+                description,
+                temperature,
+                feels_like,
+                wind,
+                humidity,
+                date){
     let element = findOneElement('.table')
         element.innerHTML += `
                             <div class = "content">
@@ -51,51 +44,58 @@ function addData(city, description, temperature, feels_like, wind, humidity, dat
                                 <p class="tr">Влажность ${humidity}%</p>
                             </div> <hr>`
 }
+//
+function getValuesDate(){
+    /* Ф-ция возвращает строку:
+        1: если нет аргументов - текущую дату
+        2: иначе - дату, выбранную из элемента <input type="date">  */
+    if (arguments.length != 0){
+        let date1 = new Date($(arguments[0]).val())
+            d = String(date1.getDate())
+            m = String(date1.getMonth() + 1)
+            y = String(date1.getFullYear())
+        return y+'-'+m+'-'+d;
+    }
+    else{
+        let date1 = new Date
+            d = String(date1.getDate())
+            m = String(date1.getMonth() + 1)
+            y = String(date1.getFullYear())
+        return y+'-'+m+'-'+d;
+    }
+}
+//
+function getAjax(url){
+    /*Ф-ция обрабатывает промис, полученный из ф-ции ajaxRequest()*/
+    ajaxRequest(url).then((summary) => {
+    //
+        for (let i in summary){
+            let element = summary[i].split(',') // преобразуем строки в массив
+            //
+            addData(element[2].replace(/'/g, ''), +element[3], +element[4], element[5], element[6], element[7].slice(0,-14).replace(/'/g, ''))
+        }
+    });
+}
+//
 
-/* Событие мыши */
-let header = document.querySelector('.header')
-    header.addEventListener('click', ()=> { // событие клик по элементу header
+/* Обработчик события мыши на погодный контент  */
+let content = document.querySelector('.header')
+    content.addEventListener('click', ()=> { // событие клик по элементу header
         let modal = document.querySelector('.modal') // получаем модальное окно (div)
             modal.style.display = "block" // изменяем состояние на block(блочный элемент)
             //
-                addElement('input', '.inputDate', 'date-input1', 'date');
-                addElement('input', '.inputDate', 'date-input2', 'date');
-                addElement('input', '.inputDate', 'btn', 'button');
+                addElement('input', '.inputDate', 'date-input1', 'date'); // добавляем input .date-input1
+                addElement('input', '.inputDate', 'date-input2', 'date'); // добавляем input .date-input2
+                addElement('input', '.inputDate', 'btn', 'button');       // добавляем button .btn
                 findOneElement('.btn').value = 'Выполнить';
-                // Узнаем текущ. дату
-                let date = new Date
-                let d = String(date.getDate())
-                let m = String(date.getMonth()+1)
-                let y = String(date.getFullYear())
-                // Вносим в значение элемента date-input1
-                //console.log(`${url_summary_date}${y+'-'+m+'-'+d}/${y+'-'+m+'-'+d}`);
-
-            //
-            getAjax(`${url_summary_date}${y+'-'+m+'-'+d}/${y+'-'+m+'-'+d}`);
-            /*ajaxRequest(`${url_summary_date}${y+'-'+m+'-'+d}/${y+'-'+m+'-'+d}`).then((summary) => {
-                //
-                for (let i in summary){
-                    let element = summary[i].split(',') // преобразуем строки в массив
-                    //
-                    addData(element[0].replace(/\s/g, ''), element[2].replace(/'/g, ''), +element[3], +element[4], element[5], element[6], element[7].slice(0,-14).replace(/'/g, ''))
-                }
-            });*/
-            // Обработчик событий. Получить день, месяц и год от объекта date-input. 
+                //console.log(getValuesDate('.date-input1'))
+                /* ajax-запрос, выводим данные за текущий день*/
+                getAjax(`${url_summary_date}${getValuesDate()}/${getValuesDate()}`);
+            // Обработчик собыия кнопки .
             $('.btn').on('click', ()=> {
-                let date1 = new Date($('.date-input1').val());
-                    day1 = String(date1.getDate());
-                    month1 = String(date1.getMonth() + 1);
-                    year1 = String(date1.getFullYear());
-                //console.log([day, month, year]);
-                    //
-                let date2 = new Date($('.date-input2').val());
-                    day2 = String(date2.getDate());
-                    month2 = String(date2.getMonth() + 1);
-                    year2 = String(date2.getFullYear());
-                //console.log([day, month, year]);
                 findOneElement('.table').innerHTML = '' // очищаем всю таблицу
-                //console.log(`${url_summary_date}${year1+'-'+month1+'-'+day1}/${year2+'-'+month2+'-'+day2}`)
-                getAjax(`${url_summary_date}${year1+'-'+month1+'-'+day1}/${year2+'-'+month2+'-'+day2}`)
+                /* ajax-запрос, выводим данные за определенные дни */
+                getAjax(`${url_summary_date}${getValuesDate('.date-input1')}/${getValuesDate('.date-input2')}`);
             });
         //
         window.onclick = function(event){ // клик, кроме контентного окна.
