@@ -42,7 +42,8 @@ def addData(request):
         # Заполняем таблицу summary
         sql_request.insertDataSummary(sql_request.showID('city'), float(context['temp']), float(context['feels_like']), context['wind'], context['humidity'], sql_request.getDate())
 
-    return JsonResponse(context)
+    #return JsonResponse(context)
+    return HttpResponse('Погодные данные добавлены в БД.')
 #---
 def delTable(request):
     '''ф-ция  удаление записей из таблиц'''

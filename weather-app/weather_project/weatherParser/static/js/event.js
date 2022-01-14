@@ -1,28 +1,7 @@
 //
-url_summary_date = 'http://127.0.0.1:8000/summary_date/'
+//url_summary_date = 'http://127.0.0.1:8000/summary_date/'
 //
-//url_summary_date = 'http://192.168.220.72:8000/summary_date/'
-//
-function addElement(child, parent = 'body', classChild = 'childBody', type = NaN, text = ''){
-    /*Ф-ция создает элемент на странице:
-        На вход подаются 1 обязятельный элемент и 3 не обязательных:
-     Дочерний (div, p, li ...), класс для дочернего элемента , родительский элемент - ('.classname'), тип дочернего элемента.
-     По умолчинию все элементы создаются в теле документа body.
-     */
-    let childElement = document.createElement(child)
-        childElement.type = type
-        childElement.className = classChild
-        childElement.innerHTML = text
-    document.querySelector(parent).appendChild(childElement)
-};
-//
-function findOneElement(className){
-    /*
-        Ф-ция находит эдементы на странице по классу и
-        возвращает массив элементов.
-    */
-    return document.querySelector(className) //массив объектов
-};
+url_summary_date = 'http://192.168.220.72:8000/summary_date/'
 //
 function addData(
     /* Ф-ция создает html-дерево из входных аргументов*/
@@ -74,7 +53,7 @@ function getAjax(url){
         for (let i in summary){
             let element = summary[i].split(',') // преобразуем строки в массив
             //
-            console.log(element)
+            //console.log(element)
             addData(element[0], element[3].replace(/'/g, ''), +element[4], +element[5], element[6], element[7], element[8].slice(0,-14).replace(/'/g, ''))
         }
     });

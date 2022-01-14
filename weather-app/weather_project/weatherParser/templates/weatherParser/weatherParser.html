@@ -11,32 +11,13 @@
 </head>
 <body>
     {% csrf_token %}
-
-    <div class="header">
-        <div class="weather none"></div>
-        <div class="weather date">{{date}}</div>
-        <div class="weather name">{{name}}</div>
-        <div class="weather icon"><img src={{icon}} class="icon" alt=""></div>
-        <div class="weather temp">{{temp}}&deg;</div>
-        <div class="weather block">
-            <div class="weather description">{{description}}</div>
-            <div class="weather temp2">Ощущается как {{feels_like}}&deg;</div>
-        </div>
-        <div class="weather wind">Ветер {{wind}} м/с</div>
-        <div class="weather humidity">Влажность {{humidity}} %</div>
-    </div>
-
-    <!-- Модальное окно -->
-    <div class="modal" id="mymodal">
-        <div class="modal_content">
-            <div class="inputDate"></div>
-            <div class="table"></div>
-        </div>
-    </div>
-
+    <!--  -->
+    <div class="header"></div>
+    <!--  -->
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
     <script src="{% static 'js/event.js' %}"></script>
-
+    <!--  -->
 </body>
 </html>
