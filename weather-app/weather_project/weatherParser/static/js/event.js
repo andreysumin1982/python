@@ -3,28 +3,41 @@
 //
 url_summary_date = 'http://192.168.220.72:8000/summary_date/'
 //
+let k = 1
 function addData(
     /* Ф-ция создает html-дерево из входных аргументов*/
-                id_city,
+                id_summary,
                 description,
                 temperature,
                 feels_like,
                 wind,
                 humidity,
-                date){
-    let element = findOneElement('.table')
-        element.innerHTML += `
-                            <div class = "content">
-                                <p>${id_city}</p>
-                                <p>${date.slice(0, -6)}</p>
-                                <p class="tr">${date.slice(-5) }</p>
-                                <p class="tr">${description }</p>
-                                <p class="tr">${temperature}&deg;C </p>
-                                <p class="tr">Ощущается как ${feels_like}&deg;C</p>
-                                <p class="tr">Ветер ${wind} м/с</p>
-                                <p class="tr">Влажность ${humidity}%</p>
-                            </div> <hr>`
-}
+                date)
+        {
+        String(k)
+        addElement('div', '.table', `content cont${k}`)
+
+            addElement('p', `.cont${k}`, `id_summary${k}`)
+                findOneElement(`.id_summary${k}`).innerHTML = `${id_summary}`
+            addElement('p', `.cont${k}`, `p_date${k}`)
+                findOneElement(`.p_date${k}`).innerHTML = `${date.slice(0, -6)}`
+            addElement('p', `.cont${k}`, `tr p_time${k}`)
+                findOneElement(`.p_time${k}`).innerHTML = `${date.slice(-5)}`
+            addElement('p', `.cont${k}`, `tr p_description${k}`)
+                findOneElement(`.p_description${k}`).innerHTML = `${description}`
+            addElement('p', `.cont${k}`, `tr p_temperature${k}`)
+                findOneElement(`.p_temperature${k}`).innerHTML = `${temperature}&deg`
+            addElement('p', `.cont${k}`, `tr p_feels_like${k}`)
+                findOneElement(`.p_feels_like${k}`).innerHTML = `Ощущается как ${feels_like}&deg`
+            addElement('p', `.cont${k}`, `tr p_wind${k}`)
+                findOneElement(`.p_wind${k}`).innerHTML = `Ветер ${wind} м/с`
+            addElement('p', `.cont${k}`, `tr p_humidity${k}`)
+                findOneElement(`.p_humidity${k}`).innerHTML = `Влажность ${humidity}%`
+
+            //findOneElement(`.cont${k}`).innerHTML += '<hr>'
+        Number(k)
+        k++
+};
 //
 function getValuesDate(){
     /* Ф-ция возвращает строку:

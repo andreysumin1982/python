@@ -1,5 +1,15 @@
 //-Ф-ции для добавления, поиска html-элементов, ajax-запрос
 //
+function getDateTime(){
+    let date1 = new Date
+        d = String(date1.getDate())
+        m = String(date1.getMonth() + 1)
+        y = String(date1.getFullYear())
+    let timeNow = new Date().toLocaleTimeString().slice(0,-3);
+
+    return y+'-'+m+'-'+d+'_'+timeNow;
+}
+//
 function addElement(child, parent = 'body', classChild = 'childBody', type = NaN, text = ''){
     /*Ф-ция создает элемент на странице:
         На вход подаются 1 обязятельный элемент и 3 не обязательных:

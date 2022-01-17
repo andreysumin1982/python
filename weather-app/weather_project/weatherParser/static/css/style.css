@@ -109,8 +109,9 @@ body, button, h1, h2, h3, h4, p, a {
     flex-wrap: wrap;
     justify-content: space-between;
     /*border: 1px solid silver;*/
-    padding: 5px;
+    padding: 10px;
 }
+
 .tr{
     /*border: 1px solid silver;*/
     /*padding-left: 30px;*/
