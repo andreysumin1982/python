@@ -1,9 +1,9 @@
 //
-//url_summary_date = 'http://127.0.0.1:8000/summary_date/'
+url_summary_date = 'http://127.0.0.1:8000/summary_date/'
 //
-url_summary_date = 'http://192.168.220.72:8000/summary_date/'
+//url_summary_date = 'http://192.168.220.72:8000/summary_date/'
 //
-let k = 1
+let k = 1 // счетчик
 function addData(
     /* Ф-ция создает html-дерево из входных аргументов*/
                 id_summary,
@@ -16,9 +16,11 @@ function addData(
         {
         String(k)
         addElement('div', '.table', `content cont${k}`)
-
+            addElement('input', `.cont${k}`, 'check-box', 'checkbox')
+            //
             addElement('p', `.cont${k}`, `id_summary${k}`)
                 findOneElement(`.id_summary${k}`).innerHTML = `${id_summary}`
+                findOneElement(`.id_summary${k}`).style.display = 'none'
             addElement('p', `.cont${k}`, `p_date${k}`)
                 findOneElement(`.p_date${k}`).innerHTML = `${date.slice(0, -6)}`
             addElement('p', `.cont${k}`, `tr p_time${k}`)
@@ -59,8 +61,11 @@ function getValuesDate(){
     }
 }
 //
+let listCheckBox = [] // 
 function getAjax(url){
     /*Ф-ция обрабатывает промис, полученный из ф-ции ajaxRequest()*/
+    //let listCheckBox = NaN // делаем переменную не присвоенную
+    //
     ajaxRequest(url).then((summary) => {
     //
         for (let i in summary){
@@ -68,8 +73,13 @@ function getAjax(url){
             //
             //console.log(element)
             addData(element[0], element[3].replace(/'/g, ''), +element[4], +element[5], element[6], element[7], element[8].slice(0,-14).replace(/'/g, ''))
+            
+            let l = findOneElement('.check-box')
+                listCheckBox.push(l) // добавляем в массив
+                //console.log(i)
         }
-    });
+        console.log(listCheckBox) 
+    }); 
 }
 //
 
@@ -86,11 +96,13 @@ let content = document.querySelector('.header')
                 //console.log(getValuesDate('.date-input1'))
                 /* ajax-запрос, выводим данные за текущий день*/
                 getAjax(`${url_summary_date}${getValuesDate()}/${getValuesDate()}`);
+                //console.log(listCheckBox)
             // Обработчик собыия кнопки .
             $('.btn').on('click', ()=> {
                 findOneElement('.table').innerHTML = '' // очищаем всю таблицу
                 /* ajax-запрос, выводим данные за определенные дни */
                 getAjax(`${url_summary_date}${getValuesDate('.date-input1')}/${getValuesDate('.date-input2')}`);
+                //
             });
         //
         window.onclick = function(event){ // клик, кроме контентного окна.
@@ -103,3 +115,4 @@ let content = document.querySelector('.header')
     };
 })
 //
+

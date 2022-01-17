@@ -1,8 +1,8 @@
 // ajax-запрос получает json, создает дерево html-элементов и рисует погодный контент.
-//url_json = 'http://127.0.0.1:8000/json/';
-url_json = 'http://192.168.220.72:8000/json/';
-//url_add_db = 'http://127.0.0.1:8000/add/'
-url_add_db = 'http://192.168.220.72:8000/add/'
+url_json = 'http://127.0.0.1:8000/json/';
+//url_json = 'http://192.168.220.72:8000/json/';
+url_add_db = 'http://127.0.0.1:8000/add/'
+//url_add_db = 'http://192.168.220.72:8000/add/'
 //
 // Добавляем элементы на страницу
     addElement('div', '.header', 'weather none')
