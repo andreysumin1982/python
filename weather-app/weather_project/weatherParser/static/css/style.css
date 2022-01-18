@@ -96,6 +96,9 @@ body, button, h1, h2, h3, h4, p, a {
 .btn{
     margin-left: 5px;
 }
+.inputBtn{
+    margin-left: 5px;
+}
 
 /*table*/
 .table{
