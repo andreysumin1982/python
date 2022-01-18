@@ -1,7 +1,7 @@
 //
-//url_summary_date = 'http://127.0.0.1:8000/summary_date/'
+url_summary_date = 'http://127.0.0.1:8000/summary_date/'
 //
-url_summary_date = 'http://192.168.220.72:8000/summary_date/'
+//url_summary_date = 'http://192.168.220.72:8000/summary_date/'
 //
 let k = 1 // счетчик
 function addData(
@@ -63,39 +63,39 @@ function getValuesDate(){
 //
 let listIdSimmary = []  // массив для id id_summary
 let objIdCheckBox = {}  // словарь для соответствия id и обьектов checkbox
+let delIdSummary = []
 function getAjax(url){
     /*Ф-ция обрабатывает промис, полученный из ф-ции ajaxRequest()*/
     //let listCheckBox = NaN // делаем переменную не присвоенную
     //
         listIdSimmary = []
-        let objIdCheckBox = {}
+        objIdCheckBox = {}
     ajaxRequest(url).then((summary) => {
     //
         for (let i in summary){
             let element = summary[i].split(',') // преобразуем строки в массив
             //
             //console.log(element)
-            listIdSimmary.push(Number(element[0])) // Добавляем id_summary в массив
+            listIdSimmary.push(element[0]) // Добавляем id_summary в массив
             addData(element[0], element[3].replace(/'/g, ''), +element[4], +element[5], element[6], element[7], element[8].slice(0,-14).replace(/'/g, ''))
         }
         for (let i=0; i < listIdSimmary.length; i++){ // Заполняем объект. {id_summary: checkbox}
             objIdCheckBox[listIdSimmary[i]] = findElement('.check-box')[i]
         }
-        //console.log(objIdCheckBox)
         //
         for (let j =0; j < findElement('.check-box').length; j++){
             let elem = findElement('.check-box') //
             elem[j].addEventListener('click', ()=> {
-                if (elem[j].checked == true && elem[j] == objIdCheckBox[listIdSimmary[j]]) {
-                    //listClick.push(elem)
-                    //listCheckBox.push(elem)
-                    console.log(listIdSimmary[j], objIdCheckBox[listIdSimmary[j]] )
-                    console.log(objIdCheckBox)
+                if (elem[j].checked == true && elem[j] == objIdCheckBox[listIdSimmary[j]]) { // проверяем, есть ли элемент в словаре(объекте)
+                    console.log(listIdSimmary[j], objIdCheckBox[listIdSimmary[j]]) // выводим ключ, значение.
+                    delIdSummary.push(listIdSimmary[j]) //добавляем id_summary в массив
+                    //console.log(delIdSummary)
                 }
                 else{
                     delete objIdCheckBox[listIdSimmary[j]];
-                    delete listIdSimmary[listIdSimmary[j]];
-                    console.log(objIdCheckBox, listIdSimmary);
+                    listIdSimmary.splice(j, j);
+                    delIdSummary.splice(j,j) // если checked = falce, убипаем из массива id_summary
+                    //console.log(delIdSummary);
                 }
             })
         }
@@ -129,9 +129,9 @@ let content = document.querySelector('.header')
             });
             //
             $('.inputBtn').on('click', ()=> {
-                listClick.forEach(elem =>{
-                    console.log(elem)
-                })
+
+                    console.log(objIdCheckBox)
+
             })
             //
         window.onclick = function(event){ // клик, кроме контентного окна.
