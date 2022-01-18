@@ -1,7 +1,7 @@
 //
-url_summary_date = 'http://127.0.0.1:8000/summary_date/'
+//url_summary_date = 'http://127.0.0.1:8000/summary_date/'
 //
-//url_summary_date = 'http://192.168.220.72:8000/summary_date/'
+url_summary_date = 'http://192.168.220.72:8000/summary_date/'
 //
 let k = 1 // счетчик
 function addData(
@@ -61,25 +61,45 @@ function getValuesDate(){
     }
 }
 //
-let listCheckBox = [] // 
+let listIdSimmary = []  // массив для id id_summary
+let objIdCheckBox = {}  // словарь для соответствия id и обьектов checkbox
 function getAjax(url){
     /*Ф-ция обрабатывает промис, полученный из ф-ции ajaxRequest()*/
     //let listCheckBox = NaN // делаем переменную не присвоенную
     //
+        listIdSimmary = []
+        let objIdCheckBox = {}
     ajaxRequest(url).then((summary) => {
     //
         for (let i in summary){
             let element = summary[i].split(',') // преобразуем строки в массив
             //
             //console.log(element)
+            listIdSimmary.push(Number(element[0])) // Добавляем id_summary в массив
             addData(element[0], element[3].replace(/'/g, ''), +element[4], +element[5], element[6], element[7], element[8].slice(0,-14).replace(/'/g, ''))
-            
-            let l = findOneElement('.check-box')
-                listCheckBox.push(l) // добавляем в массив
-                //console.log(i)
         }
-        console.log(listCheckBox) 
-    }); 
+        for (let i=0; i < listIdSimmary.length; i++){ // Заполняем объект. {id_summary: checkbox}
+            objIdCheckBox[listIdSimmary[i]] = findElement('.check-box')[i]
+        }
+        //console.log(objIdCheckBox)
+        //
+        for (let j =0; j < findElement('.check-box').length; j++){
+            let elem = findElement('.check-box') //
+            elem[j].addEventListener('click', ()=> {
+                if (elem[j].checked == true && elem[j] == objIdCheckBox[listIdSimmary[j]]) {
+                    //listClick.push(elem)
+                    //listCheckBox.push(elem)
+                    console.log(listIdSimmary[j], objIdCheckBox[listIdSimmary[j]] )
+                    console.log(objIdCheckBox)
+                }
+                else{
+                    delete objIdCheckBox[listIdSimmary[j]];
+                    delete listIdSimmary[listIdSimmary[j]];
+                    console.log(objIdCheckBox, listIdSimmary);
+                }
+            })
+        }
+    }); // end ajaxRequest
 }
 //
 
@@ -92,7 +112,10 @@ let content = document.querySelector('.header')
                 addElement('input', '.inputDate', 'date-input1', 'date'); // добавляем input .date-input1
                 addElement('input', '.inputDate', 'date-input2', 'date'); // добавляем input .date-input2
                 addElement('input', '.inputDate', 'btn', 'button');       // добавляем button .btn
-                findOneElement('.btn').value = 'Выполнить';
+                    findOneElement('.btn').value = 'Выполнить';
+                addElement('input', '.inputDate', 'inputBtn', 'button');
+                    findOneElement('.inputBtn').value = 'Удалить';
+                    findOneElement('.inputBtn').checked = false;
                 //console.log(getValuesDate('.date-input1'))
                 /* ajax-запрос, выводим данные за текущий день*/
                 getAjax(`${url_summary_date}${getValuesDate()}/${getValuesDate()}`);
@@ -104,7 +127,13 @@ let content = document.querySelector('.header')
                 getAjax(`${url_summary_date}${getValuesDate('.date-input1')}/${getValuesDate('.date-input2')}`);
                 //
             });
-        //
+            //
+            $('.inputBtn').on('click', ()=> {
+                listClick.forEach(elem =>{
+                    console.log(elem)
+                })
+            })
+            //
         window.onclick = function(event){ // клик, кроме контентного окна.
         //console.log(event)
         if (event.target == modal){ // если клик по модальному окну (div .modal)
@@ -115,4 +144,3 @@ let content = document.querySelector('.header')
     };
 })
 //
-
