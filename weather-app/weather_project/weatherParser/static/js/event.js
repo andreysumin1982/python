@@ -1,7 +1,7 @@
 //
-url_summary_date = 'http://127.0.0.1:8000/summary_date/'
+//url_summary_date = 'http://127.0.0.1:8000/summary_date/'
 //
-//url_summary_date = 'http://192.168.220.72:8000/summary_date/'
+url_summary_date = 'http://192.168.220.72:8000/summary_date/'
 //
 let k = 1 // счетчик
 function addData(
@@ -63,15 +63,16 @@ function getValuesDate(){
 //
 let listIdSimmary = []  // массив для id id_summary
 let objIdCheckBox = {}  // словарь для соответствия id и обьектов checkbox
-let delIdSummary = []
+let delIdSummary = {}   // словарь для элементов на удаление
 function getAjax(url){
     /*Ф-ция обрабатывает промис, полученный из ф-ции ajaxRequest()*/
     //let listCheckBox = NaN // делаем переменную не присвоенную
     //
         listIdSimmary = []
         objIdCheckBox = {}
+        delIdSummary = {}
+        //
     ajaxRequest(url).then((summary) => {
-    //
         for (let i in summary){
             let element = summary[i].split(',') // преобразуем строки в массив
             //
@@ -86,16 +87,14 @@ function getAjax(url){
         for (let j =0; j < findElement('.check-box').length; j++){
             let elem = findElement('.check-box') //
             elem[j].addEventListener('click', ()=> {
-                if (elem[j].checked == true && elem[j] == objIdCheckBox[listIdSimmary[j]]) { // проверяем, есть ли элемент в словаре(объекте)
-                    console.log(listIdSimmary[j], objIdCheckBox[listIdSimmary[j]]) // выводим ключ, значение.
-                    delIdSummary.push(listIdSimmary[j]) //добавляем id_summary в массив
-                    //console.log(delIdSummary)
+                if (elem[j].checked == true && (elem[j] == objIdCheckBox[listIdSimmary[j]])) { // проверяем, есть ли элемент в словаре(объекте)
+                    console.log(listIdSimmary[j], objIdCheckBox[listIdSimmary[j]]); // выводим ключ, значение.
+                    delIdSummary[listIdSimmary[j]] = listIdSimmary[j];//добавляем id_summary в массив
+                    console.log(delIdSummary);
                 }
                 else{
-                    delete objIdCheckBox[listIdSimmary[j]];
-                    listIdSimmary.splice(j, j);
-                    delIdSummary.splice(j,j) // если checked = falce, убипаем из массива id_summary
-                    //console.log(delIdSummary);
+                    delete delIdSummary[listIdSimmary[j]]; // если checked = falce, убираем из массива id_summary
+                    console.log(delIdSummary);
                 }
             })
         }
@@ -129,8 +128,12 @@ let content = document.querySelector('.header')
             });
             //
             $('.inputBtn').on('click', ()=> {
-
-                    console.log(objIdCheckBox)
+                if (Object.keys(delIdSummary).length != 0){
+                    for (let key in delIdSummary){
+                        console.log(key)
+                    }
+                }
+                else{ alert('Необходимо выбрать элементы.')}
 
             })
             //
