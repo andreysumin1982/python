@@ -45,6 +45,12 @@ def addData(request):
     #return JsonResponse(context)
     return HttpResponse('Погодные данные добавлены в БД.')
 #---
+def deleteIdSummary(request, id_summary):
+    '''Ф - ция удаляет запись из таблицы summary'''
+    if (request.method == 'GET'):
+        sql_request.delIdSummary(id_summary)
+    return HttpResponse('Запись из таблицы summary удалена.')
+#---
 def delTable(request):
     '''ф-ция  удаление записей из таблиц'''
     if (request.method == 'GET'):

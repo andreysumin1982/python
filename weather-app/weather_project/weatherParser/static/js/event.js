@@ -1,7 +1,11 @@
 //
 //url_summary_date = 'http://127.0.0.1:8000/summary_date/'
 //
+//url_deleteIdSummary = 'http://127.0.0.1:8000/deleteIdSummary/'
+//
 url_summary_date = 'http://192.168.220.72:8000/summary_date/'
+//
+url_deleteIdSummary = 'http://192.168.220.72:8000/deleteIdSummary/'
 //
 let k = 1 // счетчик
 function addData(
@@ -63,14 +67,14 @@ function getValuesDate(){
 //
 let listIdSimmary = []  // массив для id id_summary
 let objIdCheckBox = {}  // словарь для соответствия id и обьектов checkbox
-let delIdSummary = {}   // словарь для элементов на удаление
+let delIdSummary =  {}  // словарь для элементов на удаление
 function getAjax(url){
     /*Ф-ция обрабатывает промис, полученный из ф-ции ajaxRequest()*/
-    //let listCheckBox = NaN // делаем переменную не присвоенную
-    //
-        listIdSimmary = []
-        objIdCheckBox = {}
-        delIdSummary = {}
+
+        // Обнуляем
+        listIdSimmary = [] //
+        objIdCheckBox = {} //
+        delIdSummary = {} //
         //
     ajaxRequest(url).then((summary) => {
         for (let i in summary){
@@ -80,21 +84,22 @@ function getAjax(url){
             listIdSimmary.push(element[0]) // Добавляем id_summary в массив
             addData(element[0], element[3].replace(/'/g, ''), +element[4], +element[5], element[6], element[7], element[8].slice(0,-14).replace(/'/g, ''))
         }
+            //
         for (let i=0; i < listIdSimmary.length; i++){ // Заполняем объект. {id_summary: checkbox}
             objIdCheckBox[listIdSimmary[i]] = findElement('.check-box')[i]
         }
-        //
+            // Иде по массиву checkbox
         for (let j =0; j < findElement('.check-box').length; j++){
-            let elem = findElement('.check-box') //
-            elem[j].addEventListener('click', ()=> {
-                if (elem[j].checked == true && (elem[j] == objIdCheckBox[listIdSimmary[j]])) { // проверяем, есть ли элемент в словаре(объекте)
-                    console.log(listIdSimmary[j], objIdCheckBox[listIdSimmary[j]]); // выводим ключ, значение.
-                    delIdSummary[listIdSimmary[j]] = listIdSimmary[j];//добавляем id_summary в массив
+            let checkElements = findElement('.check-box') //
+            checkElements[j].addEventListener('click', ()=> { // обработчик события клик на checkbox.
+                if (checkElements[j].checked == true && (checkElements[j] == objIdCheckBox[listIdSimmary[j]])) { // проверяем, есть ли элемент в словаре(объекте)
+                    //console.log(listIdSimmary[j], objIdCheckBox[listIdSimmary[j]]); // выводим ключ, значение.
+                    delIdSummary[listIdSimmary[j]] = listIdSimmary[j];//добавляем id_summary в объект
                     console.log(delIdSummary);
                 }
                 else{
-                    delete delIdSummary[listIdSimmary[j]]; // если checked = falce, убираем из массива id_summary
-                    console.log(delIdSummary);
+                    delete delIdSummary[listIdSimmary[j]]; // если checked = falce, убираем из объекта id_summary
+                    //console.log(delIdSummary);
                 }
             })
         }
@@ -119,23 +124,23 @@ let content = document.querySelector('.header')
                 /* ajax-запрос, выводим данные за текущий день*/
                 getAjax(`${url_summary_date}${getValuesDate()}/${getValuesDate()}`);
                 //console.log(listCheckBox)
-            // Обработчик собыия кнопки .
+            // Обработчик собыия кнопки 'Выполнить'
             $('.btn').on('click', ()=> {
                 findOneElement('.table').innerHTML = '' // очищаем всю таблицу
-                /* ajax-запрос, выводим данные за определенные дни */
+                /* ajax-запрос, выводим данные в контент за определенные дни */
                 getAjax(`${url_summary_date}${getValuesDate('.date-input1')}/${getValuesDate('.date-input2')}`);
                 //
             });
-            //
+            // Обработчик собыия кнопки 'Удалить'
             $('.inputBtn').on('click', ()=> {
                 if (Object.keys(delIdSummary).length != 0){
                     for (let key in delIdSummary){
-                        console.log(key)
+                        console.log(String(key))
+                        getAjax(`${url_deleteIdSummary}${String(key)}`);
                     }
                 }
-                else{ alert('Необходимо выбрать элементы.')}
-
-            })
+                else{ alert('Необходимо выбрать элемент(ы)!')}
+            });
             //
         window.onclick = function(event){ // клик, кроме контентного окна.
         //console.log(event)

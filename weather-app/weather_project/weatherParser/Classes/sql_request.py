@@ -28,6 +28,13 @@ def getDate():
     '''Ф-ция возвр объект datetime'''
     result = getFetchall(f'exec getDate')
     return str(result[0][0])
+#
+def delIdSummary(id):
+    '''Ф - ция удаляет запись из таблицы summary'''
+    result = deleteData(f"exec delIdSummary '{id}'")
+    #print(result)
+    return result
+#
 #-------------------------------------------------
 '''Вызываем хранимые процедуры.'''
 #-------------------------------------------------

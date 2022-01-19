@@ -10,6 +10,8 @@ urlpatterns = [
     path('json/', views.getJson, name='json'),# метод getJson в файле weatherParser/views
     path('add/', views.addData, name='add'),# метод addDate в файле weatherParser/views
     path('summary_date/<str:str1>/<str:str2>/', views.showSummaryDate, name='summary_date'),# метод delTable в файле weatherParser/views
+    path('deleteIdSummary/<str:id_summary>/', views.deleteIdSummary, name='deleteIdSummary'),
+    # метод delTable в файле weatherParser/views
     #url(r'^favicon\.ico$', RedirectView.as_view(url='/static/img/favicon.ico', permanent=True)) # Нужно для иконки во вкладке
     path('favicon.ico', RedirectView.as_view(url='/static/img/favicon.ico', permanent=True)) # Нужно для иконки во вкладке
 ]
