@@ -120,14 +120,14 @@ let content = document.querySelector('.header')
                 addElement('input', '.inputDate', 'inputBtn', 'button');
                     findOneElement('.inputBtn').value = 'Удалить';
                     findOneElement('.inputBtn').checked = false;
-                //console.log(getValuesDate('.date-input1'))
+                console.log(getValuesDate('.date-input1'))
                 /* ajax-запрос, выводим данные за текущий день*/
                 getAjax(`${url_summary_date}${getValuesDate()}/${getValuesDate()}`);
                 //console.log(listCheckBox)
             // Обработчик собыия кнопки 'Выполнить'
             $('.btn').on('click', ()=> {
                 findOneElement('.table').innerHTML = '' // очищаем всю таблицу
-                /* ajax-запрос, выводим данные в контент за определенные дни */
+                /* ajax-запрос, выводим данные в контент за выбранные дни */
                 getAjax(`${url_summary_date}${getValuesDate('.date-input1')}/${getValuesDate('.date-input2')}`);
                 //
             });
@@ -136,10 +136,21 @@ let content = document.querySelector('.header')
                 if (Object.keys(delIdSummary).length != 0){
                     for (let key in delIdSummary){
                         console.log(String(key))
-                        getAjax(`${url_deleteIdSummary}${String(key)}`);
+                        // ajax-запрос на удаление
+                        getAjax(`${url_deleteIdSummary}${String(key)}`)
+                        // ajax-запрос, выводим данные в контент за выбранные дни
                     }
                 }
-                else{ alert('Необходимо выбрать элемент(ы)!')}
+                else{ alert('Необходимо выбрать элемент(ы)!')};
+                // Выводим контент после нажатия 'Удалить'
+                findOneElement('.table').innerHTML = '' // очищаем всю таблицу
+                // если не выбран временной интервал, ввыводим данные за текущий день
+                if (getValuesDate('.date-input1') == 'NaN-NaN-NaN'){
+                    getAjax(`${url_summary_date}${getValuesDate()}/${getValuesDate()}`);
+                }
+                else{ // иначе, выводим данные в контент за выбранные дни
+                    getAjax(`${url_summary_date}${getValuesDate('.date-input1')}/${getValuesDate('.date-input2')}`)
+                }
             });
             //
         window.onclick = function(event){ // клик, кроме контентного окна.
