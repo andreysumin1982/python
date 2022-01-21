@@ -1,8 +1,8 @@
 import pygame as p
 import random
 #
-WIDTH = 1024  # ширина игрового окна
-HEIGHT = 768 # высота игрового окна
+WIDTH = 800  # ширина игрового окна
+HEIGHT = 600 # высота игрового окна
 FPS = 60 # частота кадров в секунду
 
 # создаем игру и окно
@@ -18,17 +18,14 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 #
-def test():
+def grid():
     # Рендеринг отрисовка
     screen.fill(WHITE)
-    #
-
     # Рисуем сетку под размер окна
     for i in range(0, screen.get_height()//20):
         p.draw.line(screen, BLACK, (0, i*20), (screen.get_width(), i*20))
     for j in range(0, screen.get_width()//20):
         p.draw.line(screen, BLACK, (j*20, 0), (j*20, screen.get_height()))
-
 
     # после отрисовки всего, обновляем экран (Показываем)
     p.display.update()
@@ -42,7 +39,7 @@ def run():
             if event.type == p.QUIT: # p.QUIT код: 256
                return
             else:
-                test()
+                grid() # сетка
 
 #
 
