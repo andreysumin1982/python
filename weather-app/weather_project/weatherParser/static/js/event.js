@@ -1,11 +1,15 @@
 //
-url_summary_date = 'http://127.0.0.1:8000/summary_date/';
+//url_summary_date = 'http://127.0.0.1:8000/summary_date/';
 //
-url_deleteIdSummary = 'http://127.0.0.1:8000/deleteIdSummary/';
+//url_deleteIdSummary = 'http://127.0.0.1:8000/deleteIdSummary/';
 //
-//url_summary_date = 'http://192.168.220.72:8000/summary_date/'
+url_summary_date = 'http://192.168.220.72:8000/summary_date/'
 //
-//url_deleteIdSummary = 'http://192.168.220.72:8000/deleteIdSummary/'
+url_deleteIdSummary = 'http://192.168.220.72:8000/deleteIdSummary/'
+//
+//
+let listIdSummary = []  // массив для id id_summary
+let objIdCheckBox = {}  // словарь для соответствия id и обьектов checkbox
 //
 let k = 1 // счетчик
 function addData(
@@ -21,6 +25,7 @@ function addData(
         String(k)
         addElement('div', '.table', `content cont${k}`)
             addElement('input', `.cont${k}`, 'check-box', 'checkbox')
+                findOneElement(`.check-box`).id = 'box'
             //
             addElement('p', `.cont${k}`, `id_summary${k}`)
                 findOneElement(`.id_summary${k}`).innerHTML = `${id_summary}`
@@ -65,48 +70,39 @@ function getValuesDate(){
     }
 }
 //
-let listIdSummary = []  // массив для id id_summary
-let objIdCheckBox = {}  // словарь для соответствия id и обьектов checkbox
-let delIdSummary =  {}  // словарь для элементов на удаление
 function getAjax(url){
     /*Ф-ция обрабатывает промис, полученный из ф-ции ajaxRequest()*/
 
         // Обнуляем
-        listIdSimmary = [] //
-        objIdCheckBox = {} //
-        delIdSummary = {} //
+        listIdSummary = [] //
+        objIdCheckBox = {}
         //
     ajaxRequest(url).then((summary) => {
+        let l = 0
         for (let i in summary){
             let element = summary[i].split(',') // преобразуем строки в массив
             //
             //console.log(element)
-            listIdSummary.push(element[0]) // Добавляем id_summary в массив
             addData(element[0], element[3].replace(/'/g, ''), +element[4], +element[5], element[6], element[7], element[8].slice(0,-14).replace(/'/g, ''))
-        }
             //
-        for (let i=0; i < listIdSummary.length; i++){ // Заполняем объект. {id_summary: checkbox}
-            objIdCheckBox[listIdSummary[i]] = findElement('.check-box')[i]
+            listIdSummary.push(element[0]) // Добавляем id_summary в массив
+            objIdCheckBox[listIdSummary[l]] = findElement('.check-box')[l]
+            l++
         }
-            // Иде по массиву checkbox
-//        for (let j =0; j < findElement('.check-box').length; j++){
-//            let checkElements = findElement('.check-box') //
-//            checkElements[j].addEventListener('click', ()=> { // обработчик события клик на checkbox.
-//                if (checkElements[j].checked == true && (checkElements[j] == objIdCheckBox[listIdSimmary[j]])) { // проверяем, есть ли элемент в словаре(объекте)
-//                    //console.log(listIdSimmary[j], objIdCheckBox[listIdSimmary[j]]); // выводим ключ, значение.
-//                    delIdSummary[listIdSimmary[j]] = listIdSimmary[j];//добавляем id_summary в объект
-//                    console.log(delIdSummary);
-//                }
-//                else{
-//                    delete delIdSummary[listIdSimmary[j]]; // если checked = falce, убираем из объекта id_summary
-//                    //console.log(delIdSummary);
-//                }
-//            })
-//        }
+        //console.log(listIdSummary)
     }); // end ajaxRequest
-}
+};
 //
-
+//function addId(){
+//    // Обнуляем
+//    //objIdCheckBox = {}
+//    //console.log(listIdSummary)
+//    for (let i=0; i < listIdSummary.length; i++){ // Заполняем объект. {id_summary: checkbox}
+//            console.log(document.getElementById('#box'))
+//            //objIdCheckBox[listIdSummary[i]] = findElement('#box')[i]
+//        }
+//};
+//
 /* Обработчик события мыши на погодный контент  */
 let content = document.querySelector('.header')
     content.addEventListener('click', ()=> { // событие клик по элементу header
@@ -123,24 +119,30 @@ let content = document.querySelector('.header')
                 console.log(getValuesDate('.date-input1'))
                 /* ajax-запрос, выводим данные за текущий день*/
                 getAjax(`${url_summary_date}${getValuesDate()}/${getValuesDate()}`);
+
                 //console.log(listCheckBox)
+
             // Обработчик собыия кнопки 'Выполнить'
             document.querySelector('.btn').addEventListener('click', ()=> {
                 findOneElement('.table').innerHTML = '' // очищаем всю таблицу
                 /* ajax-запрос, выводим данные в контент за выбранные дни */
                 getAjax(`${url_summary_date}${getValuesDate('.date-input1')}/${getValuesDate('.date-input2')}`);
                 //
+
             });
             // Обработчик собыия кнопки 'Удалить'
             document.querySelector('.inputBtn').addEventListener('click',()=> {
                     console.log(objIdCheckBox)
-                    let lst = Object.keys(objIdCheckBox)
-                    console.log(lst)
+                    let objBox = objIdCheckBox
+                    let lst = Object.keys(objBox)
+                    //console.log(lst)
                     for (let elem of lst) {
                         //console.log(elem, objIdCheckBox[elem])
-                        if (objIdCheckBox[elem].checked == true){
-                            console.log(elem, objIdCheckBox[elem])
-                            //getAjax(`${url_deleteIdSummary}${String(elem)}`)
+                        if (objBox[elem].checked == true){
+                            console.log(elem, objBox[elem])
+                            ajaxRequest(`${url_deleteIdSummary}${elem}`).then((summary) => {
+                                console.log('Удален id: ', elem)
+                            })
                         }
                     }
 
@@ -155,24 +157,6 @@ let content = document.querySelector('.header')
                             getAjax(`${url_summary_date}${getValuesDate('.date-input1')}/${getValuesDate('.date-input2')}`)
                         }
             })
-//                if (Object.keys(delIdSummary).length != 0){
-//                    for (let key in delIdSummary){
-//                        console.log(String(key))
-//                        // ajax-запрос на удаление
-//                        getAjax(`${url_deleteIdSummary}${String(key)}`)
-//                        // ajax-запрос, выводим данные в контент за выбранные дни
-//                    }
-//                }
-//                else{ alert('Необходимо выбрать элемент(ы)!')};
-//                // Выводим контент после нажатия 'Удалить'
-//                findOneElement('.table').innerHTML = '' // очищаем всю таблицу
-//                // если не выбран временной интервал, ввыводим данные за текущий день
-//                if (getValuesDate('.date-input1') == 'NaN-NaN-NaN'){
-//                    getAjax(`${url_summary_date}${getValuesDate()}/${getValuesDate()}`);
-//                }
-//                else{ // иначе, выводим данные в контент за выбранные дни
-//                    getAjax(`${url_summary_date}${getValuesDate('.date-input1')}/${getValuesDate('.date-input2')}`)
-//                }
 
             //
         window.onclick = function(event){ // клик, кроме контентного окна.
