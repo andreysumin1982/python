@@ -1,8 +1,8 @@
 import pygame as p
 import random
 #
-WIDTH = 800  # ширина игрового окна
-HEIGHT = 600 # высота игрового окна
+WIDTH = 640  # ширина игрового окна
+HEIGHT = 480 # высота игрового окна
 FPS = 60 # частота кадров в секунду
 
 # создаем игру и окно
@@ -26,6 +26,13 @@ def grid():
         p.draw.line(screen, BLACK, (0, i*20), (screen.get_width(), i*20))
     for j in range(0, screen.get_width()//20):
         p.draw.line(screen, BLACK, (j*20, 0), (j*20, screen.get_height()))
+    # Создаем двумерный массив, и заполняем поле.
+    massiv = [[random.choice([0 , 1]) for j in range(screen.get_width()//20)] for i in range(screen.get_height()//20)]
+    print(massiv)
+    for i in range(0, len(massiv)):
+        for j in range(0, len(massiv[i])):
+            p.draw.rect(screen, (155*massiv[i][j]%156, 128, 0), [i*20, j*20, 20, 20])
+        #print()
 
     # после отрисовки всего, обновляем экран (Показываем)
     p.display.update()
@@ -50,7 +57,3 @@ if __name__ == '__main__':
     print(f'fps: {clock.get_fps()}')
     print(screen.get_width() // 20, screen.get_height() // 20)
     #
-    for i in range(0, 5):
-        for j in range(0,11):
-            print(random.randint(0,1), end=' ')
-        print()
