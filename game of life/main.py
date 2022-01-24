@@ -2,7 +2,7 @@ import pygame as p
 import random
 #
 WIDTH = 640  # ширина игрового окна
-HEIGHT = 480 # высота игрового окна
+HEIGHT = 640 # высота игрового окна
 FPS = 60 # частота кадров в секунду
 
 # создаем игру и окно
@@ -24,19 +24,23 @@ def grid():
     # Рисуем сетку под размер окна
     for i in range(0, screen.get_height()//20):
         p.draw.line(screen, BLACK, (0, i*20), (screen.get_width(), i*20))
+        #
     for j in range(0, screen.get_width()//20):
         p.draw.line(screen, BLACK, (j*20, 0), (j*20, screen.get_height()))
+    #----------------------------------------------------------------------------
     # Создаем двумерный массив, и заполняем поле.
-    massiv = [[random.choice([0 , 1]) for j in range(screen.get_width()//20)] for i in range(screen.get_height()//20)]
-    print(massiv)
-    for i in range(0, len(massiv)):
+    massiv = [[random.choice([0 , 1]) for j in range(4)] for i in range(4)]
+    for i in range(0,len(massiv)):
         for j in range(0, len(massiv[i])):
-            p.draw.rect(screen, (155*massiv[i][j]%156, 128, 0), [i*20, j*20, 20, 20])
-        #print()
-
+            #print(j, massiv[i][j])
+            if massiv[i][j] == 1:
+                p.draw.rect(screen, (GREEN), (j*20, i*20, 20, 20))      #1 - Life
+            else:
+                p.draw.rect(screen, (0,150,240), (j*20, i*20, 20, 20))  #0 - Death
+            print(massiv[j], end='\n')
+        print(40*'-')
     # после отрисовки всего, обновляем экран (Показываем)
     p.display.update()
-
 #
 def run():
     while True: # Бесконечный цикл
@@ -50,10 +54,11 @@ def run():
 
 #
 
-
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     run() #
     print(f'fps: {clock.get_fps()}')
     print(screen.get_width() // 20, screen.get_height() // 20)
     #
+    massiv = [[random.choice([0, 1]) for j in range(3)] for i in range(3)]
+    print(massiv)
