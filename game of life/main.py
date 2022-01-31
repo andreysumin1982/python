@@ -1,3 +1,5 @@
+import copy
+
 import pygame as p
 import random
 #
@@ -17,86 +19,110 @@ WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
-#
+
 # Создаем двумерный массив, и заполняем поле.
-matrix = [[random.randint(0, 1) for j in range(3)] for i in range(3)]
-for i in matrix:
-# Столбцы
-    i.insert(0, 0)
-    i.insert(0, 0) # В начале
-
-    i.append(0)
-    i.append(0)    # В конце
-
-    # Создаем массив [0,0 ..]
-massZero = [0 for i in range(0, len(matrix[0]))]
-    # Строки
-matrix.insert(0, massZero)
-matrix.insert(0, massZero) # В начале
-
-matrix.append(massZero)
-matrix.append(massZero) # В конце
-#--
+current_gen = [[random.randint(0,1) for j in range(WIDTH // 20)] for i in range(HEIGHT // 20)]
 # Создаем матрицу для след. поколения
-matrixZero = [[0 for j in range(0, len(matrix))] for i in range(0, len(matrix))]
+next_gen=[[0 for j in range(WIDTH // 20)] for j in range(HEIGHT // 20)]
 
-#
-def grid(massiv):
-    # Рендеринг отрисовка
-    screen.fill(WHITE)
-    # Рисуем сетку под размер окна
-    for i in range(0, screen.get_height()//20):
-        p.draw.line(screen, BLACK, (0, i*20), (screen.get_width(), i*20))
-        #
-    for j in range(0, screen.get_width()//20):
-        p.draw.line(screen, BLACK, (j*20, 0), (j*20, screen.get_height()))
-    #----------------------------------------------------------------------------
-    # Идем по матрице и отображанм на сетке
-    #massiv = [[random.choice([0 , 1]) for j in range(32)] for i in range(32)]
-    for i in range(0,len(massiv)):
-        for j in range(0, len(massiv[i])):
-            #print(j, massiv[i][j])
-            if massiv[i][j] == 1:
-                p.draw.rect(screen, (GREEN), (j*20, i*20, 20, 20))      #1 - Life
-            else:
-                p.draw.rect(screen, (0,150,240), (j*20, i*20, 20, 20))  #0 - Death
-            print(massiv[j], end='\n')
-        print(40*'-')
-    # после отрисовки всего, обновляем экран (Показываем)
-    p.display.update()
-#--
-def findNeighbors(x, y, matrix):
+#---
+def findNeighbors(current_gen,x,y):
     # Ф-ция ищет соседей
-    count = 0 # это счетчик
-    for i in range(-1, 2):
-        for j in range(-1, 2):
-            if (i == 0 and j == 0): #
-                pass
-            else:
-                if (matrix[x + i][y + j] == 1):
-                    count+=1
-    return count # возвращаем число соседей
-#--
+    # в пустой клетке, рядом с которой ровно 3 живые клетки, зарождается жизнь
+    # если у живой клетки есть 2 или 3 живых соседки, то эта клетка продолжает жить
+    # если у живой клетки меньше 2 или больше 3 живых соседки, клетка умирает
+    count = 0
+    for iY in range(y-1, y+2): # цикл от 0 до 3(не включая 3)
+        for jX in range(x-1, x+2): # цикл от 0 до 3(не включая 3)
+            print(current_gen[iY][jX], end=', ')
+            if current_gen[iY][jX] == 1:
+                count +=1
+    if current_gen[y][x] == 1: # Если проверяемый элем. == 1
+        count -=1
+        if count == 2 or count == 3:
+            return 1
+        else:
+            return 0
+    else:
+        if count == 3:
+            print('Новая жизнь: ', 1)
+            return 1
+        else:
+            return 0
 
-#
-def run():
-    while True: # Бесконечный цикл
-        clock.tick(FPS) # частота выполнения цикла за одну секунду.
-                        # выполнять цикл while {FPS} раз в секунду
-        for event in p.event.get(): # смотрим события
-            if event.type == p.QUIT: # p.QUIT код: 256
-               return
-            else:
-                matrix
-                grid(matrix) # сетка
+    # if current_gen[y][x]: # Если проверяемый элем. == 1
+    #     return count == 3 or count == 4
+    # else:
+    #     return count == 3
 
+
+#---
+# def run(current_gen):
+#     while True:  # Бесконечный цикл
+#         clock.tick(FPS)  # частота выполнения цикла за одну секунду.
+#         # выполнять цикл while {FPS} раз в секунду
+#         for event in p.event.get():  # смотрим события
+#             if event.type == p.QUIT:  # p.QUIT код: 256
+#                 exit(0)
+#             else:
+#                 # grid(current_gen) # сетка
+#                 # Рендеринг отрисовка
+#                 screen.fill(WHITE)
+#                 # Рисуем сетку под размер окна
+#                 for i in range(0, HEIGHT // 20):
+#                     p.draw.line(screen, BLACK, (0, i * 20), (WIDTH, i * 20))
+#                     #
+#                 for j in range(0, WIDTH // 20):
+#                     p.draw.line(screen, BLACK, (j * 20, 0), (j * 20, HEIGHT))
+#                 # ----------------------------------------------------------------------------
+#                 # Идем по массиву (матрице) current_gen
+#                 for x in range(1, (WIDTH // 20) - 1):
+#                     for y in range(1, (HEIGHT // 20) - 1):
+#                         # Рисуем только живые клетки
+#                         if current_gen[y][x] == 1:
+#                             #pass
+#                             p.draw.rect(screen, (GREEN), (x * 20, y * 20, 20, 20))
+#                         else: # иначе проверяем соседей, добавляем клетки в массив "след.поколения"
+#                             next_gen[y][x] = findNeighbors(current_gen, x, y)
 #
+#                 # Полностью копируем заполненный массив "след. поколения" в current_gen "текущее поколение
+#                 current_gen = copy.deepcopy(next_gen)
+#                 # после отрисовки всего, обновляем экран (Показываем)
+#                 p.display.update()
+# #---
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    run() #
-    print(f'fps: {clock.get_fps()}')
-    print(screen.get_width() // 20, screen.get_height() // 20)
+    #run(current_gen)
+    while True:  # Бесконечный цикл
+        clock.tick(FPS)  # частота выполнения цикла за одну секунду.
+        # выполнять цикл while {FPS} раз в секунду
+        for event in p.event.get():  # смотрим события
+            if event.type == p.QUIT:  # p.QUIT код: 256
+                exit(0)
+            else:
+                # grid(current_gen) # сетка
+                # Рендеринг отрисовка
+                screen.fill(WHITE)
+                # Рисуем сетку под размер окна
+                for i in range(0, HEIGHT // 20):
+                    p.draw.line(screen, BLACK, (0, i * 20), (WIDTH, i * 20))
+                    #
+                for j in range(0, WIDTH // 20):
+                    p.draw.line(screen, BLACK, (j * 20, 0), (j * 20, HEIGHT))
+                # ----------------------------------------------------------------------------
+
+                for x in range(1, (WIDTH // 20) - 1):
+                    for y in range(1, (HEIGHT // 20) - 1):
+                        # Рисуем только живые клетки
+                        if current_gen[y][x] == 1:
+                            p.draw.rect(screen, (GREEN), (x * 20, y * 20, 20, 20))
+                        next_gen[y][x] = findNeighbors(current_gen, x, y)
+
+                current_gen = copy.deepcopy(next_gen)
+                # после отрисовки всего, обновляем экран (Показываем)
+                p.display.update()
     #
-    # massiv = [[random.choice([0, 1]) for j in range(3)] for i in range(3)]
-    # print(massiv)
+    #
+    # #print(f'fps: {clock.get_fps()}')
+    # #print(screen.get_width() // 20, screen.get_height() // 20)
