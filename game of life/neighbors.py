@@ -64,6 +64,19 @@ def findNeighbors(x, y, matrix):
                     count+=1
     return count # возвращаем число соседей
 #--
+# def findNeighbors(x, y, matrix):
+#     # Ф-ция ищет соседей
+#     count = 0 # это счетчик
+#     for i in range(-1, 2):
+#         for j in range(-1, 2):
+#             if (i == 0 and j == 0): #
+#                 pass
+#             else:
+#                 if (matrix[x + i][y + j] == 1):
+#                     count+=1
+#     return count # возвращаем число соседей
+# #--
+
 #
 # def calc_neighbors(x,y):
 #     count = 0 # счетчик
