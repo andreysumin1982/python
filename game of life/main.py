@@ -3,8 +3,8 @@ import copy
 import pygame as p
 import random
 #
-WIDTH = 640  # ширина игрового окна
-HEIGHT = 640 # высота игрового окна
+WIDTH = 1600  # ширина игрового окна
+HEIGHT = 900 # высота игрового окна
 FPS = 60 # частота кадров в секунду
 
 # создаем игру и окно
@@ -34,7 +34,7 @@ def findNeighbors(current_gen,x,y):
     count = 0
     for iY in range(y-1, y+2): # цикл от 0 до 3(не включая 3)
         for jX in range(x-1, x+2): # цикл от 0 до 3(не включая 3)
-            print(current_gen[iY][jX], end=', ')
+            #print(current_gen[iY][jX], end=', ')
             if current_gen[iY][jX] == 1:
                 count +=1
     if current_gen[y][x] == 1: # Если проверяемый элем. == 1
@@ -45,7 +45,7 @@ def findNeighbors(current_gen,x,y):
             return 0
     else:
         if count == 3:
-            print('Новая жизнь: ', 1)
+            #print('Новая жизнь: ', 1)
             return 1
         else:
             return 0
@@ -120,6 +120,10 @@ if __name__ == '__main__':
                         next_gen[y][x] = findNeighbors(current_gen, x, y)
 
                 current_gen = copy.deepcopy(next_gen)
+                print('Новое поколение')
+                for k in current_gen:
+                    print(k)
+                print(30*'-')
                 # после отрисовки всего, обновляем экран (Показываем)
                 p.display.update()
     #
