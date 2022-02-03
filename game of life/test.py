@@ -28,36 +28,60 @@ def findNeighbors(current_gen,x,y):
         else:
             return 0
 #---
-# Выводим матрицу
-print('current')
-for k in current_gen:
-    print(k)
-print(30*'-')
-#   0 0 0
-#   0 1 0
-#   0 0 0
-# Циклом идем от 1 до предпоследнего элемента
+# import pygame
+#
+# pygame.init()
+# width = 800
+# height = 400
+# screen = pygame.display.set_mode((width, height))
+#
+# mouse = pygame.image.load('mouse.png')
+# #mouse = pygame.transform.rotate(mouse, 90)
+#
+# # Определяем стартовую позицию объекта
+# mouseX = 0
+# mouseY = 200
+# # Задаем скорость движения объекта
+# speed = 5
+#
+# while True:
+#     screen.fill((70, 131, 94))
+#     pygame.time.delay(30)
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             pygame.quit()
+#             exit()
+#
+#     # Изменяем значение координаты Y
+#     mouseX += speed
+#     if mouseX > width:
+#         mouseX = -50
+#
+#     screen.blit(mouse, (mouseX, mouseY))
+#     pygame.display.update()
+#--
+class File():
+
+    def __init__(self, path):
+        self.path = path
+
+    def readFile(self):
+        with open (self.path) as file:
+            for gen in file.readlines():
+                yield gen
+
+    def ipSearch(self, stroka, ip):
+        self.stroka = stroka
+        self.ip = ip
+        if stroka.startswith(str(ip)):
+            return stroka
+
+#
+f = File('/home/asumin/Документы/Программирование_Python/Для парсинга/access.log')
 count = 0
-while True:
-    if count < 5:
-        for i in range(1, len(current_gen)-1):
-            #print('i: ',current_gen[i])
-            for j in range(1, len(current_gen)-1):
-                next_gen[j][i] = findNeighbors(current_gen, i,j)
-                #print('j: ',current_gen[i][j])
-                #print('Соседи: ', fn)
-
-        print('next')
-        for l in current_gen:
-            print(l)
-        current_gen = copy.deepcopy(next_gen)
-        print('next')
-        for l in current_gen:
-            print(l)
-        print()
+ip = input('ip: ')
+for i in f.readFile():
+    if f.ipSearch(i, ip):
+        print(i)
         count +=1
-        time.sleep(1)
-    else:
-        break
-
-#---
+print(count)
