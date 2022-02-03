@@ -35,9 +35,8 @@ class Life():
             else:
                 return 0
 #
-class Game(Life):
+class Game():
     '''Класс Game:
-    * Наследует класс Life
     * Инициализирует импортируемый модуль pygame
     * Создает игровое окно и отрисовывает логику класса Life'''
     def __init__(self):
@@ -88,6 +87,8 @@ class Game(Life):
         p.draw.rect(rectScreen, (rectColor), (x * 20, y * 20, 20, 20))
 
     def run(self):
+        # Экземпляр класса Life
+        life = Life()
         # Бесконечный цикл
         while True:
             for event in p.event.get():  # смотрим события
@@ -105,7 +106,7 @@ class Game(Life):
                             if self.current_gen[y][x] == 1:
                                 self.drowRectangle(self.GREEN, self.screen, x, y)
                             # Проверяем каждую клетку на наличие соседей и переносим ее в массив(следующее поколение)
-                            self.next_gen[y][x] = self.findNeighbors(self.current_gen, x, y)
+                            self.next_gen[y][x] = life.findNeighbors(self.current_gen, x, y)
                     # После проверки всех клеток, копируем полученный массив (следующего поколения), и присваиваем переменную current_gen.
                     self.current_gen = copy.deepcopy(self.next_gen)
                     print(id(self.current_gen))
