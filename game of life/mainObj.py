@@ -1,6 +1,8 @@
 import copy
 import pygame as p
 import random
+
+
 #
 class Life():
     def __init__(self):
@@ -95,8 +97,6 @@ class Game():
                 else:
                     # Закрашиваем окно
                     self.screen.fill(self.WHITE)
-                    # частота выполнения цикла за одну секунду.
-                    self.clock
                     # Рисуем сетку под размер окна
                     self.drowGrid(self.screen, self.BLACK)
                     # Бежим по массиву
@@ -111,13 +111,16 @@ class Game():
                     self.current_gen = copy.deepcopy(self.next_gen)
                     print(id(self.current_gen))
                     # После отрисовки, обновляем экран
-                    p.display.flip()
+                    p.display.update()
+
 #
 if __name__ == '__main__':
+    # Экземпляр класса Life
+    life = Life()
     # Экземпляр класса Game
     game = Game()
     # Создаем игровое окно
-    game.setWindow(1280,700,60) #
+    game.setWindow(1900,800,60) #
     # Создаем текущее поколение
     game.Generations()
     # Запускаем игру
