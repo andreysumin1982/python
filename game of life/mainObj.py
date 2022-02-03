@@ -1,8 +1,6 @@
 import copy
 import pygame as p
 import random
-
-
 #
 class Life():
     def __init__(self):
@@ -97,6 +95,8 @@ class Game():
                 else:
                     # Закрашиваем окно
                     self.screen.fill(self.WHITE)
+                    # частота выполнения цикла за одну секунду.
+                    self.clock
                     # Рисуем сетку под размер окна
                     self.drowGrid(self.screen, self.BLACK)
                     # Бежим по массиву
@@ -111,80 +111,15 @@ class Game():
                     self.current_gen = copy.deepcopy(self.next_gen)
                     print(id(self.current_gen))
                     # После отрисовки, обновляем экран
-                    p.display.update()
-
+                    p.display.flip()
 #
 if __name__ == '__main__':
-    # Экземпляр класса Life
-    life = Life()
     # Экземпляр класса Game
     game = Game()
     # Создаем игровое окно
-    game.setWindow(1900,800,60) #
+    game.setWindow(1280,700,60) #
     # Создаем текущее поколение
     game.Generations()
     # Запускаем игру
     game.run()
     #
-
-
-    # # создаем игру и окно
-    # p.init()  # init запускает pygame.
-    # screen = p.display.set_mode((800, 800))  # окно программы, задаем его размеры в настройках.
-    # p.display.set_caption("Жизнь")  # заголовок окна
-    # clock = p.time.Clock()  # частота выполнения за одну секунду.
-    # WIDTH = 1600  # ширина игрового окна
-    # HEIGHT = 900  # высота игрового окна
-    # FPS = 60  # частота кадров в секунду
-    # #
-    # # Цвета (R, G, B)
-    # BLACK = (0, 0, 0)
-    # WHITE = (255, 255, 255)
-    # RED = (255, 0, 0)
-    # GREEN = (0, 255, 0)
-    # BLUE = (0, 0, 255)
-    # while True:
-    #     for event in p.event.get():  # смотрим события
-    #         if event.type == p.QUIT:  # p.QUIT код: 256 - exit
-    #             exit(0)
-    #         else:
-    #             screen.fill(WHITE)
-    #             # Рисуем сетку под размер окна
-    #             for i in range(0, HEIGHT // 20):
-    #                 p.draw.line(screen, BLACK, (0, i * 20), (WIDTH, i * 20))
-    #                 #
-    #             for j in range(0, WIDTH // 20):
-    #                 p.draw.line(screen, BLACK, (j * 20, 0), (j * 20, HEIGHT))
-    #             # ----------------------------------------------------------------------------
-    #             p.display.update()
-
-#    def run1(self):
-#     # создаем игру и окно
-#     p.init()  # init запускает pygame.
-#     screen = p.display.set_mode((800, 800))  # окно программы, задаем его размеры в настройках.
-#     p.display.set_caption("Жизнь")  # заголовок окна
-#     clock = p.time.Clock()  # частота выполнения за одну секунду.
-#     WIDTH = 1600  # ширина игрового окна
-#     HEIGHT = 900  # высота игрового окна
-#     FPS = 60  # частота кадров в секунду
-#     #
-#     # Цвета (R, G, B)
-#     BLACK = (0, 0, 0)
-#     WHITE = (255, 255, 255)
-#     RED = (255, 0, 0)
-#     GREEN = (0, 255, 0)
-#     BLUE = (0, 0, 255)
-#     while True:
-#         for event in p.event.get():  # смотрим события
-#             if event.type == p.QUIT:  # p.QUIT код: 256 - exit
-#                 exit(0)
-#             else:
-#                 screen.fill(WHITE)
-#                 # Рисуем сетку под размер окна
-#                 for i in range(0, HEIGHT // 20):
-#                     p.draw.line(screen, BLACK, (0, i * 20), (WIDTH, i * 20))
-#                     #
-#                 for j in range(0, WIDTH // 20):
-#                     p.draw.line(screen, BLACK, (j * 20, 0), (j * 20, HEIGHT))
-#                 # ----------------------------------------------------------------------------
-#                 p.display.update()
