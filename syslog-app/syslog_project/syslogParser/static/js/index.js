@@ -9,6 +9,10 @@ addElement('div', '.input_box', 'div_input')
 addElement('div', '.input_box', 'div_btn')
     addElement('input', '.div_btn', 'inp_btn', 'button')
     findOneElement('.inp_btn').value = 'Найти'
+addElement('div', '.input_box', 'div_select')
+    addElement('select', '.div_select', 'archives')
+        addElement('option', '.archives', 'opt_select')
+            findOneElement('.opt_select').innerHTML = 'Архивы'
 //Добавляем модальное окно
 addElement('div', 'body', 'modal')
     addElement('div', '.modal', 'modal_content')

@@ -1,5 +1,8 @@
 /* Ф-ции добавления, поиска элементов html, ajax-запросы*/
 //
+urlGetData = 'http://127.0.0.1:8000/getdata/'
+
+//
 function addElement(child, parent = 'body', classChild = 'no_class', type = NaN, text = ''){
     /*Ф-ция создает элемент на странице:
         На вход подаются 1 обязятельный элемент и 3 не обязательных:
@@ -28,4 +31,8 @@ function findOneElement(className){
     return document.querySelector(className) //массив объектов
 };
 //
+function ajaxGetData(){
+    const promise = $.ajax(urlGetData)
+    return promise
+};
 
