@@ -26,8 +26,8 @@ class File():
         for stroka in self.readFile():
             print(stroka)
 #--
-#path = '/home/asumin/Документы/Программирование_Python/Для парсинга/syslog.txt'
-path = '/home/asumin/Документы/Программирование_Python/Для парсинга/u_ex210730_log.txt'
+path = '/home/asumin/Документы/Программирование_Python/Для парсинга/syslog.txt'
+#path = '/home/asumin/Документы/Программирование_Python/Для парсинга/u_ex210730_log.txt'
 
 #--
 if __name__ == '__main__':
