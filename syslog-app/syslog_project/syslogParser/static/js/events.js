@@ -2,24 +2,29 @@
 //
 function handleButtonClick(){
     /* Событие кнопки 'Найти' */
-    let btn = findOneElement('.inp_btn')
-        btn.addEventListener('click', ()=> {
-            let modal = findOneElement('.modal') // получаем модальное окно (div)
-                modal.style.display = "block" // изменяем состояние на block(блочный элемент)
-            })
-};
-let btn = findOneElement('.inp_btn')
-    btn.onclick = handleButtonClick()
-/**/
-let btn2 = findOneElement('.inp_btn')
-    btn2.onclick = ajaxGetData()
-    .then(response => {
-        //console.log(response.split())
-        let count = 0
-        response.split().forEach(elem =>{
-            console.log(elem)
-            addElement('p', '.modal_content', `${count}`)
-            findOneElement(`p${count}`).innerHTML = elem
-            count++1
+    let modal = findOneElement('.modal') // получаем модальное окно (div)
+        modal.style.display = "block" // изменяем состояние на block(блочный элемент)
+        // ajax-запрос
+        ajaxGetData().then(response => {
+           let count = 0
+           console.log(response.split('\n'))
+           //response.split('\n').forEach(elem => {
+           //     console.log(elem)
+                //addElement('p', '.modal_content', `p${count}`)
+                //document.querySelector(`.p${count}`).innerHTML = elem
+                //addHtml(elem)
+           //})
         })
-    })
+    };
+//
+function addHtml(elem){
+    findOneElement('.modal_content').innerHTML +=`
+                                                ${elem}<br>
+                                                `
+    };
+
+// Обработчик события на кнопку 'Найти'
+let btn = findOneElement('.inp_btn')
+    btn.addEventListener('click', ()=> {
+        handleButtonClick() // Вызываем ф-цию handleButtonClick()
+    });
