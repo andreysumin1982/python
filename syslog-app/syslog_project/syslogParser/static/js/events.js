@@ -23,7 +23,18 @@ function addHtml(elem){
                                                 ${elem}<br>
                                                 `
     };
-
+//
+function processingData(data, i = 0, count = 0){
+    //Порционный вывод
+    setInterval(()=> {
+        for (i; i < 50; i++){
+            addHtml(data[count])
+            count++
+            console.log(count)
+    }
+        processingData(data, i=0, count)
+    },10000);
+//
 // Обработчик события на кнопку 'Найти'
 let btn = findOneElement('.inp_btn')
     btn.addEventListener('click', ()=> {
