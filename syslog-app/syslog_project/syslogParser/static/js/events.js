@@ -8,6 +8,7 @@ function handleButtonClick(){
         ajaxGetData().then(response => {
            let count = 0
            console.log(response.split('\n'))
+           //console.log(response)
            //response.split('\n').forEach(elem => {
            //     console.log(elem)
                 //addElement('p', '.modal_content', `p${count}`)
