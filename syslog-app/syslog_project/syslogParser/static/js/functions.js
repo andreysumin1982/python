@@ -32,7 +32,7 @@ function findOneElement(className){
 };
 //
 function ajaxGetData(){
-    const promise = $.ajax(urlGetData)
+    const promise = axios(urlGetData)
     return promise
 };
 
