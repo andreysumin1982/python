@@ -46,7 +46,7 @@ function processingData(data, findSymbols = NaN, i = 0, count = 0){
         }
         //btn.value = 'Найти'
         clear = setTimeout(()=> {
-            if (count < 165){
+            if (count < 500){
                         
                 processingData(data, `${findSymbols}`, i = 0, count)
             }
@@ -60,7 +60,7 @@ function processingData(data, findSymbols = NaN, i = 0, count = 0){
     else {    
         //Порционный вывод, выводим весь syslog
         console.log(data.length)
-        for (i; i < 100; i++){
+        for (i; i < 10; i++){
             addHtml(count, data[count])
             //console.log(count)
             //console.log(count, data[count])
@@ -79,7 +79,13 @@ function processingData(data, findSymbols = NaN, i = 0, count = 0){
     }
 };
 //
-//
+// Посчитать проценты (доделать)
+x = 8
+for (let i = 1; i < x+1; i++){
+    let s = i/x*100
+    console.log(i, s+'%')
+}
+
 // Обработчик события на кнопку 'Найти'
 let btn = findOneElement('.inp_btn')
     btn.addEventListener('click', ()=> {
