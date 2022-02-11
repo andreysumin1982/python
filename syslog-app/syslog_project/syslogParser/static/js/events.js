@@ -19,50 +19,65 @@ function handleButtonClick(){
         })
     };
 //
-function addHtml(elem){
+function addHtml(numberStr,elem){
     //ф-ция добавляет в modal_content строки
     findOneElement('.modal_content').innerHTML +=`
-                                                ${elem}<br>
+                                                <p>${numberStr}</p> ${elem}<br>
                                                 `
     };
 //
 function processingData(data, findSymbols = NaN, i = 0, count = 0){
+    // Порционный вывод, выводим только искомое
     if (findSymbols){
+        //console.log(findSymbols)
+        //поисковый шаблон
+        let regexp = new RegExp(`(\\b${findSymbols})|(\\b${findSymbols}\\d)|(\\b${findSymbols}\\-\\d\\-\\d\\-\\d)`, "gi")
+        //console.log(regexp, data[count])
+        //console.log(data[count].match(regexp))
         //console.log(regexp)
-        let reg_exp = new RegExp(/\b/+`${findSymbols}`, 'g')
-            
         for (i; i < 10; i++){
-            if (reg_exp.test(data[count])){
-                addHtml(data[count])
-                console.log(count)
-                count++
+            // если шаблон совподает 
+            if (regexp.test(data[count])){            
+                addHtml(count, data[count])  // выводим в modal_content
+                //console.log(regexp.test(data[count]), data[count])
+                count++               
             }
+            else{count++; continue}
         }
-    }
-    else {
-        return
-    }
-        
-
-    //Порционный вывод
-    console.log(data.length)
-    for (i; i < 10; i++){
-        addHtml(data[count])
-        console.log(count)
-        //console.log(count, data[count])
-        count++
-    }
-    clear = setTimeout(()=> {
-        if (count < 1650){
-                    
-            processingData(data, regexp = NaN, i = 0, count)
+        //btn.value = 'Найти'
+        clear = setTimeout(()=> {
+            if (count < 165){
+                        
+                processingData(data, `${findSymbols}`, i = 0, count)
+            }
+            else { 
+                clearTimeout(clear)
+                btn.value = 'Найти'
+                return}
+        }, 300)
+    }    
+    //
+    else {    
+        //Порционный вывод, выводим весь syslog
+        console.log(data.length)
+        for (i; i < 100; i++){
+            addHtml(count, data[count])
+            //console.log(count)
+            //console.log(count, data[count])
+            count++
         }
-        else { 
-            clearTimeout(clear)
-            btn.value = 'Найти'
-            return}
-    }, 300)
-}
+        clear = setTimeout(()=> {
+            if (count < 2000){
+                        
+                processingData(data, regexp = NaN, i = 0, count)
+            }
+            else { 
+                clearTimeout(clear)
+                btn.value = 'Найти'
+                return}
+        }, 300)
+    }
+};
 //
 //
 // Обработчик события на кнопку 'Найти'
