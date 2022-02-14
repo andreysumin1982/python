@@ -1,6 +1,7 @@
 /* Ф-ции добавления, поиска элементов html, ajax-запросы*/
 //
-urlGetData = 'http://127.0.0.1:8000/getdata/'
+//urlGetData = 'http://127.0.0.1:8000/getdata/'
+urlGetData = 'http://192.168.220.72:8000/getdata/'
 
 //
 function addElement(child, parent = 'body', classChild = 'no_class', type = NaN, text = ''){

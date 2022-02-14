@@ -19,39 +19,56 @@ function handleButtonClick(){
         })
     };
 //
-function addHtml(numberStr,elem){
+function addHtml(elem){
     //ф-ция добавляет в modal_content строки
     findOneElement('.modal_content').innerHTML +=`
-                                                <p>${numberStr}</p> ${elem}<br>
+                                                ${elem}<br>
                                                 `
     };
 //
+// Посчитать проценты (доделать)
+//let x = 20
+//for (let i = 1; i < x+1; i++){
+//    let s = i/x*100
+//    console.log(i, s+'%')
+//}
+//
+function loadSummary(loadCount, data){
+    // Ф-ция считат процентное соотношение
+    //let sum = loadCount/data*100
+    //console.log('sum :',  Math.round(sum))
+    return Math.round(loadCount/data*100)
+}
+//
 function processingData(data, findSymbols = NaN, i = 0, count = 0){
     // Порционный вывод, выводим только искомое
-    if (findSymbols){
-        //console.log(findSymbols)
-        //поисковый шаблон
+    n = 3000
+    if (findSymbols){ // если есть искомый аргумент(findSymbols)
+        // шаблон поиска
         let regexp = new RegExp(`(\\b${findSymbols})|(\\b${findSymbols}\\d)|(\\b${findSymbols}\\-\\d\\-\\d\\-\\d)`, "gi")
-        //console.log(regexp, data[count])
-        //console.log(data[count].match(regexp))
-        //console.log(regexp)
         for (i; i < 10; i++){
             // если шаблон совподает 
             if (regexp.test(data[count])){            
-                addHtml(count, data[count])  // выводим в modal_content
+                addHtml(data[count])  // выводим в modal_content
                 //console.log(regexp.test(data[count]), data[count])
                 count++               
             }
-            else{count++; continue}
+            else{count++; continue} // иначе продолжаем бежать по циклу
         }
         //btn.value = 'Найти'
         clear = setTimeout(()=> {
-            if (count < 500){
-                        
-                processingData(data, `${findSymbols}`, i = 0, count)
+            if (count < n){ //
+                //
+                load = loadSummary(count, n) // считаем проценты
+                    findOneElement('.p_loading').innerHTML = `Идет поиск ${load}%` // выводим 
+                //
+                processingData(data, `${findSymbols}`, i = 0, count) // рекурсивно вызываем с вх. аргументами  
             }
-            else { 
-                clearTimeout(clear)
+            else {
+                load = loadSummary(count, n)
+                    findOneElement('.p_loading').innerHTML = `Выполнено ${load}%` //выводим  
+                //
+                clearTimeout(clear) // отменяем вызов ф-ции setTimeout
                 btn.value = 'Найти'
                 return}
         }, 300)
@@ -59,32 +76,31 @@ function processingData(data, findSymbols = NaN, i = 0, count = 0){
     //
     else {    
         //Порционный вывод, выводим весь syslog
-        console.log(data.length)
         for (i; i < 10; i++){
-            addHtml(count, data[count])
-            //console.log(count)
-            //console.log(count, data[count])
+            addHtml(data[count]) // выводим по 10 строк.
             count++
         }
         clear = setTimeout(()=> {
-            if (count < 2000){
-                        
-                processingData(data, regexp = NaN, i = 0, count)
+            if (count < n){ // 
+                //         
+                console.log(count)
+                load = loadSummary(count, n) // считаем проценты
+                    findOneElement('.p_loading').innerHTML = `Идет поиск ${load}%` // выводим 
+                //
+                processingData(data, regexp = NaN, i = 0, count) // рекурсивно вызываем с вх. аргументами           
+                
             }
-            else { 
-                clearTimeout(clear)
+            else { // иначе, считаем проценты, 
+                load = loadSummary(count, n)
+                    findOneElement('.p_loading').innerHTML = `Выполнено ${load}%` //выводим  
+                //
+                clearTimeout(clear) // отменяем вызов ф-ции setTimeout
                 btn.value = 'Найти'
                 return}
         }, 300)
     }
 };
 //
-// Посчитать проценты (доделать)
-x = 8
-for (let i = 1; i < x+1; i++){
-    let s = i/x*100
-    console.log(i, s+'%')
-}
 
 // Обработчик события на кнопку 'Найти'
 let btn = findOneElement('.inp_btn')
@@ -104,8 +120,9 @@ let btn = findOneElement('.inp_btn')
         }        
     }
     else {
-        btn.value = 'Найти'
         clearTimeout(clear)
+            findOneElement('.p_loading').innerHTML = 'Остановлено на '+ load + '%' //выводим
+            btn.value = 'Найти'
     }
 });
 //

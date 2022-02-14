@@ -27,11 +27,11 @@ body, button, h1, h2, h3, h4, p, a {
     grid-gap: 3px;
     /* сетка */
     grid-template-areas:
-        "div_text none none"
-        "div_input div_btn div_select";
+        "div_text none none none"
+        "div_input div_btn div_select div_loading";
     grid-template-columns: 1fr auto 1fr;
     /**/
-    width: 355px;
+    width: 410px;
     padding: 1px;
     /*border: 1px solid silver;*/
 
@@ -48,8 +48,21 @@ body, button, h1, h2, h3, h4, p, a {
 .div_select{
     grid-area: div_select;
 }
+.div_loading{
+    grid-area: div_loading;
+}
+/* статус загрузки контента*/
+.div_loading{
+    width: 200px;
+    padding: 0px;
+    /*border: 1px solid silver;*/
+    
+}
+.p_loading{
+    font-weight: 300;
+    margin-left: 15px;
+}
 /**/
-
 /* Модальное окно */
 .modal{
     display: none;
@@ -65,6 +78,9 @@ body, button, h1, h2, h3, h4, p, a {
 }
 /*----Контентная часть модального окна: -----*/
 .modal_content{
+    display: flex;
+    flex-direction: column;
+    /**/
     border: 1px solid silver;
     border-radius: 10px;
     /*color: white;*/
@@ -79,3 +95,11 @@ body, button, h1, h2, h3, h4, p, a {
     overflow-y: scroll; /* прокрутка по вертикали */
 }
 /*------------------*/
+p{
+    font-weight: 300;
+    /*left: 0px;*/
+    /*min-width: 1vw;
+    height: auto;
+    padding-left: 1vw;
+    border: 1px solid silver;*/
+}

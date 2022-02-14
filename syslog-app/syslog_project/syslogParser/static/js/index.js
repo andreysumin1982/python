@@ -13,6 +13,8 @@ addElement('div', '.input_box', 'div_select')
     addElement('select', '.div_select', 'archives')
         addElement('option', '.archives', 'opt_select')
             findOneElement('.opt_select').innerHTML = 'Архивы'
+addElement('div', '.input_box', 'div_loading')
+    addElement('p', '.div_loading', 'p_loading')
 //Добавляем модальное окно
 addElement('div', 'body', 'modal')
     addElement('div', '.modal', 'modal_content')
