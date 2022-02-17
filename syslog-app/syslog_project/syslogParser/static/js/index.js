@@ -1,5 +1,5 @@
 /* Заполняем элементами */
-addElement('div', '.body', 'header')
+/*addElement('div', '.body', 'header')
 addElement('div', '.header', 'input_box')
 addElement('div', '.input_box', 'div_text')
     addElement('p', '.div_text', 'p_text')
@@ -14,7 +14,7 @@ addElement('div', '.input_box', 'div_select')
         addElement('option', '.archives', 'opt_select')
             findOneElement('.opt_select').innerHTML = 'Архивы'
 addElement('div', '.input_box', 'div_loading')
-    addElement('p', '.div_loading', 'p_loading')
+    addElement('p', '.div_loading', 'p_loading')*/
 //Добавляем модальное окно
-addElement('div', 'body', 'modal')
-    addElement('div', '.modal', 'modal_content')
+//addElement('div', 'body', 'modal')
+//    addElement('div', '.modal', 'modal_content')
