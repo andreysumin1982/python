@@ -12,11 +12,36 @@
 <body class="body">
     {% csrf_token %}
     <!--  -->
-    
+    <div class="header">
+        <div class="input_box">
+            <div class="div_text">
+                <p class="p_text">text</p>
+            </div>
+            <div class="div_input">
+                <input type="input" class="input">
+            </div>
+            <div class="div_btn">
+                <input type="button" class="inp_btn" value="Найти">
+            </div>
+            <div class="div_select">
+                <select class="archives">
+                    <option class="opt_select">Архивы</option>
+                </select>
+            </div>
+            <div class="div_loading">
+                <p class="p_loading"></p>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+
+    <!--  -->
+    <div class="modal">
+        <div class="modal_content"></div>
+    </div>
     <!--  -->
     <script src="{% static 'js/axios.min.js' %}"></script>
     <script src="{% static 'js/functions.js' %}"></script>
-    <script src="{% static 'js/index.js' %}"></script>
     <script src="{% static 'js/events.js' %}"></script>
     <!--  -->
 </body>
