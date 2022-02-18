@@ -78,8 +78,8 @@ body, button, h1, h2, h3, h4, p, a {
 }
 /*----Контентная часть модального окна: -----*/
 .modal_content{
-    display: flex;
-    flex-direction: column;
+    /*display: flex;
+    flex-direction: column;*/
     /**/
     border: 1px solid silver;
     border-radius: 10px;

@@ -30,6 +30,7 @@
             </div>
             <div class="div_loading">
                 <p class="p_loading"></p>
+
             </div>
         </div>
     </div>
@@ -37,7 +38,11 @@
 
     <!--  -->
     <div class="modal">
-        <div class="modal_content"></div>
+        <div class="modal_content">
+            {% for i in syslog %}
+                    {{i}}<br>
+                {% endfor %}
+        </div>
     </div>
     <!--  -->
     <script src="{% static 'js/axios.min.js' %}"></script>

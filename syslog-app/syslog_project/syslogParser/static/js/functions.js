@@ -1,8 +1,9 @@
 /* Ф-ции добавления, поиска элементов html, ajax-запросы*/
 //
-urlGetData = 'http://127.0.0.1:8000/getdata/'
-//urlGetData = 'http://192.168.220.72:8000/getdata/'
-
+//urlGetData = 'http://127.0.0.1:8000/getdata/'
+//urlSerchData = 'http://127.0.0.1:8000/serchData/'
+//urlGetData = 'http://192.168.220.72:8000/getData/'
+urlSerchData = 'http://192.168.220.72:8000/serchData/'
 //
 function addElement(child, parent = 'body', classChild = 'no_class', type = NaN, text = ''){
     /*Ф-ция создает элемент на странице:
@@ -32,8 +33,12 @@ function findOneElement(className){
     return document.querySelector(className) //массив объектов
 };
 //
-function ajaxGetData(){
-    const promise = axios(urlGetData)
+//function ajaxGetData(){
+//    const promise = axios(urlGetData)
+//    return promise
+//};
+//
+function ajaxSerchData(serchString){
+    const promise = axios(`${urlSerchData}${serchString}`)
     return promise
 };
-

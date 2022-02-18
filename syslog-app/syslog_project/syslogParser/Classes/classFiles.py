@@ -20,7 +20,7 @@ class File():
         self.element = element
         self.reg_exp = re.compile(r'\b{}'.format(symbols))  # шаблон для поиска
         if re.findall(self.reg_exp, element): # если шаблон есть в строке
-            print(element)
+            return element
 
     def showFile(self):
         for stroka in self.readFile():
