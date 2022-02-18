@@ -143,7 +143,7 @@ function dataProcessing(data, i = 0, count = 0){
         addHtml(data[i]) // выводим в modal_content
         count++
     }
-    let timer = setTimeout(()=> {
+    timer = setTimeout(()=> {
         if (count < len){
             // рекурсивно вызываем с вх. аргументами
             dataProcessing(data, i = 0, count)
@@ -175,6 +175,10 @@ let btn = findOneElement('.inp_btn')
                     dataProcessing(resp.split('\n'))
                 })
             }
+        }
+        else {
+            clearTimeout(clear)
+            
         }
     });
 //
