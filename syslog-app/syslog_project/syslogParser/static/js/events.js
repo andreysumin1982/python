@@ -166,6 +166,8 @@ let btn = findOneElement('.inp_btn')
             if (inp.value == ''){ // если пустое поле
                 //
                 console.log('пустое поле')
+                btn.value = 'Найти'
+                return
             }
             else{
                 //ajax-запрос, после выполнения получаем промис
@@ -176,9 +178,9 @@ let btn = findOneElement('.inp_btn')
                 })
             }
         }
-        else {
-            clearTimeout(clear)
-            
+        else{
+            clearTimeout(timer)
+            btn.value = 'Найти'
         }
     });
 //
