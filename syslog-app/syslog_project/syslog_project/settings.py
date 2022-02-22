@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-)p2(gkdxxgqf3v7c=(vpf3jkg98+ns79b1o9h@-+3x9dx0x+92
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['192.168.220.72', 'localhost', '127.0.0.1', '*']
 
 
 # Application definition
@@ -38,21 +38,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'syslogParser.apps.SyslogparserConfig',
-    'corsheaders'
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware'
+    
 ]
 CORS_ORIGIN_ALLOW_ALL = True
+
 ROOT_URLCONF = 'syslog_project.urls'
 
 TEMPLATES = [
@@ -110,7 +111,9 @@ AUTH_PASSWORD_VALIDATORS = [
 #LANGUAGE_CODE = 'en-us'
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC'
+#TIME_ZONE = 'UTC'
+
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
