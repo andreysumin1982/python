@@ -149,7 +149,7 @@ function dataProcessing(data, i = 0, count = 0){
             dataProcessing(data, i = 0, count)
         }
         else {
-            btn.value = 'Найти'; // возвращаем название кнопки
+            btn.value = 'Найти' // возвращаем название кнопки
             clearTimeout(timer) // отменяем вызов ф-ции setTimeout
         }
     }, 150)

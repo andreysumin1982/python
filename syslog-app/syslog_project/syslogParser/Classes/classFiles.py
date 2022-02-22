@@ -1,4 +1,5 @@
 import re
+import regex
 #--
 class File():
 
@@ -18,7 +19,7 @@ class File():
 
     def findSymbols(self, element, symbols):
         self.element = element
-        self.reg_exp = re.compile(r'\b{}'.format(symbols))  # шаблон для поиска
+        self.reg_exp = re.compile(r'\b{}'.format(symbols), flags=re.IGNORECASE)  # шаблон для поиска с игнором на регистр
         if re.findall(self.reg_exp, element): # если шаблон есть в строке
             return element
 
