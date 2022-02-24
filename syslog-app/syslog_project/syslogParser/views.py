@@ -26,3 +26,15 @@ def serchData(request, serchString):
                 context['syslog'].append(elem)
             else: continue
     return HttpResponse(context['syslog'])
+#
+def serchDataBatchOutput(request, indexArray = 0):
+    if (request.method == 'GET'):
+        context = {'syslog': []}
+        file = classFiles.File(classFiles.path)  # Экземпляр класса File из выйла files.py
+        count = 0
+        gen = (i for i in file.readFile())
+        for j in range(0,30):
+            print(next(gen))
+            count +=1
+
+    return HttpResponse(context['syslog'])
