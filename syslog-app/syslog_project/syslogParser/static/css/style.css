@@ -1,0 +1,105 @@
+/**/
+/*-------для всех все сбрасываем-----------*/
+body, button, h1, h2, h3, h4, p, a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    font-weight: normal;
+}
+/*--*/
+*{
+    box-sizing: border-box;
+}
+/* Заголовк */
+.header{
+    width: 98%;
+    height: 80px;
+    border: 1px solid silver;
+    border-radius: 10px;
+    margin: 15px auto;
+    padding: 10px;
+    background-color: #80D0C7;
+    background-image: linear-gradient(160deg, #80D0C7 0%, #80D0C7 100%);
+}
+/*grid*/
+.input_box{
+    display: grid;
+    grid-gap: 3px;
+    /* сетка */
+    grid-template-areas:
+        "div_text none none none"
+        "div_input div_btn div_select div_loading";
+    grid-template-columns: 1fr auto 1fr;
+    /**/
+    width: 410px;
+    padding: 1px;
+    /*border: 1px solid silver;*/
+
+}
+.div_text{
+    grid-area: div_text;
+}
+.div_input{
+    grid-area: div_input;
+}
+.div_btn{
+    grid-area: div_btn;
+}
+.div_select{
+    grid-area: div_select;
+}
+.div_loading{
+    grid-area: div_loading;
+}
+/* статус загрузки контента*/
+.div_loading{
+    width: 200px;
+    padding: 0px;
+    /*border: 1px solid silver;*/
+    
+}
+.p_loading{
+    font-weight: 300;
+    margin-left: 15px;
+}
+/**/
+/* Модальное окно */
+.modal{
+    /*display: none;*/
+    /*position:fixed;*/
+    /*z-index: 1000;*/
+    left: 0;
+    top: 0;
+    width: 100%;
+    /*height: 100%;*/
+    /*background: rgba(46, 45, 45, 0.7);*/
+    /*border: 1px solid silver;*/
+    /*overflow: auto;*/
+}
+/*----Контентная часть модального окна: -----*/
+.modal_content{
+    /*display: flex;
+    flex-direction: column;*/
+    /**/
+    border: 1px solid silver;
+    border-radius: 10px;
+    /*color: white;*/
+    font-weight: 300;
+    /*background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);*/
+    width: 98%;
+    height: 84vh;
+    /*z-index: 2000;*/
+    padding: 3px;
+    margin: auto;
+    overflow-y: scroll; /* прокрутка по вертикали */
+}
+/*------------------*/
+p{
+    font-weight: 300;
+    /*left: 0px;*/
+    /*min-width: 1vw;
+    height: auto;
+    padding-left: 1vw;
+    border: 1px solid silver;*/
+}
