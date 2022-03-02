@@ -137,10 +137,10 @@ function addHtml(elem){
     };
 //
 // Обработка промиса
-function dataProcessing(data, i = 0, count = 0){
+/*function dataProcessing(data, i = 0, count = 0){
     let len = data.length
     for (let i=0; i<10; i++){
-        addHtml(data[i]) // выводим в modal_content
+        addHtml(data[count]) // выводим в modal_content
         count++
     }
     timer = setTimeout(()=> {
@@ -153,8 +153,26 @@ function dataProcessing(data, i = 0, count = 0){
             clearTimeout(timer) // отменяем вызов ф-ции setTimeout
         }
     }, 150)
-};
+};*/
 //
+
+//
+function dataProcessing(data){
+    //let len = data.length
+    let count = 0
+    //
+    for (let i=0; i<80; i++){
+        if (data[count] != undefined){
+            setTimeout(function () {
+                addHtml(data[count]) // выводим в modal_content
+                count++    
+            }, 100);
+        }
+    }
+    btn.value = 'Найти' // возвращаем название кнопки  
+};    
+//
+
 // Обработчик события на кнопку 'Найти'
 let btn = findOneElement('.inp_btn')
     btn.addEventListener('click', ()=> {
@@ -184,3 +202,25 @@ let btn = findOneElement('.inp_btn')
         }
     });
 //
+// Обработчик события на скролл '.modal_content'
+let mc = document.querySelector('.modal_content')
+$(function(){
+	$(mc).scroll(function(){
+		if($(mc).scrollTop() > 100) {
+			$('#scroll_top').show();
+            $('#scroll_bottom').show();
+		} else {
+			$('#scroll_top').hide();
+            $('#scroll_bottom').hide();
+		}
+	});
+ 
+	$('#scroll_top').click(function(){
+		$(mc).animate({scrollTop: 0}, 100);
+		return false;
+	});
+    $('#scroll_bottom').click(function(){
+		$(mc).animate({scrollTop: $(mc).height() * $(mc).height()}, 100);
+		return false;
+	});
+});

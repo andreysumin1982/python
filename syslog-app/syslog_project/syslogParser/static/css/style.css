@@ -65,6 +65,7 @@ body, button, h1, h2, h3, h4, p, a {
 /**/
 /* Модальное окно */
 .modal{
+    position: relative; /*Работать отосительно от modal*/
     /*display: none;*/
     /*position:fixed;*/
     /*z-index: 1000;*/
@@ -102,4 +103,39 @@ p{
     height: auto;
     padding-left: 1vw;
     border: 1px solid silver;*/
+}
+/*--------------------------------*/
+
+/* ссылка Наверх */
+#scroll_top {
+    display: none;
+	position: fixed;
+	bottom: 90px;
+	right: 35px;
+	z-index: 1000;
+	width: 32px;
+	height: 32px;
+	background: url('/img/scroll_top.png') 50% 50% no-repeat;
+	border-radius: 50%;
+	opacity: 0.8;
+}
+#scroll_top:hover {
+ 	opacity: 1;
+}
+/*ссылка Вниз*/
+#scroll_bottom {
+    display: none;
+	position: fixed;
+	bottom: 30px;
+	right: 35px;
+	z-index: 1000;
+	width: 32px;
+	height: 32px;
+	background: url('/img/scroll_top.png') 50% 50% no-repeat;
+	transform: rotate(180deg);
+    border-radius: 50%;
+	opacity: 0.8;
+}
+#scroll_bottom:hover {
+ 	opacity: 1;
 }
