@@ -115,7 +115,7 @@ p{
 	z-index: 1000;
 	width: 32px;
 	height: 32px;
-	background: url('/img/scroll_top.png') 50% 50% no-repeat;
+	background: url("/static/img/scroll_top.png") 50% 50% no-repeat;
 	border-radius: 50%;
 	opacity: 0.8;
 }
@@ -131,7 +131,7 @@ p{
 	z-index: 1000;
 	width: 32px;
 	height: 32px;
-	background: url('/img/scroll_top.png') 50% 50% no-repeat;
+	background: url( "/static/img/scroll_top.png") 50% 50% no-repeat;
 	transform: rotate(180deg);
     border-radius: 50%;
 	opacity: 0.8;
