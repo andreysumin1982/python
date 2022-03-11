@@ -126,7 +126,7 @@ p{
 #scroll_bottom {
     display: none;
 	position: fixed;
-	bottom: 30px;
+	bottom: 35px;
 	right: 35px;
 	z-index: 1000;
 	width: 32px;
