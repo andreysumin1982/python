@@ -125,4 +125,4 @@ if __name__ == '__main__':
     game.Generations()
     # Запускаем игру
     game.run()
-    #
+    
