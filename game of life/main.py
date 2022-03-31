@@ -49,48 +49,7 @@ def findNeighbors(current_gen,x,y):
             return 1
         else:
             return 0
-
-    # if current_gen[y][x]: # Если проверяемый элем. == 1
-    #     return count == 3 or count == 4
-    # else:
-    #     return count == 3
-
-
-#---
-# def run(current_gen):
-#     while True:  # Бесконечный цикл
-#         clock.tick(FPS)  # частота выполнения цикла за одну секунду.
-#         # выполнять цикл while {FPS} раз в секунду
-#         for event in p.event.get():  # смотрим события
-#             if event.type == p.QUIT:  # p.QUIT код: 256
-#                 exit(0)
-#             else:
-#                 # grid(current_gen) # сетка
-#                 # Рендеринг отрисовка
-#                 screen.fill(WHITE)
-#                 # Рисуем сетку под размер окна
-#                 for i in range(0, HEIGHT // 20):
-#                     p.draw.line(screen, BLACK, (0, i * 20), (WIDTH, i * 20))
-#                     #
-#                 for j in range(0, WIDTH // 20):
-#                     p.draw.line(screen, BLACK, (j * 20, 0), (j * 20, HEIGHT))
-#                 # ----------------------------------------------------------------------------
-#                 # Идем по массиву (матрице) current_gen
-#                 for x in range(1, (WIDTH // 20) - 1):
-#                     for y in range(1, (HEIGHT // 20) - 1):
-#                         # Рисуем только живые клетки
-#                         if current_gen[y][x] == 1:
-#                             #pass
-#                             p.draw.rect(screen, (GREEN), (x * 20, y * 20, 20, 20))
-#                         else: # иначе проверяем соседей, добавляем клетки в массив "след.поколения"
-#                             next_gen[y][x] = findNeighbors(current_gen, x, y)
-#
-#                 # Полностью копируем заполненный массив "след. поколения" в current_gen "текущее поколение
-#                 current_gen = copy.deepcopy(next_gen)
-#                 # после отрисовки всего, обновляем экран (Показываем)
-#                 p.display.update()
-# #---
-
+ 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     #run(current_gen)
