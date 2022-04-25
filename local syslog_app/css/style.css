@@ -79,8 +79,7 @@ body, button, h1, h2, h3, h4, p, a {
 }
 /*----Контентная часть модального окна: -----*/
 .modal_content{
-    /*display: flex;
-    flex-direction: column;*/
+    /*display: none;*/
     /**/
     border: 1px solid silver;
     border-radius: 10px;
@@ -93,8 +92,12 @@ body, button, h1, h2, h3, h4, p, a {
     /*z-index: 2000;*/
     padding: 3px;
     margin: auto;
-    overflow-y: scroll; /* прокрутка по вертикали */
+    overflow: auto; /*прокрутка по вертикали*/
+    /* line-height: 150%; */
 }
+/* .modal_content p:not(:last-child){
+    margin: 0px 0px 20px 0px;
+} */
 /*------------------*/
 p{
     font-weight: 300;
@@ -106,6 +109,7 @@ p{
 }
 /*--------------------------------*/
 
+
 /* ссылка Наверх */
 #scroll_top {
     display: none;
@@ -115,7 +119,7 @@ p{
 	z-index: 1000;
 	width: 32px;
 	height: 32px;
-	background: url("/static/img/scroll_top.png") 50% 50% no-repeat;
+	background: url("/img/scroll_top.png") 50% 50% no-repeat;
 	border-radius: 50%;
 	opacity: 0.8;
 }
@@ -131,11 +135,8 @@ p{
 	z-index: 1000;
 	width: 32px;
 	height: 32px;
-	background: url( "/static/img/scroll_top.png") 50% 50% no-repeat;
-	transform: rotate(180deg);
+	background: url( "/img/scroll_top.png") 50% 50% no-repeat;
+	transform: rotate(180deg);  /*Перевернуть на 180 гр.*/
     border-radius: 50%;
 	opacity: 0.8;
-}
-#scroll_bottom:hover {
- 	opacity: 1;
 }

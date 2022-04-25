@@ -112,7 +112,7 @@ class Game():
                     print(id(self.current_gen))
                     # После отрисовки, обновляем экран
                     p.display.update()
-
+#
 #
 if __name__ == '__main__':
     # Экземпляр класса Life
@@ -125,4 +125,4 @@ if __name__ == '__main__':
     game.Generations()
     # Запускаем игру
     game.run()
-    #
+    
