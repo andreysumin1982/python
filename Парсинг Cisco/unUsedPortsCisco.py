@@ -62,6 +62,7 @@ def getSwitch(path):
             output = sshConnect(sshParams['host'], sshParams['user'], sshParams['password'], sshParams['port'])
             # Вызываем showData смотрим вывод
             showData(output)
+            #
 
 #--------------------------------------------------------------------------------------------------------
 if __name__ == '__main__':
