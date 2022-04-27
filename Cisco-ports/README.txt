@@ -5,13 +5,13 @@
 ----------------------------------
 gi1       FSTEK room_315 Down
 gi2       FSTEK room_303 Down
-gi5       FSTEK ZDU1 k309 083-010-> k305 Down
+gi5       FSTEK *** k309 083-010-> k305 Down
 gi7       FSTEK room_304.1 Down
 gi9       FSTEK room_304.2 Down
-gi12      FSTEK ZDU1 k302 Down
+gi12      FSTEK *** k302 Down
 gi13      FSTEK room_307 Down
-gi14      FSTEK ZDU1 k306 Down
-gi18      FSTEK ZDU1 k421 Down
+gi14      FSTEK *** k306 Down
+gi18      FSTEK *** k421 Down
 
 Найдено: 9 портов 
 Время поиска: 0:00:09 
@@ -28,13 +28,13 @@ aa@test:~/
 ----------------------------------
 gi1       FSTEK room_315 Down
 gi2       FSTEK room_303 Down
-gi5       FSTEK ZDU1 k309 083-010-> k305 Down
+gi5       FSTEK *** k309 083-010-> k305 Down
 gi7       FSTEK room_304.1 Down
 gi9       FSTEK room_304.2 Down
-gi12      FSTEK ZDU1 k302 Down
+gi12      FSTEK *** k302 Down
 gi13      FSTEK room_307 Down
-gi14      FSTEK ZDU1 k306 Down
-gi18      FSTEK ZDU1 k421 Down
+gi14      FSTEK *** k306 Down
+gi18      FSTEK *** k421 Down
 
 Найдено: 9 портов 
 Время поиска: 0:00:09 
