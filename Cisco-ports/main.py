@@ -29,7 +29,7 @@ outputsshConnect = {}
 # Вывод ф-ции sshConnect только для коммутаторов SG300
 outputsshConnectSG300 = {}
 # Вывод {'порт':[настройки порта]}
-dictFSTEK = {'':[]}
+dictFSTEK = {}
 # Вывод {'порт':[up/down]} для SG300
 dictStatusPortSG300 = {}
 # Список портов со статусом FSTEK
@@ -95,14 +95,15 @@ def dataAnalysier(nameSwitch, dataOutput, dataOutputSG300 = None, timer = None):
             continue
         summaryPorts(listAdminDown, timer); listNameSwitch.append(nameSwitch)
         return dictFSTEK
-    else:                # Catalyst
+    else:         #  ----------- Catalyst ------------ #
         reg_exp = re.compile(r'\bFSTEK\b') # Шаблон поиска. Ищем admin down
         for item in dataOutput['output']:
             if re.findall(reg_exp, item) and 'Gi' in item.split()[0]:  # отбираем только Gi порты "admin down"
-                dictFSTEK[item.split()[0]] = item.split('\n')
+                dictFSTEK[item.split()[0]] = item.split()
                 listAdminDown.append(item.split()[0]) # Добавляем только порты
-                print(item.split()[0], item.split()[1], " ".join(item.split()[3:])) # item.split()[1], item.split()[2], item.split()[4], " ".join(item.split()[5:])
+                print(item.split()[0], item.split()[1], " ".join(item.split()[3:])) #
             continue
+        # dictFSTEK {'Gi0/1': ['Gi0/1', 'admin', 'down', 'down', 'FSTEK', 'OSK-1.2.04-13', 'room', '118'], 'Gi0/3': ['Gi0/3', 'admin', 'down', 'down', 'FSTEK', 'OSK-1.2.8.03', 'room', '117']}
         summaryPorts(listAdminDown, timer); listNameSwitch.append(nameSwitch)
         return dictFSTEK
 #
@@ -160,27 +161,33 @@ def splitArrayCatalyst(outputData):
 def splitDictCatalyst(outputData):
     # Ф-ция обрабатывает отсортированный массив
     #['Gi1/0/2', 'Gi1/0/4', 'Gi1/1/6', 'Gi1/1/7', 'Gi2/0/1' ...]
-    # и возвращает словарь:
-    # {'1/0': [..], 1/1:[..], 2/0:[..], ..}
+    # и возвращает словарь, если Catalyst 2960S и выше:
+    # {'1/0/': [..], 1/1/:[..], 2/0/:[..], ..}
+    # иначе Catalyst 2960G:
+    # {'0/': [..], 1/: [..], ..}
     dictCatalyst = {}
     for item in outputData:
         item = item.replace('Gi', '').split('/')
-        if item[0] not in dictCatalyst:
-            if item[0] + '/' + item[1] not in dictCatalyst:
-                dictCatalyst[item[0] + '/' + item[1]] = []
-            dictCatalyst[item[0] + '/' + item[1]].append(int(item[2]))
-        elif item[1] != '0':
-            if item[0] + '-' + item[1] not in dictCatalyst:
-                dictCatalyst[item[0] + '/' + item[1]] = []
-            dictCatalyst[item[0] + '/' + item[1]].append(int(item[2]))
+        if len(item) == 2: # [0,1] Gi0/1
+            if item[0] + '/' not in dictCatalyst:
+                dictCatalyst[item[0] + '/']  = []
+            dictCatalyst[item[0] + '/'].append(int(item[1]))
+        else: # len(item) == 3  [1,0,1] Gi1/0/1
+            if item[0] not in dictCatalyst:
+                if item[0] + '/' + item[1] +'/' not in dictCatalyst:
+                    dictCatalyst[item[0] + '/' + item[1] + '/']  = []
+                dictCatalyst[item[0] + '/' + item[1] + '/'].append(int(item[2]))
+            elif item[1] != '0':
+                if item[0] + '-' + item[1] not in dictCatalyst:
+                    dictCatalyst[item[0] + '/' + item[1] + '/'] = []
+                dictCatalyst[item[0] + '/' + item[1] + '/'].append(int(item[2]))
     return dictCatalyst
-#
 #
 def on_off_Ports(command, outputData, nameSwitch = ''):
     reg_exp_sg300 = re.compile(r'iSG|isg')  # Шаблон поиска. Ищем iSG или isg
     handlerSG300['host'] = ' '.join(nameSwitch)
     if re.findall(reg_exp_sg300, ''.join(nameSwitch)):
-       try:                 # SG300 #
+       try:                 # ---------- SG300 ---------- #
            start = datetime.now().replace(microsecond=0)
            with ConnectHandler(device_type=handlerSG300['device_type'],
                                ip=handlerSG300['host'],
@@ -195,7 +202,7 @@ def on_off_Ports(command, outputData, nameSwitch = ''):
        except (NetmikoTimeoutException, NetmikoAuthenticationException) as error:
             print('Error:', error)
     else:
-        try:                    # Catalyst #
+        try:               # ---------- Catalyst ---------- #
             start = datetime.now().replace(microsecond=0)
             with ConnectHandler(device_type=handlerCatalyst['device_type'],
                                 ip=handlerCatalyst['host'],
@@ -205,8 +212,9 @@ def on_off_Ports(command, outputData, nameSwitch = ''):
                 for key, value in splitDictCatalyst(outputData).items():
                      for item in splitArrayCatalyst(value):
                          ssh.enable()
-                         ssh.send_config_set([f'{commands[5]}{key}{item[0]}-{item[-1]}'])
-                         print(f'{key}{item} - {command}')
+                         ssh.send_config_set([f'{commands[5]}{key}{item[0]}-{item[-1]}' ,command])
+                         #print(key , value)
+                         print(f'{commands[5]}{key}{item[0]}-{item[-1]}' ,command)
             stop = datetime.now().replace(microsecond=0)
             print(f'Время выполнения: {stop - start}')
         except (NetmikoTimeoutException, NetmikoAuthenticationException) as error:
@@ -236,7 +244,7 @@ def run():
         print(f'Включить или выключить порты: "on"/"off"\nВыйти: "Enter"')
         on_off = input('>: ')
         if (on_off == ''): return False
-        elif 'on' in on_off: return on_off_Ports('no sh', dictFSTEK, listNameSwitch)
+        elif 'on' in on_off:  return on_off_Ports('no sh', dictFSTEK, listNameSwitch)
         elif 'off' in on_off: return on_off_Ports('sh', dictFSTEK, listNameSwitch)
         else:
             count += 1
@@ -249,3 +257,4 @@ def run():
 # run
 if __name__ == "__main__":
     run()
+#
