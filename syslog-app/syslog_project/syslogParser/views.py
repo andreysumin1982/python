@@ -36,5 +36,5 @@ def serchDataBatchOutput(request, indexArray = 0):
         for j in range(0,30):
             print(next(gen))
             count +=1
-
+ 
     return HttpResponse(context['syslog'])
