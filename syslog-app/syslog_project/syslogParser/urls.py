@@ -4,7 +4,7 @@ from django.urls import path
 # Импортируем views из папки приложения syslogParser
 from django.conf.urls.static import static
 from .import views
-
+ 
 urlpatterns =[
     path('', views.index, name='index'),  # метод index в файле syslogParser/views
     #path('add/', views.addData, name='add'),  # метод addDate в файле syslogParser/views
