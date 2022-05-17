@@ -31,11 +31,9 @@ def serchDataAll(request, indexArray = 0):
     if (request.method == 'GET'):
         context = {'syslog': []}
         file = classFiles.File(classFiles.path)  # Экземпляр класса File из выйла files.py
-<<<<<<< HEAD
         for elem in file.readFile():  # Метод readFile()
                  context['syslog'].append(elem)
     return HttpResponse(context['syslog'])
-=======
         count = 0
         gen = (i for i in file.readFile())
         for j in range(0,30):
@@ -43,4 +41,3 @@ def serchDataAll(request, indexArray = 0):
             count +=1
  
     return HttpResponse(context['syslog'])
->>>>>>> 8f2904cbb38f33e1e452be2d3a840817221e46b0
