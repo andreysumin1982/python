@@ -34,10 +34,4 @@ def serchDataAll(request, indexArray = 0):
         for elem in file.readFile():  # Метод readFile()
                  context['syslog'].append(elem)
     return HttpResponse(context['syslog'])
-        count = 0
-        gen = (i for i in file.readFile())
-        for j in range(0,30):
-            print(next(gen))
-            count +=1
- 
-    return HttpResponse(context['syslog'])
+#
