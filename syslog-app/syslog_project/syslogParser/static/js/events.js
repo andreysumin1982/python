@@ -129,50 +129,26 @@
 ////
 
 //
-function addHtml(elem){
-    //ф-ция добавляет в modal_content строки
-    findOneElement('.modal_content').innerHTML +=`
-                                                ${elem}<br>
-                                                `
-    };
+function addHtml(dataOutput){
+    //ф-ция добавляет в modal_content промис
+    findOneElement('.modal_content').innerHTML +=`<pre>${dataOutput}<br>`
+};
 //
-// Обработка промиса
-/*function dataProcessing(data, i = 0, count = 0){
-    let len = data.length
-    for (let i=0; i<10; i++){
-        addHtml(data[count]) // выводим в modal_content
-        count++
-    }
-    timer = setTimeout(()=> {
-        if (count < len){
-            // рекурсивно вызываем с вх. аргументами
-            dataProcessing(data, i = 0, count)
-        }
-        else {
-            btn.value = 'Найти' // возвращаем название кнопки
-            clearTimeout(timer) // отменяем вызов ф-ции setTimeout
-        }
-    }, 150)
-};*/
+//function dataProcessing(data){
+//    //let len = data.length
+//    let count = 0
+//    //
+//    for (let i=0; i<80; i++){
+//        if (data[count] != undefined){
+//            setTimeout(function () {
+//                addHtml(data[count]) // выводим в modal_content
+//                count++
+//            }, 100);
+//        }
+//    }
+//    btn.value = 'Найти' // возвращаем название кнопки
+//};
 //
-
-//
-function dataProcessing(data){
-    //let len = data.length
-    let count = 0
-    //
-    for (let i=0; i<80; i++){
-        if (data[count] != undefined){
-            setTimeout(function () {
-                addHtml(data[count]) // выводим в modal_content
-                count++    
-            }, 100);
-        }
-    }
-    btn.value = 'Найти' // возвращаем название кнопки  
-};    
-//
-
 // Обработчик события на кнопку 'Найти'
 let btn = findOneElement('.inp_btn')
     btn.addEventListener('click', ()=> {
@@ -181,19 +157,33 @@ let btn = findOneElement('.inp_btn')
             findOneElement('.modal_content').innerHTML = '' // Очищаем modal_content
             // Проверяем поле ввода
             let inp = findOneElement('.input')
-            if (inp.value == ''){ // если пустое поле
-                //
-                console.log('пустое поле')
-                btn.value = 'Найти'
-                return
+            if (inp.value == ''){ // если пустое поле ?!
+                //ajax-запрос, после выполнения получаем промис
+                ajaxGetData()
+                    .then(response =>{
+                        console.log(response.data)
+                        // передаем промис в обработку
+                        addHtml(response.data)
+                    })
+                    .catch(error =>{    //ошибки
+                        console.log(error)
+                        addHtml(error)
+                    });
+                btn.value = 'Найти'; return
             }
             else{
                 //ajax-запрос, после выполнения получаем промис
-                ajaxSerchData(inp.value).then(response => {
-                    let resp = response.data // берем данные
-                    // передаем промис в обработку
-                    dataProcessing(resp.split('\n'))
-                })
+                ajaxSerchData(inp.value)
+                    .then(response => {
+                        let resp = response.data // берем данные
+                        // передаем промис в обработку
+                        addHtml(response.data)
+                    })
+                    .catch(error =>{    //ошибки
+                        console.log(error)
+                        addHtml(error)
+                    });
+                btn.value = 'Найти'; return
             }
         }
         else{
@@ -224,3 +214,4 @@ $(function(){
 		return false;
 	});
 });
+//
