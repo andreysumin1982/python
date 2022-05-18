@@ -32,6 +32,11 @@ def serchDataAll(request, indexArray = 0):
         context = {'syslog': []}
         file = classFiles.File(classFiles.path)  # Экземпляр класса File из выйла files.py
         for elem in file.readFile():  # Метод readFile()
-                 context['syslog'].append(elem)
+            context['syslog'].append(elem)
     return HttpResponse(context['syslog'])
-
+#
+def serchZipFiles(request):
+    if (request.method == 'GET'):
+        context = {'zipFiles':[]}
+        file = classFiles.File(classFiles.pathZipFiles)    
+    return HttpResponse(file.readZipFiles())

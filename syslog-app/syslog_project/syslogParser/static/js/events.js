@@ -129,9 +129,9 @@
 ////
 
 //
-function addHtml(dataOutput){
+function addHtml(dataOutput) {
     //ф-ция добавляет в modal_content промис
-    findOneElement('.modal_content').innerHTML +=`<pre>${dataOutput}<br>`
+    findOneElement('.modal_content').innerHTML = `<pre>${dataOutput}<br>`
 };
 //
 //function dataProcessing(data){
@@ -151,67 +151,79 @@ function addHtml(dataOutput){
 //
 // Обработчик события на кнопку 'Найти'
 let btn = findOneElement('.inp_btn')
-    btn.addEventListener('click', ()=> {
-        if (btn.value == 'Найти'){
-            btn.value = 'Остановить'
-            findOneElement('.modal_content').innerHTML = '' // Очищаем modal_content
-            // Проверяем поле ввода
-            let inp = findOneElement('.input')
-            if (inp.value == ''){ // если пустое поле ?!
-                //ajax-запрос, после выполнения получаем промис
-                ajaxGetData()
-                    .then(response =>{
-                        console.log(response.data)
-                        // передаем промис в обработку
-                        addHtml(response.data)
-                    })
-                    .catch(error =>{    //ошибки
-                        console.log(error)
-                        addHtml(error)
-                    });
-                btn.value = 'Найти'; return
-            }
-            else{
-                //ajax-запрос, после выполнения получаем промис
-                ajaxSerchData(inp.value)
-                    .then(response => {
+btn.addEventListener('click', () => {
+    if (btn.value == 'Найти') {
+        btn.value = 'Остановить'
+        findOneElement('.modal_content').innerHTML = '' // Очищаем modal_content
+        // Проверяем поле ввода
+        let inp = findOneElement('.input')
+        if (inp.value == '') { // если пустое поле ?!
+            //ajax-запрос, после выполнения получаем промис
+            ajaxGetData()
+                .then(response => {
+                    console.log(response.data)
+                    // передаем промис в обработку
+                    addHtml(response.data)
+                })
+                .catch(error => {    //ошибки
+                    console.log(error)
+                    addHtml(error)
+                });
+            btn.value = 'Найти'; return
+        }
+        else {
+            //ajax-запрос, после выполнения получаем промис
+            ajaxSerchData(inp.value)
+                .then(response => {
+                    if (response.data.length > 0) {
                         let resp = response.data // берем данные
                         // передаем промис в обработку
                         addHtml(response.data)
-                    })
-                    .catch(error =>{    //ошибки
-                        console.log(error)
-                        addHtml(error)
-                    });
-                btn.value = 'Найти'; return
-            }
+                    }
+                    else { addHtml('Ничего не найдено.') }
+                })
+                .catch(error => {    //ошибки
+                    console.log(error)
+                    addHtml(error)
+                });
+            btn.value = 'Найти'; return
         }
-        else{
-            clearTimeout(timer)
-            btn.value = 'Найти'
-        }
-    });
-//
-// Обработчик события на скролл '.modal_content'
-let mc = document.querySelector('.modal_content')
-$(function(){
-	$(mc).scroll(function(){
-		if($(mc).scrollTop() > 100) {
-			$('#scroll_top').show();
-            $('#scroll_bottom').show();
-		} else {
-			$('#scroll_top').hide();
-            $('#scroll_bottom').hide();
-		}
-	});
- 
-	$('#scroll_top').click(function(){
-		$(mc).animate({scrollTop: 0}, 100);
-		return false;
-	});
-    $('#scroll_bottom').click(function(){
-		$(mc).animate({scrollTop: $(mc).height() * $(mc).height()}, 100);
-		return false;
-	});
+    }
+    else {
+        clearTimeout(timer)
+        btn.value = 'Найти'
+    }
 });
 //
+let selectBtn = document.querySelector('.archives')
+readZipFiles().then(archives => {
+    console.log(archives)
+    addHtml(archives.data)
+})
+
+
+// Обработчик события на скролл '.modal_content'
+let mc = document.querySelector('.modal_content')
+$(function () {
+    $(mc).scroll(function () {
+        if ($(mc).scrollTop() > 500) {
+            $('#scroll_top').show();
+            $('#scroll_bottom').show();
+        } else {
+            $('#scroll_top').hide();
+            $('#scroll_bottom').hide();
+        }
+    });
+
+    $('#scroll_top').click(function () {
+        $(mc).animate({ scrollTop: 0 }, 100);
+        return false;
+    });
+    $('#scroll_bottom').click(function () {
+        $(mc).animate({ scrollTop: $(mc).height() * 9999 }, 100);
+        return false;
+    });
+});
+//
+
+

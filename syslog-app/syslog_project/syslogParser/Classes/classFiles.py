@@ -1,4 +1,5 @@
 import re
+import os
 #--
 class File():
 
@@ -9,7 +10,12 @@ class File():
         with open (self.path) as file:
             for gen in file.readlines():
                 yield gen
-
+    
+    def readZipFiles(self):
+        dir_files =os.listdir(os.path.join(self.path))
+        #print(dir_files)
+        return dir_files
+    
     def searchIp(self, stroka, ip):
         self.stroka = stroka
         self.ip = ip
@@ -27,8 +33,7 @@ class File():
             print(stroka)
 #--
 path = '/home/asumin/Документы/Программирование_Python/Для парсинга/syslog.txt'
-#path = '/home/asumin/Документы/Программирование_Python/Для парсинга/u_ex210730_log.txt'
-
+pathZipFiles = '/home/asumin/Документы/Программирование_Python/Для парсинга/syslog-zip'
 #--
 if __name__ == '__main__':
     pass
