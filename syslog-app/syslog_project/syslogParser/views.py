@@ -34,7 +34,4 @@ def serchDataAll(request, indexArray = 0):
         for elem in file.readFile():  # Метод readFile()
                  context['syslog'].append(elem)
     return HttpResponse(context['syslog'])
-<<<<<<< HEAD
-=======
-#
->>>>>>> 759643fd8043ac746b2665ad575412caeb2113ea
+
