@@ -12,9 +12,15 @@ class File():
                 yield gen
     
     def readZipFiles(self):
-        dir_files =os.listdir(os.path.join(self.path))
-        #print(dir_files)
-        return dir_files
+        # Смотрим файлы в директории
+        dirFiles =os.listdir(os.path.join(self.path))
+        archFiles = {'name':[]}
+        for file in dirFiles:
+            #archFiles['fullPath'].append(f'{pathZipFiles}/{file}\n')
+            if file.endswith('.zip'): # отбираем только *.zip
+                archFiles['name'].append(f'{file}\n')
+            continue
+        return sorted(archFiles['name'])
     
     def searchIp(self, stroka, ip):
         self.stroka = stroka

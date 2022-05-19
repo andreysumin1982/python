@@ -37,6 +37,7 @@ def serchDataAll(request, indexArray = 0):
 #
 def serchZipFiles(request):
     if (request.method == 'GET'):
-        context = {'zipFiles':[]}
-        file = classFiles.File(classFiles.pathZipFiles)    
+        #context = {'zipFiles':[]}
+        file = classFiles.File(classFiles.pathZipFiles)
+        #print(len(file.readZipFiles()))    
     return HttpResponse(file.readZipFiles())

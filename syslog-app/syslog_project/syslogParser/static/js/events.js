@@ -196,12 +196,20 @@ btn.addEventListener('click', () => {
 });
 //
 let selectBtn = document.querySelector('.archives')
-readZipFiles().then(archives => {
-    console.log(archives)
-    addHtml(archives.data)
-})
-
-
+addZipFiles().then(archives => {
+    /*
+    * Ф -цая создает дочерние элементы в теге <select>
+    * добавляем имя файла каждому элемету 
+    */
+    console.log(archives.data)
+    //console.log(archives.data.split('\n'))
+    count = 1 // 
+    for (let item of archives.data.split('\n')) { // бежим по массиву с именами файлов
+        addElement('option', '.archives', 'opt_select_' + count, NaN, item)
+        count++
+    }
+});
+//
 // Обработчик события на скролл '.modal_content'
 let mc = document.querySelector('.modal_content')
 $(function () {
@@ -220,7 +228,7 @@ $(function () {
         return false;
     });
     $('#scroll_bottom').click(function () {
-        $(mc).animate({ scrollTop: $(mc).height() * 9999 }, 100);
+        $(mc).animate({ scrollTop: $(mc).height() * 9999 }, 300);
         return false;
     });
 });

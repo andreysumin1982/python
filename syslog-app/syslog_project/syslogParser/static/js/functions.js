@@ -6,6 +6,7 @@
 urlGetData = 'http://192.168.220.72:8000/serchDataAll/'
 urlSerchData = 'http://192.168.220.72:8000/serchData/'
 urlZipFiles = 'http://192.168.220.72:8000/serchZipFiles/'
+urlExtractZipFiles = 'http://192.168.220.72:8000/extractZipFiles/'
 //
 function addElement(child, parent = 'body', classChild = 'no_class', type = NaN, text = '') {
     /*Ф-ция создает элемент на странице:
@@ -47,8 +48,15 @@ function ajaxSerchData(serchString) {
     return promise
 };
 //
-function readZipFiles() {
-    // Ф-ция смотрит *.zip
+function addZipFiles() {
+    // ajax-запрос .. Получаем список файлов *.zip
     const promise = axios(urlZipFiles)
     return promise
 }
+//
+function extractZipFiles() {
+    // ajax-запрос .. Получаем данные распакованного zip-архива
+    const promise = axios(urlExtractZipFiles)
+    return promise
+}
+//
