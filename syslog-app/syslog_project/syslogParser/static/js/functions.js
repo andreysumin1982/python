@@ -54,9 +54,9 @@ function addZipFiles() {
     return promise
 }
 //
-function extractZipFiles() {
+function extractZipFiles(zipFile) {
     // ajax-запрос .. Получаем данные распакованного zip-архива
-    const promise = axios(urlExtractZipFiles)
+    const promise = axios(`${urlExtractZipFiles}${zipFile}`)
     return promise
 }
 //

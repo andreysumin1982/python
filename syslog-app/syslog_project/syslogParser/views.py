@@ -30,7 +30,7 @@ def serchData(request, serchString):
 def serchDataAll(request, indexArray = 0):
     if (request.method == 'GET'):
         context = {'syslog': []}
-        file = classFiles.File(classFiles.path)  # Экземпляр класса File из выйла files.py
+        file = classFiles.File(classFiles.path)  # Экземпляр класса File из фыйла files.py
         for elem in file.readFile():  # Метод readFile()
             context['syslog'].append(elem)
     return HttpResponse(context['syslog'])
@@ -38,6 +38,11 @@ def serchDataAll(request, indexArray = 0):
 def serchZipFiles(request):
     if (request.method == 'GET'):
         #context = {'zipFiles':[]}
-        file = classFiles.File(classFiles.pathZipFiles)
-        #print(len(file.readZipFiles()))    
+        file = classFiles.File(classFiles.pathZipFiles) # Экземпляр класса File из фыйла files.py  
     return HttpResponse(file.readZipFiles())
+#
+def extractZipFile(request, zipFile):
+    if (request.method == 'GET'):
+        file = classFiles.File(zipFile) # Экземпляр класса File из фыйла files.py
+    return HttpResponse(f'{file.extractZip()} **ZIP**')
+    

@@ -22,6 +22,10 @@ class File():
             continue
         return sorted(archFiles['name'])
     
+    def extractZip(self):
+        return self.path
+    
+    
     def searchIp(self, stroka, ip):
         self.stroka = stroka
         self.ip = ip
@@ -33,7 +37,7 @@ class File():
         self.reg_exp = re.compile(r'\b{}'.format(symbols), flags=re.IGNORECASE)  # шаблон для поиска с игнором на регистр
         if re.findall(self.reg_exp, element): # если шаблон есть в строке
             return element
-
+        
     def showFile(self):
         for stroka in self.readFile():
             print(stroka)

@@ -201,12 +201,17 @@ addZipFiles().then(archives => {
     * Ф -цая создает дочерние элементы в теге <select>
     * добавляем имя файла каждому элемету 
     */
-    console.log(archives.data)
     //console.log(archives.data.split('\n'))
-    count = 1 // 
+    count = 0 // 
     for (let item of archives.data.split('\n')) { // бежим по массиву с именами файлов
-        addElement('option', '.archives', 'opt_select_' + count, NaN, item)
-        count++
+        if (item == '') { // Проверяем пробелы 
+            continue
+        }
+        else {
+            addElement('option', '.archives', 'opt_select_' + count, NaN, item)
+            count++
+            console.log(count)
+        }
     }
 });
 //
