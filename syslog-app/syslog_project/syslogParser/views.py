@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .Classes import classFiles # Импортируем файл files.py
+from .Classes import classFiles # Импортируем файл classFiles.py
 #from django.http import JsonResponse
 
 # Create your views here.

@@ -2,15 +2,15 @@ import re
 import os
 #--
 class File():
-
+    #
     def __init__(self, path):
         self.path = path
-
+    #
     def readFile(self):
         with open (self.path) as file:
             for gen in file.readlines():
                 yield gen
-    
+    #
     def readZipFiles(self):
         # Смотрим файлы в директории
         dirFiles =os.listdir(os.path.join(self.path))
@@ -21,23 +21,22 @@ class File():
                 archFiles['name'].append(f'{file}\n')
             continue
         return sorted(archFiles['name'])
-    
+    #
     def extractZip(self):
         return self.path
-    
-    
+    #
     def searchIp(self, stroka, ip):
         self.stroka = stroka
         self.ip = ip
         if stroka.startswith(str(self.ip)):
             print(stroka)
-
+    #
     def findSymbols(self, element, symbols):
-        self.element = element
-        self.reg_exp = re.compile(r'\b{}'.format(symbols), flags=re.IGNORECASE)  # шаблон для поиска с игнором на регистр
-        if re.findall(self.reg_exp, element): # если шаблон есть в строке
+        #self.element = element
+        reg_exp = re.compile(r'\b{}'.format(symbols), flags=re.IGNORECASE)  # шаблон для поиска с игнором на регистр
+        if re.findall(reg_exp, element): # если шаблон есть в строке
             return element
-        
+    #   
     def showFile(self):
         for stroka in self.readFile():
             print(stroka)

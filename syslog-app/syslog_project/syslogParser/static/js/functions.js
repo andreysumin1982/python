@@ -21,7 +21,7 @@ function addElement(child, parent = 'body', classChild = 'no_class', type = NaN,
     document.querySelector(parent).appendChild(childElement)
 };
 //
-function findElement(className) {
+function findElements(className) {
     /*  Ф-ция находит эдементы на странице по классу и
         возвращает массив.
     */
@@ -38,25 +38,25 @@ function findOneElement(className) {
 //
 function ajaxGetData() {
     // ajax-запрос .. Получаем весь файл syslog.txt
-    const promise = axios(urlGetData)
+    const promise = fetch(urlGetData)
     return promise
 };
 //
 function ajaxSerchData(serchString) {
     // ajax-запрос .. Получаем искомые данные из файла syslog.txt
-    const promise = axios(`${urlSerchData}${serchString}`)
+    const promise = fetch(`${urlSerchData}${serchString}`)
     return promise
 };
 //
 function addZipFiles() {
     // ajax-запрос .. Получаем список файлов *.zip
-    const promise = axios(urlZipFiles)
+    const promise = fetch(urlZipFiles)
     return promise
-}
+};
 //
 function extractZipFiles(zipFile) {
     // ajax-запрос .. Получаем данные распакованного zip-архива
-    const promise = axios(`${urlExtractZipFiles}${zipFile}`)
+    const promise = fetch(`${urlExtractZipFiles}${zipFile}`)
     return promise
-}
+};
 //

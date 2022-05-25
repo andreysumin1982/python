@@ -58,6 +58,15 @@ body, button, h1, h2, h3, h4, p, a {
     font-weight: 300;
     margin-left: 15px;
 }
+.input{
+    box-shadow: 4px 4px 5px rgba(160, 155, 155, 0.4);
+}
+.inp_btn{
+    box-shadow: 4px 4px 5px rgba(160, 155, 155, 0.4);
+}
+.archives{
+    box-shadow: 4px 4px 5px rgba(160, 155, 155, 0.4);
+}
 /**/
 /* Модальное окно */
 .modal{
@@ -82,6 +91,7 @@ body, button, h1, h2, h3, h4, p, a {
     margin: auto;
     font-size: 15px;
     overflow: auto; /* прокрутка  */
+    scroll-behavior: smooth; /*плавная прокрутка*/
 }
 /*------------------*/
 

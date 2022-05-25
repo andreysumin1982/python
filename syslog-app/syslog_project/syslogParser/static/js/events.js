@@ -161,9 +161,11 @@ btn.addEventListener('click', () => {
             //ajax-запрос, после выполнения получаем промис
             ajaxGetData()
                 .then(response => {
-                    console.log(response.data)
+                    //console.log(response)
                     // передаем промис в обработку
-                    addHtml(response.data)
+                    response.text().then(data => {
+                        addHtml(data)
+                    })
                 })
                 .catch(error => {    //ошибки
                     console.log(error)
@@ -175,12 +177,14 @@ btn.addEventListener('click', () => {
             //ajax-запрос, после выполнения получаем промис
             ajaxSerchData(inp.value)
                 .then(response => {
-                    if (response.data.length > 0) {
-                        let resp = response.data // берем данные
-                        // передаем промис в обработку
-                        addHtml(response.data)
-                    }
-                    else { addHtml('Ничего не найдено.') }
+                    //console.log(response)
+                    // передаем промис в обработку
+                    response.text().then(data => {
+                        if (data.length > 0) {
+                            addHtml(data)
+                        }
+                        else { addHtml('Ничего не найдено.') }
+                    })
                 })
                 .catch(error => {    //ошибки
                     console.log(error)
@@ -194,27 +198,31 @@ btn.addEventListener('click', () => {
         btn.value = 'Найти'
     }
 });
-//
+// Добавляем архивные файлы в элемент <select>..</select>
 let selectBtn = document.querySelector('.archives')
-addZipFiles().then(archives => {
+addZipFiles().then(response => {
     /*
     * Ф -цая создает дочерние элементы в теге <select>
     * добавляем имя файла каждому элемету 
     */
-    //console.log(archives.data.split('\n'))
-    count = 0 // 
-    for (let item of archives.data.split('\n')) { // бежим по массиву с именами файлов
-        if (item == '') { // Проверяем пробелы 
-            continue
+    //console.log(response)
+    response.text().then(data => {
+        count = 0 // 
+        for (let item of data.split('\n')) { // бежим по массиву с именами файлов
+            if (item == '') { // Проверяем пробелы 
+                continue
+            }
+            else {
+                addElement('option', '.archives', 'opt select_' + count, NaN, item)
+                count++
+            }
         }
-        else {
-            addElement('option', '.archives', 'opt_select_' + count, NaN, item)
-            count++
-            console.log(count)
-        }
-    }
+    })
 });
-//
+// Обработчик события: выбираем архивный файл
+let opt = findElements('.opt')
+console.log(opt)
+
 // Обработчик события на скролл '.modal_content'
 let mc = document.querySelector('.modal_content')
 $(function () {
@@ -227,13 +235,13 @@ $(function () {
             $('#scroll_bottom').hide();
         }
     });
-
+    //
     $('#scroll_top').click(function () {
         $(mc).animate({ scrollTop: 0 }, 100);
         return false;
     });
     $('#scroll_bottom').click(function () {
-        $(mc).animate({ scrollTop: $(mc).height() * 9999 }, 300);
+        $(mc).animate({ scrollTop: $(mc).height() * 9999 }, 100);
         return false;
     });
 });
