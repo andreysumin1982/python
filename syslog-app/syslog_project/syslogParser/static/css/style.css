@@ -24,11 +24,11 @@ body, button, h1, h2, h3, h4, p, a {
 /*grid*/
 .input_grid{
     display: grid;
-    grid-gap: 3px;
+    grid-gap: 6px;
     /* сетка */
     grid-template-areas:
-        "div_text none none none"
-        "div_input div_btn div_select div_unfo";
+        "div_text none none none none"
+        "div_input div_btn div_select div_btnclear div_info";
     grid-template-columns: 1fr auto 1fr;
     /*--*/
     width: 410px;
@@ -48,15 +48,14 @@ body, button, h1, h2, h3, h4, p, a {
 .div_select{
     grid-area: div_select;
 }
-.div_info{
-    grid-area: div_loading;
-    width: 200px;
-    padding: 0px;
-    /*border: 1px solid silver;*/  
+.div_btnclear{
+    display: none;
+    grid-area: div_btnclear;
 }
-.p_info{
-    font-weight: 300;
-    margin-left: 15px;
+.div_info{
+    grid-area: div_info;
+    width: 400px;
+    font-size: 15px;  
 }
 .input{
     box-shadow: 4px 4px 5px rgba(160, 155, 155, 0.4);

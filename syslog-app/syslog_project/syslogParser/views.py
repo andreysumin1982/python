@@ -44,5 +44,5 @@ def serchZipFiles(request):
 def extractZipFile(request, zipFile):
     if (request.method == 'GET'):
         file = classFiles.File(zipFile) # Экземпляр класса File из фыйла files.py
-    return HttpResponse(f'{file.extractZip()} **ZIP**')
+    return HttpResponse(file.extractZip())
     

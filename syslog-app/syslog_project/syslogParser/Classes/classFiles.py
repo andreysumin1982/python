@@ -1,5 +1,6 @@
 import re
 import os
+import zipfile
 #--
 class File():
     #
@@ -23,7 +24,12 @@ class File():
         return sorted(archFiles['name'])
     #
     def extractZip(self):
-        return self.path
+        fileZip = f'{pathZipFiles}/{self.path}' # абсолютный путь а zip-файлу
+        z = zipfile.ZipFile(fileZip) #
+        z.extractall(fileZip.strip('.zip')) # Распаковываем в папку(имя файла)
+        extractedFile = os.listdir(os.path.join(fileZip.strip(".zip")))
+        extractedPath = f"{fileZip.strip('.zip')}/{''.join(extractedFile)}" # Абсолютный путь к распакованному файлу
+        return extractedPath
     #
     def searchIp(self, stroka, ip):
         self.stroka = stroka

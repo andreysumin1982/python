@@ -1,159 +1,16 @@
-///* События */
-////
-////
-//function handleButtonClick(){
-//    /* Событие кнопки 'Найти' */
-//    let modal = findOneElement('.modal') // получаем модальное окно (div)
-//        modal.style.display = "block" // изменяем состояние на block(блочный элемент)
-//        // ajax-запрос, после выполнения получаем промис
-//        ajaxGetData().then(response => {
-//            let resp = response.data // берем данные
-//            console.log(resp)
-//            // проверяем аргументы, если 0
-//            if (arguments == 0){
-//                // Вызываем ф-цию processingData() и передаем только [массив данных]
-//                processingData(resp.split('\n'))
-//            }
-//            else{ // // Вызываем ф-цию processingData() и передаем [массив данных] и аргумент
-//                processingData(resp.split('\n'), arguments[0])
-//            }
-//        })
-//    };
-////
-//function addHtml(elem){
-//    //ф-ция добавляет в modal_content строки
-//    findOneElement('.modal_content').innerHTML +=`
-//                                                ${elem}<br>
-//                                                `
-//    };
-////
-//// Посчитать проценты (доделать)
-////let x = 20
-////for (let i = 1; i < x+1; i++){
-////    let s = i/x*100
-////    console.log(i, s+'%')
-////}
-////
-//function loadSummary(loadCount, data){
-//    // Ф-ция считат процентное соотношение
-//    //let sum = loadCount/data*100
-//    //console.log('sum :',  Math.round(sum))
-//    return Math.round(loadCount/data*100)
-//}
-////
-//function processingData(data, findSymbols = NaN, i = 0, count = 0){
-//    // Порционный вывод, выводим только искомое
-//    n = 1000
-//    if (findSymbols){ // если есть искомый аргумент(findSymbols)
-//        // шаблон поиска
-//        let regexp = new RegExp(`(\\b${findSymbols})|(\\b${findSymbols}\\d)|(\\b${findSymbols}\\-\\d\\-\\d\\-\\d)`, "gi")
-//        for (i; i < 10; i++){
-//            // если шаблон есть в искомой строке
-//            if (regexp.test(data[count])){
-//                addHtml(data[count])  // выводим в modal_content
-//                //console.log(regexp.test(data[count]), data[count])
-//                count++
-//            }
-//            else{count++; continue} // иначе продолжаем бежать по циклу
-//        }
-//        //btn.value = 'Найти'
-//        clear = setTimeout(()=> {
-//            if (count < n){ //
-//                //
-//                load = loadSummary(count, n) // считаем проценты
-//                    findOneElement('.p_loading').innerHTML = `Идет поиск ${load}%` // выводим
-//                //
-//                processingData(data, `${findSymbols}`, i = 0, count) // рекурсивно вызываем с вх. аргументами
-//            }
-//            else {
-//                load = loadSummary(count, n)
-//                    findOneElement('.p_loading').innerHTML = `Выполнено ${load}%` //выводим
-//                //
-//                clearTimeout(clear) // отменяем вызов ф-ции setTimeout
-//                btn.value = 'Найти'
-//                return}
-//        }, 300)
-//    }
-//    //
-//    else {
-//        //Порционный вывод, выводим весь syslog
-//        for (i; i < 10; i++){
-//            addHtml(data[count]) // выводим по 10 строк.
-//            count++
-//        }
-//        clear = setTimeout(()=> {
-//            if (count < n){ //
-//                //
-//                //console.log(count)
-//                load = loadSummary(count, n) // считаем проценты
-//                    findOneElement('.p_loading').innerHTML = `Идет поиск ${load}%` // выводим
-//                //
-//                processingData(data, regexp = NaN, i = 0, count) // рекурсивно вызываем с вх. аргументами
-//
-//            }
-//            else { // иначе, считаем проценты,
-//                load = loadSummary(count, n)
-//                    findOneElement('.p_loading').innerHTML = `Выполнено ${load}%` //выводим
-//                //
-//                clearTimeout(clear) // отменяем вызов ф-ции setTimeout
-//                btn.value = 'Найти'
-//                return}
-//        }, 300)
-//    }
-//};
-////
-//
-//// Обработчик события на кнопку 'Найти'
-//let btn = findOneElement('.inp_btn')
-//    btn.addEventListener('click', ()=> {
-//    if (btn.value == 'Найти'){
-//        btn.value = 'Остановить'
-//        findOneElement('.modal_content').innerHTML = '' // Очищаем modal_content
-//        // Проверяем поле ввода
-//        let inp = findOneElement('.input')
-//        if (inp.value == ''){ // если пустое поле
-//           // Вызываем ф-цию handleButtonClick() без аргементов
-//           handleButtonClick()
-//        }
-//        else{
-//            // Вызываем ф-цию handleButtonClick() с аргументом
-//            handleButtonClick(inp.value)
-//        }
-//    }
-//    else {
-//        clearTimeout(clear)
-//            findOneElement('.p_loading').innerHTML = 'Остановлено на '+ load + '%' //выводим
-//            btn.value = 'Найти'
-//    }
-//});
-////
+//* ------------------------------- */
 
-//
 function addHtml(dataOutput) {
-    //ф-ция добавляет в modal_content промис
+    //ф-ция добавляет в modal_content данные
     findOneElement('.modal_content').innerHTML = `<pre>${dataOutput}<br>`
+    findOneElement('.inp_btn').value = 'Найти'
 };
-//
-//function dataProcessing(data){
-//    //let len = data.length
-//    let count = 0
-//    //
-//    for (let i=0; i<80; i++){
-//        if (data[count] != undefined){
-//            setTimeout(function () {
-//                addHtml(data[count]) // выводим в modal_content
-//                count++
-//            }, 100);
-//        }
-//    }
-//    btn.value = 'Найти' // возвращаем название кнопки
-//};
-//
+
 // Обработчик события на кнопку 'Найти'
 let btn = findOneElement('.inp_btn')
 btn.addEventListener('click', () => {
-    if (btn.value == 'Найти') {
-        btn.value = 'Остановить'
+    if (findOneElement('.div_info').innerHTML.length == 0) { // Если ничего не выбрано и поля пустые, подгружаем весь syslog
+        btn.value = 'Идет поиск'
         findOneElement('.modal_content').innerHTML = '' // Очищаем modal_content
         // Проверяем поле ввода
         let inp = findOneElement('.input')
@@ -171,9 +28,8 @@ btn.addEventListener('click', () => {
                     console.log(error)
                     addHtml(error)
                 });
-            btn.value = 'Найти'; return
         }
-        else {
+        else { // если поле заполнено ?!
             //ajax-запрос, после выполнения получаем промис
             ajaxSerchData(inp.value)
                 .then(response => {
@@ -183,7 +39,7 @@ btn.addEventListener('click', () => {
                         if (data.length > 0) {
                             addHtml(data)
                         }
-                        else { addHtml('Ничего не найдено.') }
+                        else { addHtml('Ничего не найдено.'); return }
                     })
                 })
                 .catch(error => {    //ошибки
@@ -193,13 +49,29 @@ btn.addEventListener('click', () => {
             btn.value = 'Найти'; return
         }
     }
-    else {
-        clearTimeout(timer)
-        btn.value = 'Найти'
+    else if (findOneElement('.inp_btn').value == 'Распаковать и найти' && findOneElement('.div_info').innerHTML.length > 0) {
+        if (findOneElement('.input').value == '') { // если поле пустое
+            let zipFile = findOneElement('.div_info').innerHTML
+            extractZipFiles(zipFile).then(response => {
+                findOneElement('.modal_content').innerHTML = `Status:${response.status}<br>`
+                response.text().then(data => {
+                    findOneElement('.modal_content').innerHTML += `${data}<br>`
+                })
+            })
+            findOneElement('.inp_btn').value = 'Найти'
+        }
+        else { // иначе 
+            findOneElement('.modal_content').innerHTML = 'No'
+        }
     }
+    else if (findOneElement('.input').value.length > 0 && findOneElement('.inp_btn').value == 'Найти' && findOneElement('.div_info').innerHTML.length > 0) {
+        findOneElement('.modal_content').innerHTML = findOneElement('.input').value
+    }
+
 });
+
 // Добавляем архивные файлы в элемент <select>..</select>
-let selectBtn = document.querySelector('.archives')
+let selectBtn = findOneElement('.archives')
 addZipFiles().then(response => {
     /*
     * Ф -цая создает дочерние элементы в теге <select>
@@ -217,11 +89,33 @@ addZipFiles().then(response => {
                 count++
             }
         }
+        // Обработчик события: выбираем архивный файл
+        let opt = findElements('.opt')
+        opt.forEach(elem => {
+            if (elem.innerText.includes('.zip')) { // отбрасываем, если не zip
+                elem.addEventListener('click', () => {
+                    findOneElement('.div_btnclear').style.display = 'block'
+                    findOneElement('.div_info').innerHTML = elem.innerText
+                    findOneElement('.select').style.display = 'none'
+                    findOneElement('.inp_btn').value = 'Распаковать и найти'
+                    findOneElement('.input').value = ''
+                })
+            }
+        })
     })
+}); //
+
+//Обработчик события на кнопку 'Очистить'
+let btnClear = findOneElement('.div_btnclear')
+btnClear.addEventListener('click', () => {
+    findOneElement('.div_btnclear').style.display = 'none'
+    findOneElement('.div_info').innerHTML = ''
+    findOneElement('.select').style.display = 'block'
+    findOneElement('.select').selected = true // Пункт по умолчанию: 'Выберите архивные файлы'
+    findOneElement('.inp_btn').value = 'Найти'
+    findOneElement('.modal_content').innerHTML = ''
+    findOneElement('.input').value = ''
 });
-// Обработчик события: выбираем архивный файл
-let opt = findElements('.opt')
-console.log(opt)
 
 // Обработчик события на скролл '.modal_content'
 let mc = document.querySelector('.modal_content')
