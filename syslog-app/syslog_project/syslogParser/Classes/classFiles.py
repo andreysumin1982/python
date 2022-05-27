@@ -24,12 +24,13 @@ class File():
         return sorted(archFiles['name'])
     #
     def extractZip(self):
-        fileZip = f'{pathZipFiles}/{self.path}' # абсолютный путь а zip-файлу
+        # !!  Доделать условие для вывода и поиска  в распакованном файле
+        fileZip = f'{pathZipFiles}/{self.path}' # абсолютный путь к zip-файлу
         z = zipfile.ZipFile(fileZip) #
         z.extractall(fileZip.strip('.zip')) # Распаковываем в папку(имя файла)
         extractedFile = os.listdir(os.path.join(fileZip.strip(".zip")))
-        extractedPath = f"{fileZip.strip('.zip')}/{''.join(extractedFile)}" # Абсолютный путь к распакованному файлу
-        return extractedPath
+        extractedPathDir = f"{fileZip.strip('.zip')}/{''.join(extractedFile)}" # Абсолютный путь к распакованному файлу
+        return extractedPathDir
     #
     def searchIp(self, stroka, ip):
         self.stroka = stroka

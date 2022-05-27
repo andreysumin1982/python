@@ -6,16 +6,8 @@ from .Classes import classFiles # Импортируем файл classFiles.py
 # Create your views here.
 def index(request):
     if (request.method == 'GET'):
-        print('OK')
+        pass
     return render(request, 'syslogParser/index.html')
-#
-# def getData(request):
-#     if (request.method == 'GET'):
-#         syslog_lst = []
-#         file = classFiles.File(classFiles.path) # Экземпляр класса File из выйла files.py
-#         for elem in file.readFile(): # Метод readFile()
-#             syslog_lst.append(elem)
-#     return HttpResponse(syslog_lst)
 #
 def serchData(request, serchString):
     if (request.method == 'GET'):
@@ -43,6 +35,23 @@ def serchZipFiles(request):
 #
 def extractZipFile(request, zipFile):
     if (request.method == 'GET'):
+        context = {'syslog': []}
         file = classFiles.File(zipFile) # Экземпляр класса File из фыйла files.py
-    return HttpResponse(file.extractZip())
-    
+        path = file.extractZip()
+        file2 = classFiles.File(path) # Экземпляр класса File2 c абсолютным путем распак.файла
+        for elem in file2.readFile():  # Метод readFile()
+            context['syslog'].append(elem)
+    return HttpResponse(context['syslog'])
+#
+def serchZipData(request, zipFile, serchString):
+    if (request.method == 'GET'):
+        context = {'syslog': []}
+        file = classFiles.File(zipFile) # Экземпляр класса File из фыйла files.py
+        path = file.extractZip()
+        file2 = classFiles.File(path) # Экземпляр класса File2 c абсолютным путем распак.файла
+        for elem in file2.readFile():  # Метод readFile()
+            if file2.findSymbols(elem, serchString):
+                context['syslog'].append(elem)
+            else: continue
+    return HttpResponse(context['syslog'])
+#

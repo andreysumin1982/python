@@ -7,6 +7,7 @@ urlGetData = 'http://192.168.220.72:8000/serchDataAll/'
 urlSerchData = 'http://192.168.220.72:8000/serchData/'
 urlZipFiles = 'http://192.168.220.72:8000/serchZipFiles/'
 urlExtractZipFiles = 'http://192.168.220.72:8000/extractZipFile/'
+urlSerchZipData = 'http://192.168.220.72:8000/serchZipData/'
 //
 function addElement(child, parent = 'body', classChild = 'no_class', type = NaN, text = '') {
     /*Ф-ция создает элемент на странице:
@@ -60,3 +61,8 @@ function extractZipFiles(zipFile) {
     return promise
 };
 //
+function serchZipData(zipFile, serchString) {
+    // ajax-запрос .. Получаем искомые данные из распакованного файла syslog
+    const promise = fetch(`${urlSerchZipData}${zipFile}/${serchString}`)
+    return promise
+};

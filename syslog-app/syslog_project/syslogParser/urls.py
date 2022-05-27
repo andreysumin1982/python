@@ -13,5 +13,6 @@ urlpatterns =[
     path('serchData/<str:serchString>/', views.serchData, name='serchData'),  # метод serchData в файле syslogParser/views
     path('serchZipFiles/', views.serchZipFiles, name='serchZipFiles'),
     path('extractZipFile/<str:zipFile>/', views.extractZipFile, name='extractZipFile'),
+    path('serchZipData/<str:zipFile>/<str:serchString>/', views.serchZipData, name='serchZipData'),
     path('favicon.ico', RedirectView.as_view(url='/static/img/favicon.ico', permanent=True)) # Нужно для иконки во вкладке
 ]
