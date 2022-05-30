@@ -24,13 +24,18 @@ class File():
         return sorted(archFiles['name'])
     #
     def extractZip(self):
-        # !!  Доделать условие для вывода и поиска  в распакованном файле
         fileZip = f'{pathZipFiles}/{self.path}' # абсолютный путь к zip-файлу
-        z = zipfile.ZipFile(fileZip) #
-        z.extractall(fileZip.strip('.zip')) # Распаковываем в папку(имя файла)
-        extractedFile = os.listdir(os.path.join(fileZip.strip(".zip")))
-        extractedPathDir = f"{fileZip.strip('.zip')}/{''.join(extractedFile)}" # Абсолютный путь к распакованному файлу
-        return extractedPathDir
+        absPathExtractFile = f'{fileZip.strip(".zip")}/{self.path.replace(".zip", ".txt")}' # абсолютный путь к распакованному файлу
+        if os.path.isfile(absPathExtractFile): # если файл распакован, возвращаем путь
+            print(f"Файл уже распакован: {absPathExtractFile}")
+            return absPathExtractFile
+        else:
+            print(f"Распаковываю {self.path} в папку: {fileZip.strip('.zip')}")
+            z = zipfile.ZipFile(fileZip) #
+            z.extractall(fileZip.strip('.zip')) # Распаковываем в папку(имя файла)
+            #extractedFile = os.listdir(os.path.join(fileZip.strip(".zip")))
+            extractedPathDir = f'{fileZip.strip(".zip")}/{self.path.replace(".zip", ".txt")}'#f"{fileZip.strip('.zip')}/{''.join(extractedFile)}" # Абсолютный путь к распакованному файлу
+            return extractedPathDir
     #
     def searchIp(self, stroka, ip):
         self.stroka = stroka

@@ -4,6 +4,7 @@ function addHtml(dataOutput) {
     //ф-ция добавляет в modal_content данные
     findOneElement('.modal_content').innerHTML = `<pre>${dataOutput}<br>`
     findOneElement('.inp_btn').value = 'Найти'
+    findOneElement('.input').disabled = false
 };
 
 // Обработчик события на кнопку 'Найти'
@@ -70,7 +71,7 @@ btn.addEventListener('click', () => {
             findOneElement('.inp_btn').value = 'Найти'
         }
         else { // иначе 
-            findOneElement('.modal_content').innerHTML = 'No'
+            findOneElement('.modal_content').innerHTML = 'Error/'
         }
     }
     else if (findOneElement('.input').value.length == 0 && findOneElement('.inp_btn').value == 'Найти' && findOneElement('.div_info').innerHTML.length > 0) {
@@ -98,7 +99,12 @@ btn.addEventListener('click', () => {
             btn.value = 'Идет поиск'
             response.text().then(data => {
                 //findOneElement('.modal_content').innerHTML += `${data}<br>`
-                addHtml(data)
+                //addHtml(data)
+                if (data.length > 0) {
+                    addHtml(data)
+                }
+                else { addHtml('Ничего не найдено.') }
+
             })
         })
             .catch(error => {    //ошибки
@@ -106,7 +112,6 @@ btn.addEventListener('click', () => {
                 addHtml(error)
             });
     }
-
 });
 
 // Добавляем архивные файлы в элемент <select>..</select>
@@ -138,6 +143,7 @@ addZipFiles().then(response => {
                     findOneElement('.select').style.display = 'none'
                     findOneElement('.inp_btn').value = 'Распаковать и найти'
                     findOneElement('.input').value = ''
+                    findOneElement('.input').disabled = true
                 })
             }
         })
@@ -154,6 +160,7 @@ btnClear.addEventListener('click', () => {
     findOneElement('.inp_btn').value = 'Найти'
     findOneElement('.modal_content').innerHTML = ''
     findOneElement('.input').value = ''
+    findOneElement('.input').disabled = false
 });
 
 // Обработчик события на скролл '.modal_content'

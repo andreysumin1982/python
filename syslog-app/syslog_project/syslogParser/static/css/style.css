@@ -54,6 +54,7 @@ body, button, h1, h2, h3, h4, p, a {
 }
 .div_info{
     grid-area: div_info;
+    display: none;
     width: 400px;
     font-size: 15px;  
 }
