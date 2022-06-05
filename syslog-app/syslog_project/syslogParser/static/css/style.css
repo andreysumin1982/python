@@ -59,12 +59,16 @@ body, button, h1, h2, h3, h4, p, a {
     font-size: 15px;  
 }
 .input{
+    border: 0.4px solid silver;
     box-shadow: 4px 4px 5px rgba(160, 155, 155, 0.4);
 }
 .inp_btn{
     box-shadow: 4px 4px 5px rgba(160, 155, 155, 0.4);
 }
 .archives{
+    box-shadow: 4px 4px 5px rgba(160, 155, 155, 0.4);
+}
+.div_btnclear{
     box-shadow: 4px 4px 5px rgba(160, 155, 155, 0.4);
 }
 /**/
