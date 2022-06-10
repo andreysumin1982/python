@@ -36,7 +36,7 @@ class Postgres:
         else:
             print('Запрос выполнен')
     #
-    def __del__(self):
+    def __del__(self):\
         # Закрыть соединение с базой
         self.cursor.close()
         self.connectdb.close()
