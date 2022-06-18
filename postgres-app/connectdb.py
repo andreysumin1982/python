@@ -4,6 +4,9 @@ from psycopg2 import Error
 #
 class Postgres:
     #
+    def __str__(self):
+        return "* Класс Postgres создан, для работы с базами данных PostgreSQL *"
+    #
     def __init__(self, host, dbname, user, password):
         self.host = host
         self.dbname = dbname
@@ -19,8 +22,9 @@ class Postgres:
             print("Ошибка при работе с PostgreSQL:", error)
             self.connectdb.close()
         else:
-            print(f'{"*"*40}\nСоединение с PostgreSQL установлено.\n'
-                  f'Вы подключены к базе данных "{dbname}".\n{"*"*40}')
+            print(f'{"-"*60}\nСоединение с PostgreSQL установлено.\n'
+                  f'Пользователь {self.user} '
+                  f'подключен к базе данных "{dbname}".\n{"-"*60}')
     #
     def executeRequest(self, request):
         try:
@@ -29,16 +33,39 @@ class Postgres:
             # Выполнение SQL-запроса
             self.cursor.execute(request)
             # Получить результат
-            record = self.cursor.fetchone()
-            print(record)
+            result = self.cursor.fetchall()
         except (Exception, Error) as error:
-            print(f"{'-'*40}\nПользователь: {self.user}\n{error}{'-'*40}")
+            print(error); return error
         else:
-            print('Запрос выполнен')
+            self.acceptRequest(result)
+    #
+    def transactionCommit(self):
+        self.connectdb.commit()
+        print("Транзакция успешно завершена.")
+    #
+    def transactionRollback(self):
+        self.connectdb.rollback()
+        print("Ошибка в транзакции. Отмена всех остальных операций транзакции.")
+    #
+    def acceptRequest(self, request):
+        print(f'Выполнен запрос: {request}')
+        return request
+    #
+    @staticmethod
+    def testMethod(*args):
+        s1,s2,s3 = 1, 1, 1
+        for i in args:
+            s1 +=i
+        s2 = s1 * 500
+        s3 = s2 // s1
+        return s1, s2, s3
     #
     def __del__(self):\
         # Закрыть соединение с базой
         self.cursor.close()
         self.connectdb.close()
-        print("Соединение с PostgreSQL закрыто.")
+        print(f'{"-" * 60}\n'
+              f'Соединение с PostgreSQL закрыто.\n'
+              f'Пользователь {self.user} отключен от базы данных {self.dbname}.\n'
+              f'{"-" * 60}')
 #
