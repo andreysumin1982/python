@@ -3,7 +3,7 @@ from connectdb import Postgres
 #
 def run():
     # Экземпляр класса
-    db = Postgres('localhost', 'drf_db', 'test_user', 'test')
+    db = Postgres('localhost', 'drfapi_db', 'test', 'test')
     # Выполнить запрос
     db.executeRequest('SELECT version();')
     db.executeRequest('SELECT table_name FROM information_schema.tables;')
