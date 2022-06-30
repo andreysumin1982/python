@@ -3,11 +3,10 @@ from connectdb import Postgres
 #
 def run():
     # Экземпляр класса
-    db = Postgres('localhost', 'drfapi_db', 'test', 'test')
+    db = Postgres('localhost', 'drf_db', 'test', 'test')
     # Выполнить запрос
     db.executeRequest('SELECT version();')
-    db.executeRequest('SELECT table_name FROM information_schema.tables;')
-    db.executeRequest('SHOW DATABASES;')
+    db.executeRequest('SELECT * FROM air;')
     #
 
 #

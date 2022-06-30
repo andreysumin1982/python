@@ -1,6 +1,7 @@
 # connect_db
 import psycopg2
 from psycopg2 import Error
+
 #
 class Postgres:
     #
@@ -37,7 +38,9 @@ class Postgres:
         except (Exception, Error) as error:
             print(error); return error
         else:
+            print(f'Выполнен запрос: {request}')
             self.acceptRequest(result)
+
     #
     def transactionCommit(self):
         self.connectdb.commit()
@@ -48,8 +51,12 @@ class Postgres:
         print("Ошибка в транзакции. Отмена всех остальных операций транзакции.")
     #
     def acceptRequest(self, request):
-        print(f'Выполнен запрос: {request}')
-        return request
+        d = {}
+        for key, value in enumerate(request):
+            if key not in d:
+                d[key] = list(map(lambda x:str(x), value))
+                print(' '.join(d[key]))
+        print()
     #
     @staticmethod
     def testMethod(*args):
