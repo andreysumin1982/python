@@ -1,15 +1,13 @@
-#
+# Импортируем класс PostgresSQL
 from connectdb import Postgres
 #
 def run():
-    db = Postgres('localhost', 'cities', 'test', 'test')
+    # Экземпляр класса
+    db = Postgres('localhost', 'drf_db', 'test', 'test')
     # Выполнить запрос
     db.executeRequest('SELECT version();')
-    db.executeRequest('SELECT * FROM name_of_the_cities;')
-    # Смотрим № транзакций:
-    # Строка создана прудыдущей транзакцией, а xmax = 0 означает, что эта версия актуальна.
-    db.executeRequest('SELECT *, xmin, xmax FROM name_of_the_cities')
-
+    db.executeRequest('SELECT * FROM air;')
+    #
 
 #
 if __name__ == '__main__':
