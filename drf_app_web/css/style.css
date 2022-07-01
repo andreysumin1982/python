@@ -1,0 +1,36 @@
+/*-------для всех все сбрасываем-----------*/
+body, button, h1, h2, h3, h4, p, a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    font-weight: normal;
+}
+/*--*/
+*{
+    box-sizing: border-box;
+}
+/*-----------------------------------------*/
+.container{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    border: 1px solid silver;
+}
+/*-*/
+.header{
+    width: 80%;
+    height: 40%;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid silver;
+    border-radius: 5px;
+}
+/*-*/
+.content{
+    width: 80%;
+    height: 80vmin;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid silver;
+    border-radius: 5px;
+}
