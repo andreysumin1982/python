@@ -21,12 +21,20 @@
 <body>
 {% csrf_token %}
 
-    lsdfkjgsdlfkg
-    df
-    gsd
-fgsdf
+    <div class="container">
+        <div class="header">
+            <div class="header_image"></div>
+            <div class="header_content"></div>
+        </div>
+        <div class="content">
+            <div class="content_textarea"></div>
+            <div class="content_button"></div>
+            <div class="content_output"></div>
+        </div>
+    </div>
+
     <!-- scripts -->
-    <script src="{% static 'js/index.js' %}"></script>
     <script src="{% static 'js/funcs.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
 </body>
 </html>

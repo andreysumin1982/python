@@ -10,3 +10,95 @@ body, button, h1, h2, h3, h4, p, a {
     box-sizing: border-box;
 }
 /*-----------------------------------------*/
+.container{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    border: 1px solid rgb(255, 255, 255);
+    background-color: #d2f2e9;
+    background-image: linear-gradient(90deg, #ffffff 80%, #eaebde 100%);
+
+}
+/*-*/
+.header{
+    /**/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /**/
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid silver;
+    border-radius: 10px;
+}
+.header_image{
+    width: 12%;
+    height: auto;
+    /* border: 1px solid sandybrown; */
+    padding: 10px;
+    /*border: 1px solid silver;*/
+}
+.header_content{
+    width: 85%;
+    height: auto;
+    padding: 10px;
+    border: 1px solid silver;
+    border-radius: 10px;
+}
+/*-*/
+.content{
+    /**/
+    display: grid;
+    grid-gap: 10px;
+    /* сетка */
+    grid-template-areas:
+        "content_textarea content_button content_output";
+
+    /**/
+    width: 80%;
+    height: 80vmin;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid silver;
+    border-radius: 5px;
+}
+.content_textarea{
+    grid-area: content_textarea;
+    width: 28vw;
+    height: 54vh;
+    /* border: 1px solid rgb(159, 80, 80); */
+}
+.textarea{
+    /*Размеры*/
+    resize: none;
+    max-width: 60vw;
+    min-width: 60vh;
+    /**/
+    max-height: 50vw;
+    min-height: 50vh;
+    font-size: 15px;
+}
+.content_button{
+    grid-area: content_button;
+    width: 8vw;
+    height: 15vh;
+    /* border: 1px solid silver; */
+}
+.btn_send{
+    margin: 5px;
+}
+.btn_clear{
+    margin: 5px;
+}
+.content_output{
+    grid-area: content_output;
+    width: 40vw;
+    height: auto;
+    padding: 10px;
+    border: 1px solid silver;
+    border-radius: 5px;
+    overflow: auto; /*прокрутка по вертикали*/
+}
+/*-*/
