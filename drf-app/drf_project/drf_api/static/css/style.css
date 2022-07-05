@@ -55,7 +55,7 @@ body, button, h1, h2, h3, h4, p, a {
     /* сетка */
     grid-template-areas:
         "content_textarea content_button content_output";
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: 1fr auto 2fr;
     /**/
     width: 80%;
     height: 80vmin;
@@ -94,7 +94,7 @@ body, button, h1, h2, h3, h4, p, a {
 }
 .content_output{
     grid-area: content_output;
-    width: 40vw;
+    width: 100%;
     height: auto;
     padding: 10px;
     border: 1px solid silver;

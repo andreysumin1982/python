@@ -45,6 +45,7 @@ class testSerializer2(serializers.Serializer):
 #
 def encodeTest2(id, data):
     modeldata = testclass2(id, data)
+    print(modeldata)
     modeltest_sr = testSerializer2(modeldata)
     json = JSONRenderer().render(modeltest_sr.data)
     return json

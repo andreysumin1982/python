@@ -84,7 +84,7 @@ DATABASES = {
     'default':{         # Подключаем db PostgreSQL
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'drf_db',
-        'USER': 'test',
+        'USER': 'test_user',
         'PASSWORD': 'test',
         'HOST': 'localhost',
         'PORT': '5432',
