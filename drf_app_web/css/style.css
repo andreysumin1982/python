@@ -14,19 +14,16 @@ body, button, h1, h2, h3, h4, p, a {
     width: 100%;
     height: auto;
     padding: 10px;
-    border: 1px solid rgb(255, 255, 255);
-    background-color: #d2f2e9;
-    background-image: linear-gradient(90deg, #ffffff 80%, #eaebde 100%);
-    
+    border: 1px solid sienna;
 }
 /*-*/
 .header{
     /**/
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     justify-content: space-between;
     /**/
-    width: 80%;
+    width: 100%;
     height: auto;
     margin: 0 auto;
     padding: 10px;
@@ -41,7 +38,7 @@ body, button, h1, h2, h3, h4, p, a {
     /*border: 1px solid silver;*/
 }
 .header_content{
-    width: 85%;
+    width: 100%;
     height: auto;
     padding: 10px;
     border: 1px solid silver;
@@ -55,10 +52,10 @@ body, button, h1, h2, h3, h4, p, a {
     /* сетка */
     grid-template-areas:
         "content_textarea content_button content_output";
-        
+    grid-template-columns: 1fr auto 1fr;
     /**/
-    width: 80%;
-    height: 80vmin;
+    width: 100%;
+    height: 75vmin;
     margin: 10px auto;
     padding: 10px;
     border: 1px solid silver;
@@ -66,35 +63,33 @@ body, button, h1, h2, h3, h4, p, a {
 }
 .content_textarea{
     grid-area: content_textarea;
-    width: 28vw;
+    width: 20vw;
     height: 54vh;
     /* border: 1px solid rgb(159, 80, 80); */
 }
 .textarea{
     /*Размеры*/
-    resize: none; 
-    max-width: 60vw; 
+    resize: none;
+    max-width: 60vw;
     min-width: 60vh;
     /**/
-    max-height: 50vw; 
+    max-height: 50vw;
     min-height: 50vh;
-    font-size: 15px; 
+    font-size: 15px;
 }
 .content_button{
     grid-area: content_button;
-    width: 8vw;
-    height: 15vh;
-    /* border: 1px solid silver; */
+    width: 7vw;
+    height: 14vh;
+    border: 1px solid silver;
+    padding: 5px;
 }
 .btn_send{
-    margin: 5px;
-}
-.btn_clear{
-    margin: 5px;
+    margin-bottom: 5px;
 }
 .content_output{
     grid-area: content_output;
-    width: 40vw;
+    width: 37vw;
     height: auto;
     padding: 10px;
     border: 1px solid silver;
