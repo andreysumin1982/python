@@ -1,13 +1,16 @@
 /* Ф-ции добавления, поиска элементов html, ajax-запросы*/
 //
-//urlGetData = 'http://127.0.0.1:8000/serchDataBatchOutput/'
-//urlSerchData = 'http://127.0.0.1:8000/serchData/'
-//urlZipFiles = 'http://127.0.0.1:8000/serchZipFiles/'
-urlGetData = 'http://192.168.220.72:8000/serchDataAll/'
-urlSerchData = 'http://192.168.220.72:8000/serchData/'
-urlZipFiles = 'http://192.168.220.72:8000/serchZipFiles/'
-urlExtractZipFiles = 'http://192.168.220.72:8000/extractZipFile/'
-urlSerchZipData = 'http://192.168.220.72:8000/serchZipData/'
+urlGetData = 'http://127.0.0.1:8000/serchDataAll/'
+urlSerchData = 'http://127.0.0.1:8000/serchData/'
+urlZipFiles = 'http://127.0.0.1:8000/serchZipFiles/'
+urlExtractZipFiles = 'http://127.0.0.1:8000/extractZipFile/'
+urlSerchZipData = 'http://127.0.0.1:8000/serchZipData/'
+//------------------------------------------------------------
+// urlGetData = 'http://192.168.220.72:8000/serchDataAll/'
+// urlSerchData = 'http://192.168.220.72:8000/serchData/'
+// urlZipFiles = 'http://192.168.220.72:8000/serchZipFiles/'
+// urlExtractZipFiles = 'http://192.168.220.72:8000/extractZipFile/'
+// urlSerchZipData = 'http://192.168.220.72:8000/serchZipData/'
 //
 function addElement(child, parent = 'body', classChild = 'no_class', type = NaN, text = '') {
     /*Ф-ция создает элемент на странице:
