@@ -6,3 +6,10 @@
 -   Java-script (ajax-запросы для получения данных (json), отрисовка web-контента, порционный вывод)
 -   Распаковка резервных копий
 -   Быстрый поиск нужных данных (модуль regex)
+
+<div align="center">
+    <img src="screen.png" width="800px"</img> 
+</div>
+<div align="center">
+    <img src="screen2.png" width="800px"</img> 
+</div>
