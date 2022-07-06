@@ -13,3 +13,9 @@
 <div align="center">
     <img src="syslog2.png" width="600px"</img> 
 </div>
+<div align="center">
+    <img src="syslog3.png" width="600px"</img> 
+</div>
+<div align="center">
+    <img src="syslog4.png" width="600px"</img> 
+</div>
