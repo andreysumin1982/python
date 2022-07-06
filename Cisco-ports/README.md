@@ -2,5 +2,5 @@
 При нахождении, предлагает (ВКЛ, ВЫКЛ) порты. 
 
 <div align="center">
-    <img src="screen.png" width="800px"</img> 
+    <img src="screen.png" width="600px"</img> 
 </div>
