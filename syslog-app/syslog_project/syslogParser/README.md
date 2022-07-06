@@ -8,8 +8,8 @@
 -   Быстрый поиск нужных данных (модуль regex)
 
 <div align="center">
-    <img src="screen.png" width="800px"</img> 
+    <img src="syslog.png" width="600px"</img> 
 </div>
 <div align="center">
-    <img src="screen2.png" width="800px"</img> 
+    <img src="syslog2.png" width="600px"</img> 
 </div>
