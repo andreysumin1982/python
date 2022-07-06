@@ -2,5 +2,5 @@
 При нахождении, предлагает (ВКЛ, ВЫКЛ) порты. 
 
 <div align="center">
-    <img src="/python/Cisco-ports/screen.png" width="400px"</img> 
+    <img src="/screen.png" width="400px"</img> 
 </div>
